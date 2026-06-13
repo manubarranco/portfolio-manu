@@ -14,10 +14,7 @@ import { cases } from '../data/cases';
       <div class="hero-col">
         <p class="status mono"><span class="dot" aria-hidden="true"></span> Available for new challenges</p>
 
-        <p class="eyebrow">I turn product complexity into</p>
-        <h1 id="hero-title">
-          <span id="rot" class="rot-phrase">Systems that <span class="hl">actually get adopted</span></span>
-        </h1>
+        <h1 id="hero-title" class="hero-h">I turn product complexity into <span id="rot" class="hl rot-phrase">systems that actually get adopted</span></h1>
 
         <div class="lede">
           <p class="pos">
@@ -78,10 +75,9 @@ import { cases } from '../data/cases';
   .hero-col { padding: 26px 0 64px; }
   .status { color: var(--accent-ink); text-transform: uppercase; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 9px; }
   .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-  .eyebrow { margin: 36px 0 12px; }
-  h1 { font-weight: 800; font-size: clamp(44px, 9vw, 92px); line-height: 0.96; letter-spacing: -0.035em; max-width: 14ch; }
+  .hero-h { font-weight: 800; font-size: clamp(38px, 6.6vw, 76px); line-height: 1.0; letter-spacing: -0.03em; max-width: 19ch; margin-top: 40px; }
   .hl { color: var(--accent); }
-  .rot-phrase { transition: opacity 0.28s ease; display: inline-block; }
+  .rot-phrase { transition: opacity 0.28s ease; }
   .rot-phrase.is-out { opacity: 0; }
 
   .lede { margin-top: 44px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; max-width: 920px; }
@@ -123,10 +119,10 @@ import { cases } from '../data/cases';
 
 <script>
   const phrases = [
-    'Systems that <span class="hl">actually get adopted</span>',
-    'The <span class="hl">decisions</span> that set direction',
-    'Products <span class="hl">ready for AI</span>',
-    'Systems built to <span class="hl">scale</span>',
+    'systems that actually get adopted',
+    'the decisions that set direction',
+    'products ready for AI',
+    'systems built to scale',
   ];
   const el = document.getElementById('rot');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -136,7 +132,7 @@ import { cases } from '../data/cases';
       el.classList.add('is-out');
       setTimeout(() => {
         i = (i + 1) % phrases.length;
-        el.innerHTML = phrases[i];
+        el.textContent = phrases[i];
         el.classList.remove('is-out');
       }, 300);
     }, 3200);
