@@ -1,0 +1,144 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { cases } from '../data/cases';
+---
+
+<Base>
+  <Nav />
+
+  <main>
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="idx mono">00</div>
+      <div class="hero-col">
+        <p class="status mono"><span class="dot" aria-hidden="true"></span> Available for new challenges</p>
+
+        <p class="eyebrow">I turn product complexity into</p>
+        <h1 id="hero-title">
+          <span id="rot" class="rot-phrase">Systems that <span class="hl">actually get adopted</span></span>
+        </h1>
+
+        <div class="lede">
+          <p class="pos">
+            I define the system and make the decisions that set the direction.
+            Then I lead the execution and adoption to make it real.
+          </p>
+          <p class="through">
+            I'm not discovering AI now. It's the latest in a series of waves I've been part of
+            from the start: the web, UX, design systems, behavioral design.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="arc wrap" aria-labelledby="arc-title">
+      <div class="idx mono">01</div>
+      <p id="arc-title" class="eyebrow arc-label">The arc · abstraction, scaled</p>
+      <ol class="stages">
+        {cases.map((c) => (
+          <li class={`stage${c.aiNative ? ' is-ai' : ''}`}>
+            <a href={`/work/${c.slug}`}>
+              <span class="n mono">{c.index}<span class="go" aria-hidden="true">↗</span></span>
+              <h2 class="t">{c.title}</h2>
+              <p class="d">{c.blurb}</p>
+              <p class="meta mono">{c.years} · {c.stage}</p>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section id="about" class="about wrap" aria-labelledby="about-title">
+      <div class="idx mono">02</div>
+      <div class="about-col">
+        <p id="about-title" class="eyebrow">About</p>
+        <p class="about-body">
+          I'm a systems thinker with a pull toward structure and abstraction. My strength is the
+          early definition: shaping the system and making the decisions that set the direction,
+          then leading the execution and adoption that make it real. I've led design at scale
+          and built an AI-native product from zero.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .idx { color: var(--faint); padding-top: 26px; }
+
+  /* hero */
+  .hero {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    border-bottom: 1.5px solid var(--line-strong);
+  }
+  .hero-col { padding: 26px 0 64px; }
+  .status { color: var(--accent-ink); text-transform: uppercase; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 9px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .eyebrow { margin: 36px 0 12px; }
+  h1 { font-weight: 800; font-size: clamp(44px, 9vw, 92px); line-height: 0.96; letter-spacing: -0.035em; max-width: 14ch; }
+  .hl { color: var(--accent); }
+  .rot-phrase { transition: opacity 0.28s ease; display: inline-block; }
+  .rot-phrase.is-out { opacity: 0; }
+
+  .lede { margin-top: 44px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; max-width: 920px; }
+  .pos { font-weight: 500; font-size: 23px; line-height: 1.34; letter-spacing: -0.015em; }
+  .through { font-size: 15px; line-height: 1.65; color: var(--muted); }
+
+  /* arc */
+  .arc { display: grid; grid-template-columns: 80px 1fr; padding-top: 0; }
+  .arc-label { grid-column: 2; padding: 26px 0 20px; }
+  .stages { grid-column: 2; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); }
+  .stage + .stage { border-left: 1.5px solid var(--line); }
+  .stage a { display: block; padding: 6px 28px 40px; height: 100%; transition: background 0.15s; }
+  .stage:first-child a { padding-left: 0; }
+  .stage a:hover { background: var(--paper-2); }
+  .stage .n { color: var(--accent); font-weight: 700; font-size: 13px; display: flex; justify-content: space-between; }
+  .stage .go { color: var(--faint); transition: transform 0.15s, color 0.15s; }
+  .stage a:hover .go { transform: translate(3px, -3px); color: var(--accent); }
+  .stage .t { font-weight: 700; font-size: 26px; letter-spacing: -0.02em; margin: 12px 0 8px; }
+  .stage .d { font-size: 14px; line-height: 1.55; color: var(--muted); }
+  .stage .meta { color: var(--faint); margin-top: 16px; text-transform: uppercase; font-size: 11px; }
+  .stage.is-ai .t::after { content: ' ▮'; color: var(--accent); font-size: 0.6em; vertical-align: 0.18em; }
+
+  /* about */
+  .about { display: grid; grid-template-columns: 80px 1fr; border-top: 1.5px solid var(--line); margin-top: 64px; }
+  .about-col { padding: 26px 0 0; max-width: 680px; }
+  .about-col .eyebrow { margin-bottom: 18px; }
+  .about-body { font-size: 19px; line-height: 1.55; letter-spacing: -0.01em; }
+
+  @media (max-width: 720px) {
+    .hero, .arc, .about { grid-template-columns: 1fr; }
+    .idx { display: none; }
+    .arc-label, .stages, .arc { grid-column: 1; }
+    .lede { grid-template-columns: 1fr; gap: 24px; }
+    .stages { grid-template-columns: 1fr; }
+    .stage + .stage { border-left: 0; border-top: 1.5px solid var(--line); }
+    .stage a, .stage:first-child a { padding: 24px 0; }
+  }
+</style>
+
+<script>
+  const phrases = [
+    'Systems that <span class="hl">actually get adopted</span>',
+    'The <span class="hl">decisions</span> that set direction',
+    'Products <span class="hl">ready for AI</span>',
+    'Systems built to <span class="hl">scale</span>',
+  ];
+  const el = document.getElementById('rot');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (el && !reduce) {
+    let i = 0;
+    setInterval(() => {
+      el.classList.add('is-out');
+      setTimeout(() => {
+        i = (i + 1) % phrases.length;
+        el.innerHTML = phrases[i];
+        el.classList.remove('is-out');
+      }, 300);
+    }, 3200);
+  }
+</script>

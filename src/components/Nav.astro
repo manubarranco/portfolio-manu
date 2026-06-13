@@ -1,0 +1,46 @@
+---
+const links = [
+  { label: 'Work', href: '/#work' },
+  { label: 'About', href: '/#about' },
+  { label: 'Contact', href: '/contact', cta: true },
+];
+---
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="/" class="brand">Manu Barranco</a>
+    <nav class="links" aria-label="Primary">
+      {links.map((l) => (
+        <a href={l.href}>{l.label}{l.cta ? ' ↗' : ''}</a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav { border-bottom: 1.5px solid var(--line-strong); }
+  .nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 26px var(--pad);
+  }
+  .brand {
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+  .links {
+    display: flex;
+    gap: 30px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    text-transform: uppercase;
+  }
+  .links a { transition: color 0.15s; }
+  .links a:hover { color: var(--accent); }
+  @media (max-width: 560px) {
+    .links { gap: 18px; font-size: 11px; }
+  }
+</style>

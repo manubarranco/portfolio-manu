@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { cases } from '../../data/cases';
+
+export function getStaticPaths() {
+  return cases.map((c) => ({ params: { slug: c.slug }, props: { study: c } }));
+}
+
+const { study } = Astro.props;
+---
+
+<Base title={`${study.title} — Manu Barranco`} description={study.blurb}>
+  <Nav />
+  <main class="cs wrap">
+    <div class="head">
+      <p class="eyebrow">{study.category}</p>
+      <h1>{study.title}</h1>
+      <p class="lead">{study.blurb}</p>
+    </div>
+    <div class="meta">
+      <div><span class="k mono">Year</span><span class="v">{study.years}</span></div>
+      <div><span class="k mono">Stage</span><span class="v">{study.stage}</span></div>
+      <div><span class="k mono">Category</span><span class="v">{study.category}</span></div>
+    </div>
+    <p class="wip mono">Full case study in progress. Content migrating from the previous site.</p>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .cs { padding-top: 64px; }
+  .head h1 { font-weight: 800; font-size: clamp(48px, 10vw, 104px); line-height: 0.94; letter-spacing: -0.035em; margin: 20px 0; }
+  .lead { font-weight: 500; font-size: 24px; line-height: 1.34; letter-spacing: -0.015em; max-width: 32ch; }
+  .meta { display: flex; gap: 56px; margin: 56px 0; border-top: 1.5px solid var(--line); padding-top: 28px; flex-wrap: wrap; }
+  .meta .k { display: block; color: var(--accent-ink); text-transform: uppercase; font-size: 11px; margin-bottom: 8px; }
+  .meta .v { font-size: 16px; }
+  .wip { color: var(--faint); }
+</style>

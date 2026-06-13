@@ -1,0 +1,41 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <div class="cta">
+      <p class="eyebrow">Say hello</p>
+      <a class="big" href="/contact">Let's build something that lasts ↗</a>
+    </div>
+    <div class="meta">
+      <a href="https://linkedin.com/in/manubarranco">LinkedIn</a>
+      <a href="mailto:mbarranco@gmail.com">Email</a>
+      <span class="faint">© {year} Manu Barranco</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .foot {
+    border-top: 1.5px solid var(--line-strong);
+    margin-top: 120px;
+    padding: 64px 0 48px;
+  }
+  .foot-inner { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; }
+  .cta .eyebrow { margin-bottom: 16px; }
+  .big {
+    font-weight: 700;
+    font-size: clamp(28px, 5vw, 52px);
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    display: inline-block;
+  }
+  .big:hover { color: var(--accent); }
+  .meta { display: flex; flex-direction: column; gap: 8px; font-family: var(--mono); font-size: 13px; text-align: right; }
+  .meta a:hover { color: var(--accent); }
+  .meta .faint { color: var(--faint); }
+  @media (max-width: 640px) {
+    .meta { text-align: left; }
+  }
+</style>
