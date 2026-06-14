@@ -113,6 +113,12 @@ const d = item.data;
   }
   .prose :global(.callout strong) { color: var(--accent-ink); font-weight: 700; }
 
+  .prose :global(figure.shot) { margin: 2.2em 0; }
+  .prose :global(figure.shot img) { display: block; width: 100%; height: auto; border: 1.5px solid var(--line); background: var(--paper-2); }
+  .prose :global(figure.shot figcaption) { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--faint); margin-top: 10px; }
+  .prose :global(.shot-row) { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 2.2em 0; }
+  .prose :global(.shot-row figure.shot) { margin: 0; }
+
   @media (max-width: 860px) {
     .cs-body { grid-template-columns: 1fr; gap: 32px; }
     .meta { position: static; flex-direction: row; flex-wrap: wrap; gap: 24px 40px; }
