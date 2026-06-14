@@ -2,7 +2,9 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { cases } from '../data/cases';
+import { getCollection } from 'astro:content';
+
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Base>
@@ -33,13 +35,13 @@ import { cases } from '../data/cases';
       <div class="idx mono">01</div>
       <p id="arc-title" class="eyebrow arc-label">The arc · abstraction, scaled</p>
       <ol class="stages">
-        {cases.map((c, i) => (
-          <li class={`stage${c.aiNative ? ' is-ai' : ''}`} data-reveal style={`transition-delay:${i * 90}ms`}>
-            <a href={`/work/${c.slug}`}>
-              <span class="n mono">{c.index}<span class="go" aria-hidden="true">↗</span></span>
-              <h2 class="t">{c.title}</h2>
-              <p class="d">{c.blurb}</p>
-              <p class="meta mono">{c.years} · {c.stage}</p>
+        {work.map((c, i) => (
+          <li class={`stage${c.data.aiNative ? ' is-ai' : ''}`} data-reveal style={`transition-delay:${i * 90}ms`}>
+            <a href={`/work/${c.id}`}>
+              <span class="n mono">{c.data.index}<span class="go" aria-hidden="true">↗</span></span>
+              <h2 class="t">{c.data.title}</h2>
+              <p class="d">{c.data.blurb}</p>
+              <p class="meta mono">{c.data.years} · {c.data.stage}</p>
             </a>
           </li>
         ))}
