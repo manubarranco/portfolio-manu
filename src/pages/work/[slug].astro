@@ -62,17 +62,19 @@ const d = item.data;
   .meta .v { font-size: 15px; }
 
   .cs-foot { display: flex; justify-content: space-between; margin-top: 80px; padding-top: 28px; border-top: 1.5px solid var(--line); font-family: var(--mono); font-size: 13px; }
-  .cs-foot a:hover { color: var(--accent); }
+  .cs-foot a { transition: color 0.12s, background 0.12s, box-shadow 0.12s; }
+  .cs-foot a:hover { background: var(--accent); color: var(--paper); box-shadow: 0 0 0 0.12em var(--accent); }
 
   /* prose */
   .prose { max-width: 70ch; font-size: 18px; line-height: 1.7; }
-  .prose :global(h2) { font-family: var(--display); font-weight: 800; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.05; letter-spacing: -0.02em; margin: 1.8em 0 0.5em; }
-  .prose :global(h3) { font-family: var(--display); font-weight: 700; font-size: clamp(20px, 2.4vw, 24px); letter-spacing: -0.015em; margin: 1.9em 0 0.4em; }
+  .prose :global(h2) { font-family: var(--headline); font-weight: 400; font-size: clamp(34px, 4.4vw, 50px); line-height: 1.0; letter-spacing: -0.02em; margin: 1.8em 0 0.7em; padding-bottom: 0.1em; border-bottom: 2px solid var(--accent-ink); }
+  .prose :global(h3) { font-family: var(--headline); font-weight: 400; font-size: clamp(26px, 3vw, 32px); line-height: 1.0; letter-spacing: -0.02em; margin: 1.7em 0 0.3em; }
   .prose :global(h2:first-child), .prose :global(h3:first-child) { margin-top: 0; }
   .prose :global(p) { margin: 0 0 1.1em; }
   .prose :global(strong) { font-weight: 600; }
   .prose :global(em) { font-style: italic; }
-  .prose :global(a) { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; }
+  .prose :global(a) { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; transition: color 0.12s, background 0.12s, box-shadow 0.12s; }
+  .prose :global(a:hover) { background: var(--accent); color: var(--paper); text-decoration-color: transparent; box-shadow: 0 0 0 0.08em var(--accent); }
   .prose :global(ul) { margin: 0 0 1.2em; padding-left: 1.1em; }
   .prose :global(li) { margin: 0.35em 0; }
   .prose :global(blockquote) {
@@ -97,7 +99,7 @@ const d = item.data;
     margin: 2em 0;
   }
   .prose :global(.metric) { background: var(--paper); padding: 22px 18px; display: flex; flex-direction: column; gap: 6px; }
-  .prose :global(.metric .num) { font-family: var(--display); font-weight: 800; font-size: clamp(26px, 3.6vw, 38px); letter-spacing: -0.02em; color: var(--accent); }
+  .prose :global(.metric .num) { font-family: var(--headline); font-weight: 400; font-size: clamp(36px, 4.6vw, 52px); line-height: 0.95; letter-spacing: -0.02em; color: var(--accent); }
   .prose :global(.metric .lbl) { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
 
   .prose :global(.video) { position: relative; aspect-ratio: 16 / 9; margin: 2em 0; border: 1.5px solid var(--line-strong); background: var(--ink); }

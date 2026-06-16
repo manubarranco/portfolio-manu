@@ -9,8 +9,9 @@
   --line: rgba(20, 20, 12, 0.14);
   --line-strong: #16160F;
 
-  --sans: 'Switzer', system-ui, sans-serif;
-  --display: 'Bricolage Grotesque', 'Switzer', system-ui, sans-serif;
+  --sans: 'Host Grotesk', system-ui, sans-serif;
+  --display: 'Bricolage Grotesque', 'Host Grotesk', system-ui, sans-serif;
+  --headline: 'Bebas Neue', 'Bricolage Grotesque', system-ui, sans-serif;
   --mono: 'Space Mono', ui-monospace, monospace;
 
   --pad: 56px;

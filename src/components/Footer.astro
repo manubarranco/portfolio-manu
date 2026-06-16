@@ -33,10 +33,11 @@ const year = new Date().getFullYear();
     display: inline-block;
   }
   .big:hover { color: var(--accent); }
-  .meta { display: flex; flex-direction: column; gap: 8px; font-family: var(--mono); font-size: 13px; text-align: right; }
-  .meta a:hover { color: var(--accent); }
+  .meta { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; font-family: var(--mono); font-size: 13px; }
+  .meta a { transition: color 0.12s, background 0.12s, box-shadow 0.12s; }
+  .meta a:hover { background: var(--accent); color: var(--paper); box-shadow: 0 0 0 0.12em var(--accent); }
   .meta .faint { color: var(--faint); }
   @media (max-width: 640px) {
-    .meta { text-align: left; }
+    .meta { align-items: flex-start; }
   }
 </style>
