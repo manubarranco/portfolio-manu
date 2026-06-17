@@ -11,6 +11,7 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
   <Nav />
 
   <main>
+    <!-- ═══ HERO — frame; stays in main theme throughout ═══ -->
     <section class="hero wrap" aria-labelledby="hero-title">
       <div class="idx mono">00</div>
       <div class="hero-col">
@@ -31,44 +32,88 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
       </div>
     </section>
 
-    <section id="work" class="arc wrap" aria-labelledby="arc-title">
-      <div class="idx mono">01</div>
-      <p id="arc-title" class="eyebrow arc-label">The arc · abstraction, scaled</p>
-      <ol class="stages">
-        {work.map((c, i) => (
-          <li class={`stage${c.data.aiNative ? ' is-ai' : ''}`} data-reveal style={`transition-delay:${i * 90}ms`}>
-            <a href={`/work/${c.id}`}>
-              <span class="n mono">{c.data.index}<span class="go" aria-hidden="true">↗</span></span>
-              <h2 class="t">{c.data.title}</h2>
-              <p class="d">{c.data.blurb}</p>
-              <p class="meta mono">{c.data.years} · {c.data.stage}</p>
-            </a>
-          </li>
-        ))}
-      </ol>
-    </section>
+    <!-- ═══ CONTENT AREA — morphs from main → Ruralvía tokens ═══ -->
+    <div id="content-area">
 
-    <section id="about" class="about wrap" aria-labelledby="about-title">
-      <div class="idx mono">02</div>
-      <div class="about-col" data-reveal>
-        <p id="about-title" class="eyebrow">About</p>
-        <p class="about-body">
-          I'm a systems thinker with a pull toward structure and abstraction. My strength is the
-          early definition: shaping the system and making the decisions that set the direction,
-          then leading the execution and adoption that make it real. I've led design at scale
-          and built an AI-native product from zero.
-        </p>
-      </div>
-    </section>
+      <!-- 200vh scroll trigger zone (invisible, drives the animation) -->
+      <div id="rv-trigger" aria-hidden="true"></div>
+
+      <!-- Ruralvía showcase: first content in the new theme -->
+      <section class="rv-showcase wrap" aria-labelledby="rv-title">
+        <div class="rv-header" data-reveal>
+          <p class="eyebrow">01 · Ruralvía · 2018–2019 · Caja Rural</p>
+          <h2 id="rv-title" class="rv-tagline">An expert<br>in your corner</h2>
+        </div>
+        <div class="rv-cards">
+          <div class="rv-card" data-reveal style="transition-delay:60ms">
+            <p class="rv-card-label eyebrow">Vision</p>
+            <p class="rv-card-body">Before Cleo, Revolut, N26. We built proactive financial advice in 2018 around a single insight: users didn't need features, they needed someone in their corner.</p>
+          </div>
+          <div class="rv-card" data-reveal style="transition-delay:120ms">
+            <p class="rv-card-label eyebrow">System</p>
+            <p class="rv-card-body">Proto-design system with tokens, flows, and a UI library that scaled across 70+ financial entities within Caja Rural Group.</p>
+          </div>
+          <div class="rv-card rv-card--cta" data-reveal style="transition-delay:180ms">
+            <p class="rv-card-label eyebrow">The differentiator</p>
+            <p class="rv-card-body">El Experto — a contextual advisor embedded in the home screen. Not a chatbot. Someone who noticed things before you did.</p>
+            <a href="/work/ruralvia" class="rv-link">Read the case study ↗</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Work arc -->
+      <section id="work" class="arc wrap" aria-labelledby="arc-title">
+        <div class="idx mono">01</div>
+        <p id="arc-title" class="eyebrow arc-label">The arc · abstraction, scaled</p>
+        <ol class="stages">
+          {work.map((c, i) => (
+            <li class={`stage${c.data.aiNative ? ' is-ai' : ''}`} data-reveal style={`transition-delay:${i * 90}ms`}>
+              <a href={`/work/${c.id}`}>
+                <span class="n mono">{c.data.index}<span class="go" aria-hidden="true">↗</span></span>
+                <h2 class="t">{c.data.title}</h2>
+                <p class="d">{c.data.blurb}</p>
+                <p class="meta mono">{c.data.years} · {c.data.stage}</p>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="about wrap" aria-labelledby="about-title">
+        <div class="idx mono">02</div>
+        <div class="about-col" data-reveal>
+          <p id="about-title" class="eyebrow">About</p>
+          <p class="about-body">
+            I'm a systems thinker with a pull toward structure and abstraction. My strength is the
+            early definition: shaping the system and making the decisions that set the direction,
+            then leading the execution and adoption that make it real. I've led design at scale
+            and built an AI-native product from zero.
+          </p>
+        </div>
+      </section>
+    </div><!-- /content-area -->
   </main>
 
   <Footer />
 </Base>
 
+<!-- ═══ SLATE — fixed overlay, appears mid-transition ═══ -->
+<div id="rv-slate" aria-hidden="true">
+  <p class="slate-eyebrow">campo y trigo</p>
+  <h2 class="slate-title">RURALVÍA</h2>
+  <dl class="slate-readout">
+    <div class="readout-row"><dt>--paper</dt><dd id="ro-paper">#F3F1EA</dd></div>
+    <div class="readout-row"><dt>--ink</dt><dd id="ro-ink">#16160F</dd></div>
+    <div class="readout-row"><dt>--radius</dt><dd id="ro-radius">0px</dd></div>
+    <div class="readout-row"><dt>--pad</dt><dd id="ro-pad">56px</dd></div>
+  </dl>
+</div>
+
 <style>
   .idx { color: var(--faint); padding-top: 26px; }
 
-  /* hero */
+  /* ── hero */
   .hero {
     display: grid;
     grid-template-columns: 80px 1fr;
@@ -81,18 +126,118 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
   .hl { color: var(--accent); }
   .rot-phrase { display: block; text-wrap: balance; min-height: 2em; transition: opacity 0.22s ease; }
   .rot-phrase.is-out { opacity: 0; }
-
   .lede { margin-top: 44px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; max-width: 920px; }
   .pos { font-weight: 500; font-size: 23px; line-height: 1.34; letter-spacing: -0.015em; }
   .through { font-size: 15px; line-height: 1.65; color: var(--muted); }
 
-  /* arc */
-  .arc { display: grid; grid-template-columns: 80px 1fr; padding-top: 0; }
+  /* ── transition trigger zone */
+  #rv-trigger {
+    height: 200vh;
+    pointer-events: none;
+  }
+
+  /* ── slate */
+  :global(#rv-slate) {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0; /* overridden by JS to match nav height */
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background: rgba(28, 58, 43, 0.97);
+    opacity: 0;
+    pointer-events: none;
+    will-change: opacity;
+  }
+  :global(.slate-eyebrow) {
+    font-family: var(--mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(239, 234, 198, 0.6);
+  }
+  :global(.slate-title) {
+    font-family: var(--headline);
+    font-weight: 400;
+    font-size: clamp(80px, 14vw, 180px);
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    color: #EFEAC6;
+    text-align: center;
+  }
+  :global(.slate-readout) {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 12px;
+    text-align: left;
+    list-style: none;
+  }
+  :global(.readout-row) {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+  }
+  :global(.readout-row dt) { color: rgba(239, 234, 198, 0.35); min-width: 80px; }
+  :global(.readout-row dd) { color: rgba(239, 234, 198, 0.75); font-weight: 700; min-width: 80px; font-variant-numeric: tabular-nums; }
+
+  /* ── Ruralvía showcase */
+  .rv-showcase {
+    padding: 100px 0 72px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+  }
+  .rv-header { grid-column: 2; margin-bottom: 56px; }
+  .rv-tagline {
+    font-family: var(--headline);
+    font-weight: 400;
+    font-size: clamp(64px, 10vw, 128px);
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-top: 20px;
+  }
+  .rv-cards {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .rv-card {
+    background: var(--paper-2);
+    border-radius: var(--radius);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .rv-card-label { margin-bottom: 4px; }
+  .rv-card-body { font-size: 15px; line-height: 1.6; color: var(--muted); flex: 1; }
+  .rv-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    transition: color 0.12s, background 0.12s, box-shadow 0.12s;
+  }
+  .rv-link:hover { background: var(--accent); color: var(--paper); box-shadow: 0 0 0 0.1em var(--accent); }
+
+  /* ── arc */
+  .arc { display: grid; grid-template-columns: 80px 1fr; padding-top: 0; border-top: 1.5px solid var(--line-strong); margin-top: 72px; }
   .arc-label { grid-column: 2; padding: 26px 0 20px; }
   .stages { grid-column: 2; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); }
   .stage + .stage { border-left: 1.5px solid var(--line); }
-  .stage a { display: block; padding: 6px 28px 40px; height: 100%; transition: background 0.15s; }
-  .stage:first-child a { padding-left: 0; }
+  .stage a { display: block; padding: 6px 28px 40px; height: 100%; border-radius: var(--radius); transition: background 0.15s; }
+  .stage:first-child a { padding-left: 0; border-radius: 0; }
   .stage a:hover { background: var(--paper-2); }
   .stage .n { color: var(--accent); font-weight: 700; font-size: 13px; display: flex; justify-content: space-between; }
   .stage .go { color: var(--faint); transition: transform 0.15s, color 0.15s; }
@@ -102,7 +247,7 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
   .stage .meta { color: var(--faint); margin-top: 16px; text-transform: uppercase; font-size: 11px; }
   .stage.is-ai .t::after { content: ' ▮'; color: var(--accent); font-size: 0.6em; vertical-align: 0.18em; }
 
-  /* about */
+  /* ── about */
   .about { display: grid; grid-template-columns: 80px 1fr; border-top: 1.5px solid var(--line); margin-top: 64px; }
   .about-col { padding: 26px 0 0; max-width: 680px; }
   .about-col .eyebrow { margin-bottom: 18px; }
@@ -116,45 +261,149 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     .stages { grid-template-columns: 1fr; }
     .stage + .stage { border-left: 0; border-top: 1.5px solid var(--line); }
     .stage a, .stage:first-child a { padding: 24px 0; }
+    .rv-showcase { grid-template-columns: 1fr; }
+    .rv-header, .rv-cards { grid-column: 1; }
+    .rv-cards { grid-template-columns: 1fr; }
   }
 </style>
 
 <script>
+  /* ── rotating phrases */
   const phrases = [
     'systems that actually get adopted',
     'decisions that set direction',
     'products ready for AI',
     'systems built to scale',
   ];
-  const el = document.getElementById('rot');
+  const rotEl = document.getElementById('rot');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (el && !reduce) {
+  if (rotEl && !reduce) {
     let i = 0;
     setInterval(() => {
-      el.classList.add('is-out');
+      rotEl.classList.add('is-out');
       setTimeout(() => {
         i = (i + 1) % phrases.length;
-        el.textContent = phrases[i];
-        el.classList.remove('is-out');
+        rotEl.textContent = phrases[i];
+        rotEl.classList.remove('is-out');
       }, 240);
     }, 3400);
   }
 
-  const reveal = document.querySelectorAll('[data-reveal]');
-  if (reveal.length && !reduce && 'IntersectionObserver' in window) {
+  /* ── reveal on scroll */
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  if (revealEls.length && !reduce && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('in');
-            io.unobserve(e.target);
-          }
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
         });
       },
       { rootMargin: '0px 0px -12% 0px' },
     );
-    reveal.forEach((n) => io.observe(n));
+    revealEls.forEach((n) => io.observe(n));
   } else {
-    reveal.forEach((n) => n.classList.add('in'));
+    revealEls.forEach((n) => n.classList.add('in'));
+  }
+
+  /* ── scroll-linked transition: main → Ruralvía ─────────────────────── */
+  const trigger   = document.getElementById('rv-trigger');
+  const contentEl = document.getElementById('content-area');
+  const slate     = document.getElementById('rv-slate');
+  const navEl     = document.querySelector('header.nav');
+
+  /* Position slate flush below nav so the frame stays visible */
+  if (slate && navEl) slate.style.top = `${navEl.offsetHeight}px`;
+
+  const roPaper  = document.getElementById('ro-paper');
+  const roInk    = document.getElementById('ro-ink');
+  const roRadius = document.getElementById('ro-radius');
+  const roPad    = document.getElementById('ro-pad');
+
+  /* Token endpoints — RGB arrays */
+  const MAIN = {
+    paper:      [243, 241, 234],
+    paper2:     [236, 233, 223],
+    ink:        [22,  22,  15 ],
+    accent:     [226, 52,  29 ],
+    accentInk:  [168, 35,  9  ],
+    muted:      [79,  78,  68 ],
+    faint:      [120, 118, 106],
+    lineRgb:    [20,  20,  12 ],
+    lineStrong: [22,  22,  15 ],
+    radius: 0, pad: 56,
+  };
+  const RV = {
+    paper:      [239, 234, 198],
+    paper2:     [232, 226, 176],
+    ink:        [28,  58,  43 ],
+    accent:     [46,  125, 82 ],
+    accentInk:  [30,  92,  58 ],
+    muted:      [58,  84,  69 ],
+    faint:      [92,  122, 104],
+    lineRgb:    [28,  58,  43 ],
+    lineStrong: [28,  58,  43 ],
+    radius: 18, pad: 64,
+  };
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function lerpRgb(a, b, t) {
+    return `rgb(${Math.round(lerp(a[0],b[0],t))},${Math.round(lerp(a[1],b[1],t))},${Math.round(lerp(a[2],b[2],t))})`;
+  }
+  function toHex(r, g, b) {
+    return '#' + [r,g,b].map((v) => Math.round(v).toString(16).padStart(2,'0')).join('');
+  }
+  function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+  /* Bell-curve: visible progress 0.25 → 0.75, peak at 0.5 */
+  function slateAlpha(p) {
+    if (p <= 0.25 || p >= 0.75) return 0;
+    return Math.sin(((p - 0.25) / 0.5) * Math.PI);
+  }
+
+  function applyTokens(t) {
+    if (!contentEl) return;
+    const el = contentEl;
+    el.style.setProperty('--paper',      lerpRgb(MAIN.paper,      RV.paper,      t));
+    el.style.setProperty('--paper-2',    lerpRgb(MAIN.paper2,     RV.paper2,     t));
+    el.style.setProperty('--ink',        lerpRgb(MAIN.ink,        RV.ink,        t));
+    el.style.setProperty('--accent',     lerpRgb(MAIN.accent,     RV.accent,     t));
+    el.style.setProperty('--accent-ink', lerpRgb(MAIN.accentInk,  RV.accentInk,  t));
+    el.style.setProperty('--muted',      lerpRgb(MAIN.muted,      RV.muted,      t));
+    el.style.setProperty('--faint',      lerpRgb(MAIN.faint,      RV.faint,      t));
+    el.style.setProperty('--line',
+      `rgba(${MAIN.lineRgb.map((v,i) => Math.round(lerp(v, RV.lineRgb[i], t))).join(',')},0.14)`);
+    el.style.setProperty('--line-strong', lerpRgb(MAIN.lineStrong, RV.lineStrong, t));
+    el.style.setProperty('--radius',  `${Math.round(lerp(MAIN.radius, RV.radius, t))}px`);
+    el.style.setProperty('--pad',     `${Math.round(lerp(MAIN.pad,    RV.pad,    t))}px`);
+
+    /* Tick the readout */
+    const pr = MAIN.paper.map((v,i) => Math.round(lerp(v, RV.paper[i], t)));
+    const ir = MAIN.ink.map((v,i)   => Math.round(lerp(v, RV.ink[i],   t)));
+    if (roPaper)  roPaper.textContent  = toHex(...pr);
+    if (roInk)    roInk.textContent    = toHex(...ir);
+    if (roRadius) roRadius.textContent = `${Math.round(lerp(MAIN.radius, RV.radius, t))}px`;
+    if (roPad)    roPad.textContent    = `${Math.round(lerp(MAIN.pad,    RV.pad,    t))}px`;
+  }
+
+  function updateTransition() {
+    if (!trigger || !slate) return;
+    const rect = trigger.getBoundingClientRect();
+    const vh   = window.innerHeight;
+    let p = (vh - rect.top) / (rect.height + vh);
+    p = Math.max(0, Math.min(1, p));
+    applyTokens(easeInOut(p));
+    slate.style.opacity = String(slateAlpha(p));
+  }
+
+  if (!reduce && trigger) {
+    window.addEventListener('scroll', updateTransition, { passive: true });
+    updateTransition();
+  } else if (reduce && trigger && contentEl) {
+    /* Reduced motion: snap Ruralvía theme on entry */
+    new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) contentEl.setAttribute('data-theme', 'ruralvia');
+      });
+    }).observe(trigger);
   }
 </script>
