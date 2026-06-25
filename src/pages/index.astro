@@ -32,6 +32,95 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
       </div>
     </section>
 
+    <!-- ═══ ACTO 0 — who I am / how I work ═══ -->
+    <section class="acto-0" aria-labelledby="acto-label">
+      <div class="wrap acto-grid">
+        <div class="idx mono" aria-hidden="true">·</div>
+        <div class="acto-body">
+          <p id="acto-label" class="eyebrow">Who I am · How I work</p>
+
+          <ol class="beats" role="list">
+
+            <!-- 1 · Altitud -->
+            <li class="beat" data-reveal>
+              <span class="beat-n mono" aria-hidden="true">01</span>
+              <p class="beat-text beat-text--lg">
+                Most designers hand off. I define the system, make the decisions
+                that set direction, lead the execution, and stay until
+                it's adopted.
+              </p>
+            </li>
+
+            <!-- 2 · Cómo pienso -->
+            <li class="beat" data-reveal>
+              <span class="beat-n mono" aria-hidden="true">02</span>
+              <p class="beat-text">
+                I look for the invariants first: what must be true regardless of
+                implementation. Structure before system. System before screens.
+              </p>
+            </li>
+
+            <!-- 3 · El puente -->
+            <li class="beat" data-reveal>
+              <span class="beat-n mono" aria-hidden="true">03</span>
+              <p class="beat-text">
+                I speak product fluently enough to push back on direction.
+                Engineering fluently enough to know what's real.
+                That's not a soft skill. It's how systems actually get built.
+              </p>
+            </li>
+
+            <!-- 4 · Autoridad tranquila -->
+            <li class="beat" data-reveal>
+              <span class="beat-n mono" aria-hidden="true">04</span>
+              <p class="beat-text">
+                I've led design at global scale and built an AI-native product
+                from zero. I don't need to be the loudest voice in the room.
+                I need to be the most useful one.
+              </p>
+            </li>
+
+            <!-- 5 · Arquetipo: The Infrastructure Maker -->
+            <li class="beat beat--archetype" id="beat-archetype" data-reveal>
+              <span class="beat-n mono" aria-hidden="true">05</span>
+              <div class="archetype-inner">
+                <p class="beat-text archetype-setup">
+                  I built a product that reads professional trajectories.
+                  I gave it mine. It returned this:
+                </p>
+                <p class="archetype-label" id="archetype-label">
+                  The Infrastructure Maker
+                </p>
+                <p class="archetype-sub">
+                  The one who builds what needs to exist for everything else
+                  to work.
+                </p>
+              </div>
+            </li>
+
+            <!-- 6 · Olas semilla -->
+            <li class="beat beat--olas" data-reveal>
+              <span class="beat-n mono" aria-hidden="true">06</span>
+              <div class="olas-inner">
+                <p class="beat-text olas-frame">
+                  Five waves. I don't discover categories. I arrive when
+                  they're forming.
+                </p>
+                <ol class="olas-list" role="list" aria-label="Industry waves">
+                  <li>The web</li>
+                  <li>Portals</li>
+                  <li>UX</li>
+                  <li>Design systems</li>
+                  <li class="ola-current">AI</li>
+                </ol>
+              </div>
+            </li>
+
+          </ol>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══ CONTENT AREA — morphs from main → Ruralvía tokens ═══ -->
     <div id="content-area">
 
@@ -253,6 +342,75 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
   .about-col .eyebrow { margin-bottom: 18px; }
   .about-body { font-size: 19px; line-height: 1.55; letter-spacing: -0.01em; }
 
+  /* ── acto 0 */
+  .acto-0 { border-top: 1.5px solid var(--line-strong); }
+  .acto-grid {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+  }
+  .acto-body { padding: 26px 0 0; }
+  .acto-body > .eyebrow { padding-bottom: 36px; display: block; }
+
+  .beats { list-style: none; border-top: 1.5px solid var(--line); }
+  .beat {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 0 24px;
+    padding: 36px 0;
+    border-bottom: 1.5px solid var(--line);
+    align-items: start;
+  }
+  .beat-n { color: var(--faint); padding-top: 3px; }
+  .beat-text { font-size: 17px; line-height: 1.65; letter-spacing: -0.01em; }
+  .beat-text--lg {
+    font-size: 21px;
+    line-height: 1.4;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  /* beat 5 — archetype */
+  .beat--archetype { align-items: start; }
+  .archetype-inner { display: flex; flex-direction: column; gap: 0; }
+  .archetype-setup { color: var(--muted); margin-bottom: 20px; }
+  .archetype-label {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(28px, 4.5vw, 52px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    transition: color 0.45s ease;
+  }
+  .archetype-label.is-gold { color: #A87C2A; }
+  .archetype-sub {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--faint);
+    margin-top: 12px;
+    max-width: 46ch;
+  }
+
+  /* beat 6 — olas */
+  .olas-frame { color: var(--muted); margin-bottom: 20px; }
+  .olas-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 0;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+  }
+  .olas-list li { display: flex; align-items: center; }
+  .olas-list li:not(:last-child)::after {
+    content: '→';
+    color: var(--accent);
+    margin: 0 10px;
+  }
+  .ola-current { color: var(--accent); font-weight: 700; }
+
   @media (max-width: 720px) {
     .hero, .arc, .about { grid-template-columns: 1fr; }
     .idx { display: none; }
@@ -264,6 +422,11 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     .rv-showcase { grid-template-columns: 1fr; }
     .rv-header, .rv-cards { grid-column: 1; }
     .rv-cards { grid-template-columns: 1fr; }
+    .acto-grid { grid-template-columns: 1fr; }
+    .acto-grid > .idx { display: none; }
+    .beat { grid-template-columns: 36px 1fr; gap: 0 16px; }
+    .beat-text--lg { font-size: 18px; }
+    .olas-list { font-size: 11.5px; }
   }
 </style>
 
@@ -303,6 +466,36 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     revealEls.forEach((n) => io.observe(n));
   } else {
     revealEls.forEach((n) => n.classList.add('in'));
+  }
+
+  /* ── beat 5: archetype gold flash */
+  const archetypeBeat  = document.getElementById('beat-archetype');
+  const archetypeLabel = document.getElementById('archetype-label');
+
+  if (archetypeBeat && archetypeLabel && !reduce) {
+    let fired = false;
+    const archetypeObs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && !fired) {
+            fired = true;
+            archetypeLabel.style.fontFamily = "'Playfair Display', Georgia, serif";
+            archetypeLabel.style.fontStyle  = 'italic';
+            archetypeLabel.classList.add('is-gold');
+            setTimeout(() => {
+              archetypeLabel.classList.remove('is-gold');
+            }, 1300);
+            setTimeout(() => {
+              archetypeLabel.style.fontFamily = '';
+              archetypeLabel.style.fontStyle  = '';
+            }, 1750);
+            archetypeObs.disconnect();
+          }
+        });
+      },
+      { threshold: 0.7 },
+    );
+    archetypeObs.observe(archetypeBeat);
   }
 
   /* ── scroll-linked transition: main → Ruralvía ─────────────────────── */
