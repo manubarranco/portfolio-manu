@@ -224,20 +224,20 @@ import Footer from '../components/Footer.astro';
   <p class="slate-eyebrow">campo y trigo</p>
   <h2 class="slate-title">RURALVÍA</h2>
   <dl class="slate-readout">
-    <div class="readout-row"><dt>--paper</dt><dd>#F3F1EA</dd></div>
-    <div class="readout-row"><dt>--ink</dt><dd>#16160F</dd></div>
-    <div class="readout-row"><dt>--radius</dt><dd>0px</dd></div>
-    <div class="readout-row"><dt>--pad</dt><dd>56px</dd></div>
+    <div class="readout-row"><dt>--paper</dt><dd>#EFEAC6</dd></div>
+    <div class="readout-row"><dt>--ink</dt><dd>#1C3A2B</dd></div>
+    <div class="readout-row"><dt>--radius</dt><dd>24px</dd></div>
+    <div class="readout-row"><dt>--pad</dt><dd>64px</dd></div>
   </dl>
 </div>
 
 <div class="slate slate--flame" id="flame-slate" aria-hidden="true">
-  <p class="slate-eyebrow">fuego controlado</p>
+  <p class="slate-eyebrow">orden y escala</p>
   <h2 class="slate-title">FLAME</h2>
   <dl class="slate-readout">
-    <div class="readout-row"><dt>--paper</dt><dd>#EFEAC6</dd></div>
-    <div class="readout-row"><dt>--ink</dt><dd>#1C3A2B</dd></div>
-    <div class="readout-row"><dt>--radius</dt><dd>18px</dd></div>
+    <div class="readout-row"><dt>--paper</dt><dd>#ECE9DF</dd></div>
+    <div class="readout-row"><dt>--ink</dt><dd>#16160F</dd></div>
+    <div class="readout-row"><dt>--radius</dt><dd>0px</dd></div>
     <div class="readout-row"><dt>--pad</dt><dd>64px</dd></div>
   </dl>
 </div>
@@ -246,10 +246,10 @@ import Footer from '../components/Footer.astro';
   <p class="slate-eyebrow">el autómata</p>
   <h2 class="slate-title">ERNESZT</h2>
   <dl class="slate-readout">
-    <div class="readout-row"><dt>--paper</dt><dd>#18120E</dd></div>
-    <div class="readout-row"><dt>--ink</dt><dd>#F2E7DD</dd></div>
+    <div class="readout-row"><dt>--paper</dt><dd>#1A1209</dd></div>
+    <div class="readout-row"><dt>--ink</dt><dd>#EFEAC6</dd></div>
     <div class="readout-row"><dt>--radius</dt><dd>4px</dd></div>
-    <div class="readout-row"><dt>--pad</dt><dd>64px</dd></div>
+    <div class="readout-row"><dt>--pad</dt><dd>72px</dd></div>
   </dl>
 </div>
 
@@ -295,8 +295,8 @@ import Footer from '../components/Footer.astro';
     will-change: opacity;
   }
   :global(.slate--rv)      { background: rgba(28, 58, 43, 0.97); }
-  :global(.slate--flame)   { background: rgba(24, 18, 14, 0.97); }
-  :global(.slate--erneszt) { background: rgba(13, 14, 22, 0.97); }
+  :global(.slate--flame)   { background: rgba(226, 52, 29, 0.97); }
+  :global(.slate--erneszt) { background: rgba(26, 18, 9, 0.97); }
 
   :global(.slate-eyebrow) {
     font-family: var(--mono);
@@ -306,16 +306,16 @@ import Footer from '../components/Footer.astro';
     color: rgba(255, 255, 255, 0.55);
   }
   :global(.slate-title) {
-    font-family: var(--headline);
-    font-weight: 400;
+    font-weight: 700;
     font-size: clamp(80px, 14vw, 180px);
     line-height: 0.88;
     letter-spacing: -0.01em;
     text-align: center;
   }
-  :global(.slate--rv .slate-title)      { color: #EFEAC6; }
-  :global(.slate--flame .slate-title)   { color: #FF5A2C; }
-  :global(.slate--erneszt .slate-title) { color: #D8B24A; }
+  /* Each flood titles itself in its universe's display face */
+  :global(.slate--rv .slate-title)      { font-family: 'Fraunces', Georgia, serif;       font-weight: 600; color: #EFEAC6; }
+  :global(.slate--flame .slate-title)   { font-family: 'Archivo Black', system-ui, sans-serif; font-weight: 400; color: #F3F1EA; }
+  :global(.slate--erneszt .slate-title) { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 700; color: #C9A24B; }
 
   :global(.slate-readout) {
     display: flex;
@@ -338,7 +338,7 @@ import Footer from '../components/Footer.astro';
   }
   .uni-header { grid-column: 2; margin-bottom: 56px; }
   .uni-tagline {
-    font-family: var(--headline);
+    font-family: var(--display);
     font-weight: 400;
     font-size: clamp(64px, 10vw, 128px);
     line-height: 0.88;
@@ -354,6 +354,7 @@ import Footer from '../components/Footer.astro';
   }
   .uni-card {
     background: var(--paper-2);
+    border: var(--bw) solid var(--line);
     border-radius: var(--radius);
     padding: 32px;
     display: flex;
@@ -547,12 +548,29 @@ import Footer from '../components/Footer.astro';
   const contentEl = document.getElementById('content-area');
   const navEl     = document.querySelector('header.nav');
 
-  /* Token endpoints per universe — RGB arrays + scalars */
+  /* Token endpoints per universe — canonical from Figma modes (file 8JMA60B81nVHQKIsNRIWS7).
+     RGB arrays + scalars; fonts snap (can't interpolate), colors/radius/bw lerp. */
   const THEMES = {
-    main:     { paper:[243,241,234], paper2:[236,233,223], ink:[22,22,15],    accent:[226,52,29],  accentInk:[168,35,9],   muted:[79,78,68],    faint:[120,118,106], lineRgb:[20,20,12],    lineStrong:[22,22,15],  radius:0,  pad:56 },
-    ruralvia: { paper:[239,234,198], paper2:[232,226,176], ink:[28,58,43],    accent:[46,125,82],  accentInk:[30,92,58],   muted:[58,84,69],    faint:[92,122,104],  lineRgb:[28,58,43],    lineStrong:[28,58,43],  radius:18, pad:64 },
-    flame:    { paper:[24,18,14],    paper2:[35,26,20],    ink:[242,231,221], accent:[255,90,44],  accentInk:[255,130,84], muted:[194,176,164], faint:[139,122,108], lineRgb:[242,231,221], lineStrong:[74,58,48],  radius:4,  pad:64 },
-    erneszt:  { paper:[13,14,22],    paper2:[22,24,38],    ink:[236,230,216], accent:[216,178,74], accentInk:[232,198,106],muted:[169,166,184], faint:[110,108,128], lineRgb:[236,230,216], lineStrong:[42,44,64],  radius:14, pad:72 },
+    main: {
+      paper:[243,241,234], paper2:[236,233,223], ink:[22,22,15], muted:[79,78,68], faint:[120,118,106],
+      accent:[226,52,29], accentInk:[168,35,9], lineRgb:[20,20,12], lineStrong:[22,22,15], radius:8, bw:2, pad:56,
+      display:"'Bricolage Grotesque','Host Grotesk',system-ui,sans-serif", headline:"'Bebas Neue','Bricolage Grotesque',system-ui,sans-serif", sans:"'Host Grotesk',system-ui,sans-serif",
+    },
+    ruralvia: {
+      paper:[239,234,198], paper2:[231,224,180], ink:[28,58,43], muted:[46,125,82], faint:[111,138,116],
+      accent:[46,125,82], accentInk:[30,92,58], lineRgb:[28,58,43], lineStrong:[28,58,43], radius:24, bw:2, pad:64,
+      display:"'Fraunces',Georgia,serif", headline:"'Fraunces',Georgia,serif", sans:"'Hanken Grotesk',system-ui,sans-serif",
+    },
+    flame: {
+      paper:[236,233,223], paper2:[227,222,208], ink:[22,22,15], muted:[79,78,68], faint:[140,137,125],
+      accent:[226,52,29], accentInk:[168,35,9], lineRgb:[20,20,12], lineStrong:[22,22,15], radius:0, bw:4, pad:64,
+      display:"'Archivo Black',system-ui,sans-serif", headline:"'Archivo',system-ui,sans-serif", sans:"'Inter',system-ui,sans-serif",
+    },
+    erneszt: {
+      paper:[26,18,9], paper2:[36,26,14], ink:[239,234,198], muted:[217,194,115], faint:[154,138,88],
+      accent:[201,162,75], accentInk:[217,194,115], lineRgb:[236,234,198], lineStrong:[201,162,75], radius:4, bw:2, pad:72,
+      display:"'Playfair Display',Georgia,serif", headline:"'Playfair Display',Georgia,serif", sans:"'Lora',Georgia,serif",
+    },
   };
 
   const SEGMENTS = [
@@ -604,7 +622,14 @@ import Footer from '../components/Footer.astro';
       `rgba(${A.lineRgb.map((v,i) => Math.round(lerp(v, B.lineRgb[i], t))).join(',')},0.14)`);
     el.style.setProperty('--line-strong', lerpRgb(A.lineStrong, B.lineStrong, t));
     el.style.setProperty('--radius', `${Math.round(lerp(A.radius, B.radius, t))}px`);
+    el.style.setProperty('--bw',     `${lerp(A.bw, B.bw, t).toFixed(1)}px`);
     el.style.setProperty('--pad',    `${Math.round(lerp(A.pad,    B.pad,    t))}px`);
+
+    /* Fonts can't interpolate — snap at the midpoint, hidden behind the flood slate */
+    const F = THEMES[t < 0.5 ? fromKey : toKey];
+    el.style.setProperty('--display',  F.display);
+    el.style.setProperty('--headline', F.headline);
+    el.style.setProperty('--sans',     F.sans);
   }
 
   function updateReadout(seg, t) {

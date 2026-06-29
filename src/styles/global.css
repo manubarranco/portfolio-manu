@@ -16,53 +16,68 @@
 
   --pad: 56px;
   --maxw: 1180px;
-  --radius: 0px;
+  --radius: 8px;
+  --bw: 2px;
 }
 
-/* ── Universe theme tokens (reduced-motion fallback; morphed values set inline by JS) */
+/* ── Universe theme tokens — canonical from Figma modes (file 8JMA60B81nVHQKIsNRIWS7).
+   Reduced-motion fallback; the morphed values are set inline by JS on #content-area. */
 [data-theme="ruralvia"] {
   --paper: #EFEAC6;
-  --paper-2: #E8E2B0;
+  --paper-2: #E7E0B4;
   --ink: #1C3A2B;
+  --muted: #2E7D52;
+  --faint: #6F8A74;
   --accent: #2E7D52;
   --accent-ink: #1E5C3A;
-  --muted: #3A5445;
-  --faint: #5C7A68;
   --line: rgba(28, 58, 43, 0.14);
   --line-strong: #1C3A2B;
-  --radius: 18px;
+  --radius: 24px;
+  --bw: 2px;
   --pad: 64px;
+  --display: 'Fraunces', Georgia, serif;
+  --headline: 'Fraunces', Georgia, serif;
+  --sans: 'Hanken Grotesk', system-ui, sans-serif;
 }
 [data-theme="flame"] {
-  --paper: #18120E;
-  --paper-2: #231A14;
-  --ink: #F2E7DD;
-  --accent: #FF5A2C;
-  --accent-ink: #FF8254;
-  --muted: #C2B0A4;
-  --faint: #8B7A6C;
-  --line: rgba(242, 231, 221, 0.14);
-  --line-strong: #4A3A30;
-  --radius: 4px;
+  --paper: #ECE9DF;
+  --paper-2: #E3DED0;
+  --ink: #16160F;
+  --muted: #4F4E44;
+  --faint: #8C897D;
+  --accent: #E2341D;
+  --accent-ink: #A82309;
+  --line: rgba(20, 20, 12, 0.16);
+  --line-strong: #16160F;
+  --radius: 0px;
+  --bw: 4px;
   --pad: 64px;
+  --display: 'Archivo Black', system-ui, sans-serif;
+  --headline: 'Archivo', system-ui, sans-serif;
+  --sans: 'Inter', system-ui, sans-serif;
 }
 [data-theme="erneszt"] {
-  --paper: #0D0E16;
-  --paper-2: #161826;
-  --ink: #ECE6D8;
-  --accent: #D8B24A;
-  --accent-ink: #E8C66A;
-  --muted: #A9A6B8;
-  --faint: #6E6C80;
-  --line: rgba(236, 230, 216, 0.14);
-  --line-strong: #2A2C40;
-  --radius: 14px;
+  --paper: #1A1209;
+  --paper-2: #241A0E;
+  --ink: #EFEAC6;
+  --muted: #D9C273;
+  --faint: #9A8A58;
+  --accent: #C9A24B;
+  --accent-ink: #D9C273;
+  --line: rgba(236, 234, 198, 0.16);
+  --line-strong: #C9A24B;
+  --radius: 4px;
+  --bw: 2px;
   --pad: 72px;
+  --display: 'Playfair Display', Georgia, serif;
+  --headline: 'Playfair Display', Georgia, serif;
+  --sans: 'Lora', Georgia, serif;
 }
 
 #content-area {
   background-color: var(--paper);
   color: var(--ink);
+  font-family: var(--sans);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
