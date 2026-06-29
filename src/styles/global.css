@@ -19,7 +19,7 @@
   --radius: 0px;
 }
 
-/* ── Ruralvía theme tokens (reduced-motion fallback; morphed values set inline by JS) */
+/* ── Universe theme tokens (reduced-motion fallback; morphed values set inline by JS) */
 [data-theme="ruralvia"] {
   --paper: #EFEAC6;
   --paper-2: #E8E2B0;
@@ -32,6 +32,32 @@
   --line-strong: #1C3A2B;
   --radius: 18px;
   --pad: 64px;
+}
+[data-theme="flame"] {
+  --paper: #18120E;
+  --paper-2: #231A14;
+  --ink: #F2E7DD;
+  --accent: #FF5A2C;
+  --accent-ink: #FF8254;
+  --muted: #C2B0A4;
+  --faint: #8B7A6C;
+  --line: rgba(242, 231, 221, 0.14);
+  --line-strong: #4A3A30;
+  --radius: 4px;
+  --pad: 64px;
+}
+[data-theme="erneszt"] {
+  --paper: #0D0E16;
+  --paper-2: #161826;
+  --ink: #ECE6D8;
+  --accent: #D8B24A;
+  --accent-ink: #E8C66A;
+  --muted: #A9A6B8;
+  --faint: #6E6C80;
+  --line: rgba(236, 230, 216, 0.14);
+  --line-strong: #2A2C40;
+  --radius: 14px;
+  --pad: 72px;
 }
 
 #content-area {

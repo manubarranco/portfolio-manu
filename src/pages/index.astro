@@ -2,9 +2,6 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { getCollection } from 'astro:content';
-
-const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Base>
@@ -121,56 +118,87 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
       </div>
     </section>
 
-    <!-- ═══ CONTENT AREA — morphs from main → Ruralvía tokens ═══ -->
+    <!-- ═══ CONTENT AREA — morphs through universe themes ═══ -->
     <div id="content-area">
 
-      <!-- 200vh scroll trigger zone (invisible, drives the animation) -->
-      <div id="rv-trigger" aria-hidden="true"></div>
+      <!-- ── Universe 01 · Ruralvía ───────────────────────────────── -->
+      <div class="uni-trigger" id="rv-trigger" aria-hidden="true"></div>
 
-      <!-- Ruralvía showcase: first content in the new theme -->
-      <section class="rv-showcase wrap" aria-labelledby="rv-title">
-        <div class="rv-header" data-reveal>
+      <section class="uni-showcase wrap" data-universe="ruralvia" aria-labelledby="rv-title">
+        <div class="uni-header" data-reveal>
           <p class="eyebrow">01 · Ruralvía · 2018–2019 · Caja Rural</p>
-          <h2 id="rv-title" class="rv-tagline">An expert<br>in your corner</h2>
+          <h2 id="rv-title" class="uni-tagline">An expert<br>in your corner</h2>
         </div>
-        <div class="rv-cards">
-          <div class="rv-card" data-reveal style="transition-delay:60ms">
-            <p class="rv-card-label eyebrow">Vision</p>
-            <p class="rv-card-body">Before Cleo, Revolut, N26. We built proactive financial advice in 2018 around a single insight: users didn't need features, they needed someone in their corner.</p>
+        <div class="uni-cards">
+          <div class="uni-card" data-reveal style="transition-delay:60ms">
+            <p class="uni-card-label eyebrow">Vision</p>
+            <p class="uni-card-body">Before Cleo, Revolut, N26. We built proactive financial advice in 2018 around a single insight: users didn't need features, they needed someone in their corner.</p>
           </div>
-          <div class="rv-card" data-reveal style="transition-delay:120ms">
-            <p class="rv-card-label eyebrow">System</p>
-            <p class="rv-card-body">Proto-design system with tokens, flows, and a UI library that scaled across 70+ financial entities within Caja Rural Group.</p>
+          <div class="uni-card" data-reveal style="transition-delay:120ms">
+            <p class="uni-card-label eyebrow">System</p>
+            <p class="uni-card-body">Proto-design system with tokens, flows, and a UI library that scaled across 70+ financial entities within Caja Rural Group.</p>
           </div>
-          <div class="rv-card rv-card--cta" data-reveal style="transition-delay:180ms">
-            <p class="rv-card-label eyebrow">The differentiator</p>
-            <p class="rv-card-body">El Experto — a contextual advisor embedded in the home screen. Not a chatbot. Someone who noticed things before you did.</p>
-            <a href="/work/ruralvia" class="rv-link">Read the case study ↗</a>
+          <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+            <p class="uni-card-label eyebrow">The differentiator</p>
+            <p class="uni-card-body">El Experto, a contextual advisor embedded in the home screen. Not a chatbot. Someone who noticed things before you did.</p>
+            <a href="/work/ruralvia" class="uni-link">Read the case study ↗</a>
           </div>
         </div>
       </section>
 
-      <!-- Work arc -->
-      <section id="work" class="arc wrap" aria-labelledby="arc-title">
-        <div class="idx mono">01</div>
-        <p id="arc-title" class="eyebrow arc-label">The arc · abstraction, scaled</p>
-        <ol class="stages">
-          {work.map((c, i) => (
-            <li class={`stage${c.data.aiNative ? ' is-ai' : ''}`} data-reveal style={`transition-delay:${i * 90}ms`}>
-              <a href={`/work/${c.id}`}>
-                <span class="n mono">{c.data.index}<span class="go" aria-hidden="true">↗</span></span>
-                <h2 class="t">{c.data.title}</h2>
-                <p class="d">{c.data.blurb}</p>
-                <p class="meta mono">{c.data.years} · {c.data.stage}</p>
-              </a>
-            </li>
-          ))}
-        </ol>
+      <!-- ── Universe 02 · Flame ──────────────────────────────────── -->
+      <div class="uni-trigger uni-trigger--short" id="flame-trigger" aria-hidden="true"></div>
+
+      <section class="uni-showcase wrap" data-universe="flame" aria-labelledby="flame-title">
+        <div class="uni-header" data-reveal>
+          <p class="eyebrow">02 · Flame · 2020–2024 · Santander</p>
+          <h2 id="flame-title" class="uni-tagline">A system teams<br>chose to adopt</h2>
+        </div>
+        <div class="uni-cards">
+          <div class="uni-card" data-reveal style="transition-delay:60ms">
+            <p class="uni-card-label eyebrow">Scale</p>
+            <p class="uni-card-body">1,780+ components governed across 350+ designers and 10 countries. In banking, design coherence isn't a UX nicety: it's a trust signal.</p>
+          </div>
+          <div class="uni-card" data-reveal style="transition-delay:120ms">
+            <p class="uni-card-label eyebrow">The model</p>
+            <p class="uni-card-body">A tiered system: a global foundation with local layers. Teams moved fast locally without fragmenting the platform at scale.</p>
+          </div>
+          <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+            <p class="uni-card-label eyebrow">Impact</p>
+            <p class="uni-card-body">~35% faster feature development. I led the system, the team, and the alignment with Santander's Chief Design Officer.</p>
+            <a href="/work/flame" class="uni-link">Read the case study ↗</a>
+          </div>
+        </div>
       </section>
 
-      <!-- About -->
+      <!-- ── Universe 03 · Erneszt (climax) ───────────────────────── -->
+      <div class="uni-trigger uni-trigger--short" id="erneszt-trigger" aria-hidden="true"></div>
+
+      <section class="uni-showcase wrap" data-universe="erneszt" aria-labelledby="erneszt-title">
+        <div class="uni-header" data-reveal>
+          <p class="eyebrow">03 · Erneszt · 2026 · Self-initiated</p>
+          <h2 id="erneszt-title" class="uni-tagline">The thesis,<br>made real</h2>
+        </div>
+        <div class="uni-cards">
+          <div class="uni-card" data-reveal style="transition-delay:60ms">
+            <p class="uni-card-label eyebrow">Thesis</p>
+            <p class="uni-card-body">An AI-native product, built from zero. Conceived, designed, and orchestrated end to end. The arc's climax, made real.</p>
+          </div>
+          <div class="uni-card" data-reveal style="transition-delay:120ms">
+            <p class="uni-card-label eyebrow">Emotional architecture</p>
+            <p class="uni-card-body">Designed the emotional architecture before the product: the "this is me" click of a viral test with the depth of a real coach.</p>
+          </div>
+          <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+            <p class="uni-card-label eyebrow">The product</p>
+            <p class="uni-card-body">Zoltar, an automaton that reads your trajectory and returns it as something you can finally claim. Try it free with HIREMANU.</p>
+            <a href="/work/erneszt" class="uni-link">Read the case study ↗</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- About + closing CTA — rests in the Erneszt theme -->
       <section id="about" class="about wrap" aria-labelledby="about-title">
-        <div class="idx mono">02</div>
+        <div class="idx mono">·</div>
         <div class="about-col" data-reveal>
           <p id="about-title" class="eyebrow">About</p>
           <p class="about-body">
@@ -179,6 +207,10 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
             then leading the execution and adoption that make it real. I've led design at scale
             and built an AI-native product from zero.
           </p>
+          <div class="end-cta">
+            <p class="end-line">Available for new challenges.</p>
+            <a href="/contact" class="end-link mono">Get in touch ↗</a>
+          </div>
         </div>
       </section>
     </div><!-- /content-area -->
@@ -187,15 +219,37 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
   <Footer />
 </Base>
 
-<!-- ═══ SLATE — fixed overlay, appears mid-transition ═══ -->
-<div id="rv-slate" aria-hidden="true">
+<!-- ═══ FLOOD SLATES — fixed overlays, one floods at each transition peak ═══ -->
+<div class="slate slate--rv" id="rv-slate" aria-hidden="true">
   <p class="slate-eyebrow">campo y trigo</p>
   <h2 class="slate-title">RURALVÍA</h2>
   <dl class="slate-readout">
-    <div class="readout-row"><dt>--paper</dt><dd id="ro-paper">#F3F1EA</dd></div>
-    <div class="readout-row"><dt>--ink</dt><dd id="ro-ink">#16160F</dd></div>
-    <div class="readout-row"><dt>--radius</dt><dd id="ro-radius">0px</dd></div>
-    <div class="readout-row"><dt>--pad</dt><dd id="ro-pad">56px</dd></div>
+    <div class="readout-row"><dt>--paper</dt><dd>#F3F1EA</dd></div>
+    <div class="readout-row"><dt>--ink</dt><dd>#16160F</dd></div>
+    <div class="readout-row"><dt>--radius</dt><dd>0px</dd></div>
+    <div class="readout-row"><dt>--pad</dt><dd>56px</dd></div>
+  </dl>
+</div>
+
+<div class="slate slate--flame" id="flame-slate" aria-hidden="true">
+  <p class="slate-eyebrow">fuego controlado</p>
+  <h2 class="slate-title">FLAME</h2>
+  <dl class="slate-readout">
+    <div class="readout-row"><dt>--paper</dt><dd>#EFEAC6</dd></div>
+    <div class="readout-row"><dt>--ink</dt><dd>#1C3A2B</dd></div>
+    <div class="readout-row"><dt>--radius</dt><dd>18px</dd></div>
+    <div class="readout-row"><dt>--pad</dt><dd>64px</dd></div>
+  </dl>
+</div>
+
+<div class="slate slate--erneszt" id="erneszt-slate" aria-hidden="true">
+  <p class="slate-eyebrow">el autómata</p>
+  <h2 class="slate-title">ERNESZT</h2>
+  <dl class="slate-readout">
+    <div class="readout-row"><dt>--paper</dt><dd>#18120E</dd></div>
+    <div class="readout-row"><dt>--ink</dt><dd>#F2E7DD</dd></div>
+    <div class="readout-row"><dt>--radius</dt><dd>4px</dd></div>
+    <div class="readout-row"><dt>--pad</dt><dd>64px</dd></div>
   </dl>
 </div>
 
@@ -219,14 +273,12 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
   .pos { font-weight: 500; font-size: 23px; line-height: 1.34; letter-spacing: -0.015em; }
   .through { font-size: 15px; line-height: 1.65; color: var(--muted); }
 
-  /* ── transition trigger zone */
-  #rv-trigger {
-    height: 200vh;
-    pointer-events: none;
-  }
+  /* ── transition trigger zones (invisible; drive the morph) */
+  .uni-trigger { height: 200vh; pointer-events: none; }
+  .uni-trigger--short { height: 160vh; }
 
-  /* ── slate */
-  :global(#rv-slate) {
+  /* ── flood slates */
+  :global(.slate) {
     position: fixed;
     left: 0;
     right: 0;
@@ -238,17 +290,20 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     align-items: center;
     justify-content: center;
     gap: 20px;
-    background: rgba(28, 58, 43, 0.97);
     opacity: 0;
     pointer-events: none;
     will-change: opacity;
   }
+  :global(.slate--rv)      { background: rgba(28, 58, 43, 0.97); }
+  :global(.slate--flame)   { background: rgba(24, 18, 14, 0.97); }
+  :global(.slate--erneszt) { background: rgba(13, 14, 22, 0.97); }
+
   :global(.slate-eyebrow) {
     font-family: var(--mono);
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: rgba(239, 234, 198, 0.6);
+    color: rgba(255, 255, 255, 0.55);
   }
   :global(.slate-title) {
     font-family: var(--headline);
@@ -256,9 +311,12 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     font-size: clamp(80px, 14vw, 180px);
     line-height: 0.88;
     letter-spacing: -0.01em;
-    color: #EFEAC6;
     text-align: center;
   }
+  :global(.slate--rv .slate-title)      { color: #EFEAC6; }
+  :global(.slate--flame .slate-title)   { color: #FF5A2C; }
+  :global(.slate--erneszt .slate-title) { color: #D8B24A; }
+
   :global(.slate-readout) {
     display: flex;
     flex-direction: column;
@@ -268,22 +326,18 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     text-align: left;
     list-style: none;
   }
-  :global(.readout-row) {
-    display: flex;
-    gap: 16px;
-    align-items: baseline;
-  }
-  :global(.readout-row dt) { color: rgba(239, 234, 198, 0.35); min-width: 80px; }
-  :global(.readout-row dd) { color: rgba(239, 234, 198, 0.75); font-weight: 700; min-width: 80px; font-variant-numeric: tabular-nums; }
+  :global(.readout-row) { display: flex; gap: 16px; align-items: baseline; }
+  :global(.readout-row dt) { color: rgba(255, 255, 255, 0.35); min-width: 80px; }
+  :global(.readout-row dd) { color: rgba(255, 255, 255, 0.8); font-weight: 700; min-width: 80px; font-variant-numeric: tabular-nums; }
 
-  /* ── Ruralvía showcase */
-  .rv-showcase {
+  /* ── universe showcase (generic; auto-themes from content-area tokens) */
+  .uni-showcase {
     padding: 100px 0 72px;
     display: grid;
     grid-template-columns: 80px 1fr;
   }
-  .rv-header { grid-column: 2; margin-bottom: 56px; }
-  .rv-tagline {
+  .uni-header { grid-column: 2; margin-bottom: 56px; }
+  .uni-tagline {
     font-family: var(--headline);
     font-weight: 400;
     font-size: clamp(64px, 10vw, 128px);
@@ -292,13 +346,13 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     color: var(--ink);
     margin-top: 20px;
   }
-  .rv-cards {
+  .uni-cards {
     grid-column: 2;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
   }
-  .rv-card {
+  .uni-card {
     background: var(--paper-2);
     border-radius: var(--radius);
     padding: 32px;
@@ -306,9 +360,9 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     flex-direction: column;
     gap: 12px;
   }
-  .rv-card-label { margin-bottom: 4px; }
-  .rv-card-body { font-size: 15px; line-height: 1.6; color: var(--muted); flex: 1; }
-  .rv-link {
+  .uni-card-label { margin-bottom: 4px; }
+  .uni-card-body { font-size: 15px; line-height: 1.6; color: var(--muted); flex: 1; }
+  .uni-link {
     display: inline-block;
     margin-top: 20px;
     font-family: var(--mono);
@@ -318,29 +372,24 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     color: var(--accent);
     transition: color 0.12s, background 0.12s, box-shadow 0.12s;
   }
-  .rv-link:hover { background: var(--accent); color: var(--paper); box-shadow: 0 0 0 0.1em var(--accent); }
+  .uni-link:hover { background: var(--accent); color: var(--paper); box-shadow: 0 0 0 0.1em var(--accent); }
 
-  /* ── arc */
-  .arc { display: grid; grid-template-columns: 80px 1fr; padding-top: 0; border-top: 1.5px solid var(--line-strong); margin-top: 72px; }
-  .arc-label { grid-column: 2; padding: 26px 0 20px; }
-  .stages { grid-column: 2; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); }
-  .stage + .stage { border-left: 1.5px solid var(--line); }
-  .stage a { display: block; padding: 6px 28px 40px; height: 100%; border-radius: var(--radius); transition: background 0.15s; }
-  .stage:first-child a { padding-left: 0; border-radius: 0; }
-  .stage a:hover { background: var(--paper-2); }
-  .stage .n { color: var(--accent); font-weight: 700; font-size: 13px; display: flex; justify-content: space-between; }
-  .stage .go { color: var(--faint); transition: transform 0.15s, color 0.15s; }
-  .stage a:hover .go { transform: translate(3px, -3px); color: var(--accent); }
-  .stage .t { font-family: var(--headline); font-weight: 400; font-size: 38px; line-height: 0.95; letter-spacing: -0.02em; margin: 12px 0 8px; }
-  .stage .d { font-size: 14px; line-height: 1.55; color: var(--muted); }
-  .stage .meta { color: var(--faint); margin-top: 16px; text-transform: uppercase; font-size: 11px; }
-  .stage.is-ai .t::after { content: ' ▮'; color: var(--accent); font-size: 0.6em; vertical-align: 0.18em; }
-
-  /* ── about */
-  .about { display: grid; grid-template-columns: 80px 1fr; border-top: 1.5px solid var(--line); margin-top: 64px; }
+  /* ── about + closing cta */
+  .about { display: grid; grid-template-columns: 80px 1fr; border-top: 1.5px solid var(--line); margin-top: 64px; padding-bottom: 96px; }
   .about-col { padding: 26px 0 0; max-width: 680px; }
   .about-col .eyebrow { margin-bottom: 18px; }
   .about-body { font-size: 19px; line-height: 1.55; letter-spacing: -0.01em; }
+  .end-cta { margin-top: 40px; display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+  .end-line { font-size: 19px; letter-spacing: -0.01em; color: var(--ink); }
+  .end-link {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    border-bottom: 1.5px solid var(--accent);
+    padding-bottom: 2px;
+    transition: opacity 0.12s;
+  }
+  .end-link:hover { opacity: 0.65; }
 
   /* ── acto 0 */
   .acto-0 { border-top: 1.5px solid var(--line-strong); }
@@ -412,16 +461,14 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
   .ola-current { color: var(--accent); font-weight: 700; }
 
   @media (max-width: 720px) {
-    .hero, .arc, .about { grid-template-columns: 1fr; }
+    .hero, .about { grid-template-columns: 1fr; }
     .idx { display: none; }
-    .arc-label, .stages, .arc { grid-column: 1; }
     .lede { grid-template-columns: 1fr; gap: 24px; }
-    .stages { grid-template-columns: 1fr; }
-    .stage + .stage { border-left: 0; border-top: 1.5px solid var(--line); }
-    .stage a, .stage:first-child a { padding: 24px 0; }
-    .rv-showcase { grid-template-columns: 1fr; }
-    .rv-header, .rv-cards { grid-column: 1; }
-    .rv-cards { grid-template-columns: 1fr; }
+    .uni-showcase { grid-template-columns: 1fr; }
+    .uni-header, .uni-cards { grid-column: 1; }
+    .uni-cards { grid-template-columns: 1fr; }
+    .uni-trigger { height: 140vh; }
+    .uni-trigger--short { height: 120vh; }
     .acto-grid { grid-template-columns: 1fr; }
     .acto-grid > .idx { display: none; }
     .beat { grid-template-columns: 36px 1fr; gap: 0 16px; }
@@ -482,9 +529,7 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
             archetypeLabel.style.fontFamily = "'Playfair Display', Georgia, serif";
             archetypeLabel.style.fontStyle  = 'italic';
             archetypeLabel.classList.add('is-gold');
-            setTimeout(() => {
-              archetypeLabel.classList.remove('is-gold');
-            }, 1300);
+            setTimeout(() => { archetypeLabel.classList.remove('is-gold'); }, 1300);
             setTimeout(() => {
               archetypeLabel.style.fontFamily = '';
               archetypeLabel.style.fontStyle  = '';
@@ -498,105 +543,112 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     archetypeObs.observe(archetypeBeat);
   }
 
-  /* ── scroll-linked transition: main → Ruralvía ─────────────────────── */
-  const trigger   = document.getElementById('rv-trigger');
+  /* ── scroll-linked universe transitions ─────────────────────────────── */
   const contentEl = document.getElementById('content-area');
-  const slate     = document.getElementById('rv-slate');
   const navEl     = document.querySelector('header.nav');
 
-  /* Position slate flush below nav so the frame stays visible */
-  if (slate && navEl) slate.style.top = `${navEl.offsetHeight}px`;
-
-  const roPaper  = document.getElementById('ro-paper');
-  const roInk    = document.getElementById('ro-ink');
-  const roRadius = document.getElementById('ro-radius');
-  const roPad    = document.getElementById('ro-pad');
-
-  /* Token endpoints — RGB arrays */
-  const MAIN = {
-    paper:      [243, 241, 234],
-    paper2:     [236, 233, 223],
-    ink:        [22,  22,  15 ],
-    accent:     [226, 52,  29 ],
-    accentInk:  [168, 35,  9  ],
-    muted:      [79,  78,  68 ],
-    faint:      [120, 118, 106],
-    lineRgb:    [20,  20,  12 ],
-    lineStrong: [22,  22,  15 ],
-    radius: 0, pad: 56,
-  };
-  const RV = {
-    paper:      [239, 234, 198],
-    paper2:     [232, 226, 176],
-    ink:        [28,  58,  43 ],
-    accent:     [46,  125, 82 ],
-    accentInk:  [30,  92,  58 ],
-    muted:      [58,  84,  69 ],
-    faint:      [92,  122, 104],
-    lineRgb:    [28,  58,  43 ],
-    lineStrong: [28,  58,  43 ],
-    radius: 18, pad: 64,
+  /* Token endpoints per universe — RGB arrays + scalars */
+  const THEMES = {
+    main:     { paper:[243,241,234], paper2:[236,233,223], ink:[22,22,15],    accent:[226,52,29],  accentInk:[168,35,9],   muted:[79,78,68],    faint:[120,118,106], lineRgb:[20,20,12],    lineStrong:[22,22,15],  radius:0,  pad:56 },
+    ruralvia: { paper:[239,234,198], paper2:[232,226,176], ink:[28,58,43],    accent:[46,125,82],  accentInk:[30,92,58],   muted:[58,84,69],    faint:[92,122,104],  lineRgb:[28,58,43],    lineStrong:[28,58,43],  radius:18, pad:64 },
+    flame:    { paper:[24,18,14],    paper2:[35,26,20],    ink:[242,231,221], accent:[255,90,44],  accentInk:[255,130,84], muted:[194,176,164], faint:[139,122,108], lineRgb:[242,231,221], lineStrong:[74,58,48],  radius:4,  pad:64 },
+    erneszt:  { paper:[13,14,22],    paper2:[22,24,38],    ink:[236,230,216], accent:[216,178,74], accentInk:[232,198,106],muted:[169,166,184], faint:[110,108,128], lineRgb:[236,230,216], lineStrong:[42,44,64],  radius:14, pad:72 },
   };
 
-  function lerp(a, b, t) { return a + (b - a) * t; }
-  function lerpRgb(a, b, t) {
-    return `rgb(${Math.round(lerp(a[0],b[0],t))},${Math.round(lerp(a[1],b[1],t))},${Math.round(lerp(a[2],b[2],t))})`;
-  }
-  function toHex(r, g, b) {
-    return '#' + [r,g,b].map((v) => Math.round(v).toString(16).padStart(2,'0')).join('');
-  }
-  function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+  const SEGMENTS = [
+    { triggerId:'rv-trigger',      slateId:'rv-slate',      from:'main',     to:'ruralvia' },
+    { triggerId:'flame-trigger',   slateId:'flame-slate',   from:'ruralvia', to:'flame'    },
+    { triggerId:'erneszt-trigger', slateId:'erneszt-slate', from:'flame',    to:'erneszt'  },
+  ].map((s) => {
+    const slateEl = document.getElementById(s.slateId);
+    return {
+      ...s,
+      triggerEl: document.getElementById(s.triggerId),
+      slateEl,
+      readoutDd: slateEl ? slateEl.querySelectorAll('.slate-readout dd') : [],
+    };
+  }).filter((s) => s.triggerEl && s.slateEl);
 
-  /* Bell-curve: visible progress 0.25 → 0.75, peak at 0.5 */
+  /* Position slates flush below nav so the frame stays visible */
+  if (navEl) SEGMENTS.forEach((s) => { s.slateEl.style.top = `${navEl.offsetHeight}px`; });
+
+  const lerp     = (a, b, t) => a + (b - a) * t;
+  const lerpRgb  = (a, b, t) => `rgb(${Math.round(lerp(a[0],b[0],t))},${Math.round(lerp(a[1],b[1],t))},${Math.round(lerp(a[2],b[2],t))})`;
+  const toHex    = (r, g, b) => '#' + [r,g,b].map((v) => Math.round(v).toString(16).padStart(2,'0')).join('');
+  const easeInOut = (t) => (t < 0.5 ? 2*t*t : -1+(4-2*t)*t);
+  const clamp    = (v) => Math.max(0, Math.min(1, v));
+
+  /* Bell-curve: slate visible 0.25 → 0.75, opaque peak at 0.5 (masks the muddy mid-morph) */
   function slateAlpha(p) {
     if (p <= 0.25 || p >= 0.75) return 0;
     return Math.sin(((p - 0.25) / 0.5) * Math.PI);
   }
 
-  function applyTokens(t) {
-    if (!contentEl) return;
-    const el = contentEl;
-    el.style.setProperty('--paper',      lerpRgb(MAIN.paper,      RV.paper,      t));
-    el.style.setProperty('--paper-2',    lerpRgb(MAIN.paper2,     RV.paper2,     t));
-    el.style.setProperty('--ink',        lerpRgb(MAIN.ink,        RV.ink,        t));
-    el.style.setProperty('--accent',     lerpRgb(MAIN.accent,     RV.accent,     t));
-    el.style.setProperty('--accent-ink', lerpRgb(MAIN.accentInk,  RV.accentInk,  t));
-    el.style.setProperty('--muted',      lerpRgb(MAIN.muted,      RV.muted,      t));
-    el.style.setProperty('--faint',      lerpRgb(MAIN.faint,      RV.faint,      t));
-    el.style.setProperty('--line',
-      `rgba(${MAIN.lineRgb.map((v,i) => Math.round(lerp(v, RV.lineRgb[i], t))).join(',')},0.14)`);
-    el.style.setProperty('--line-strong', lerpRgb(MAIN.lineStrong, RV.lineStrong, t));
-    el.style.setProperty('--radius',  `${Math.round(lerp(MAIN.radius, RV.radius, t))}px`);
-    el.style.setProperty('--pad',     `${Math.round(lerp(MAIN.pad,    RV.pad,    t))}px`);
-
-    /* Tick the readout */
-    const pr = MAIN.paper.map((v,i) => Math.round(lerp(v, RV.paper[i], t)));
-    const ir = MAIN.ink.map((v,i)   => Math.round(lerp(v, RV.ink[i],   t)));
-    if (roPaper)  roPaper.textContent  = toHex(...pr);
-    if (roInk)    roInk.textContent    = toHex(...ir);
-    if (roRadius) roRadius.textContent = `${Math.round(lerp(MAIN.radius, RV.radius, t))}px`;
-    if (roPad)    roPad.textContent    = `${Math.round(lerp(MAIN.pad,    RV.pad,    t))}px`;
-  }
-
-  function updateTransition() {
-    if (!trigger || !slate) return;
-    const rect = trigger.getBoundingClientRect();
+  function progress(el) {
+    const rect = el.getBoundingClientRect();
     const vh   = window.innerHeight;
-    let p = (vh - rect.top) / (rect.height + vh);
-    p = Math.max(0, Math.min(1, p));
-    applyTokens(easeInOut(p));
-    slate.style.opacity = String(slateAlpha(p));
+    return clamp((vh - rect.top) / (rect.height + vh));
   }
 
-  if (!reduce && trigger) {
-    window.addEventListener('scroll', updateTransition, { passive: true });
-    updateTransition();
-  } else if (reduce && trigger && contentEl) {
-    /* Reduced motion: snap Ruralvía theme on entry */
-    new IntersectionObserver((entries) => {
+  function applyTokens(fromKey, toKey, t) {
+    if (!contentEl) return;
+    const A = THEMES[fromKey], B = THEMES[toKey], el = contentEl;
+    el.style.setProperty('--paper',       lerpRgb(A.paper,      B.paper,      t));
+    el.style.setProperty('--paper-2',     lerpRgb(A.paper2,     B.paper2,     t));
+    el.style.setProperty('--ink',         lerpRgb(A.ink,        B.ink,        t));
+    el.style.setProperty('--accent',      lerpRgb(A.accent,     B.accent,     t));
+    el.style.setProperty('--accent-ink',  lerpRgb(A.accentInk,  B.accentInk,  t));
+    el.style.setProperty('--muted',       lerpRgb(A.muted,      B.muted,      t));
+    el.style.setProperty('--faint',       lerpRgb(A.faint,      B.faint,      t));
+    el.style.setProperty('--line',
+      `rgba(${A.lineRgb.map((v,i) => Math.round(lerp(v, B.lineRgb[i], t))).join(',')},0.14)`);
+    el.style.setProperty('--line-strong', lerpRgb(A.lineStrong, B.lineStrong, t));
+    el.style.setProperty('--radius', `${Math.round(lerp(A.radius, B.radius, t))}px`);
+    el.style.setProperty('--pad',    `${Math.round(lerp(A.pad,    B.pad,    t))}px`);
+  }
+
+  function updateReadout(seg, t) {
+    const A = THEMES[seg.from], B = THEMES[seg.to], dd = seg.readoutDd;
+    if (dd.length < 4) return;
+    const paper = A.paper.map((v,i) => lerp(v, B.paper[i], t));
+    const ink   = A.ink.map((v,i)   => lerp(v, B.ink[i],   t));
+    dd[0].textContent = toHex(paper[0], paper[1], paper[2]);
+    dd[1].textContent = toHex(ink[0], ink[1], ink[2]);
+    dd[2].textContent = `${Math.round(lerp(A.radius, B.radius, t))}px`;
+    dd[3].textContent = `${Math.round(lerp(A.pad,    B.pad,    t))}px`;
+  }
+
+  function update() {
+    const ps = SEGMENTS.map((s) => progress(s.triggerEl));
+    SEGMENTS.forEach((s, i) => { s.slateEl.style.opacity = String(slateAlpha(ps[i])); });
+
+    /* Walk segments in order to find the single applied theme state */
+    let fromKey = SEGMENTS[0].from, toKey = SEGMENTS[0].from, t = 0;
+    for (let i = 0; i < SEGMENTS.length; i++) {
+      const p = ps[i];
+      if (p >= 1) { fromKey = toKey = SEGMENTS[i].to; t = 0; continue; }
+      if (p <= 0) { fromKey = toKey = SEGMENTS[i].from; t = 0; break; }
+      fromKey = SEGMENTS[i].from; toKey = SEGMENTS[i].to; t = easeInOut(p);
+      updateReadout(SEGMENTS[i], t);
+      break;
+    }
+    applyTokens(fromKey, toKey, t);
+  }
+
+  if (!reduce && SEGMENTS.length) {
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  } else if (reduce) {
+    /* Reduced motion: snap each universe theme as its showcase enters */
+    const showcases = document.querySelectorAll('[data-universe]');
+    const themeObs = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
-        if (e.isIntersecting) contentEl.setAttribute('data-theme', 'ruralvia');
+        if (e.isIntersecting && contentEl) {
+          contentEl.setAttribute('data-theme', e.target.getAttribute('data-universe'));
+        }
       });
-    }).observe(trigger);
+    }, { threshold: 0.4 });
+    showcases.forEach((n) => themeObs.observe(n));
   }
 </script>
