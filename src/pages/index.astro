@@ -29,196 +29,303 @@ import Footer from '../components/Footer.astro';
       </div>
     </section>
 
-    <!-- ═══ HERO — frame; stays in main theme throughout ═══ -->
-    <section id="hero" class="hero wrap" aria-labelledby="hero-title">
-      <div class="idx mono">00</div>
-      <div class="hero-col">
-        <p class="status mono"><span class="dot" aria-hidden="true"></span> Available for new challenges</p>
+    <!-- ═══ PANEL STACK — sheets that cover and reveal: floor 1 surfaces (content) +
+         floor 0 cartelas (title cards), stacked with position:sticky so each new
+         panel physically slides over the one before it. No fades, no color lerp —
+         every panel carries its own theme's tokens already applied. ═══ -->
+    <div class="panel-stack">
 
-        <h1 id="hero-title" class="hero-h">I turn product complexity into <span id="rot" class="hl rot-phrase">systems that actually get adopted</span></h1>
+      <!-- Floor 1 · intro surface (Hero + Acto 0). First sheet — nothing above it to
+           release from, so it just sits in normal flow under everything that follows. -->
+      <div class="surface surface--intro" style="--z:1">
+        <section id="hero" class="hero wrap" aria-labelledby="hero-title">
+          <div class="idx mono">00</div>
+          <div class="hero-col">
+            <p class="status mono"><span class="dot" aria-hidden="true"></span> Available for new challenges</p>
 
-        <div class="lede">
-          <p class="pos">
-            I define the system and make the decisions that set the direction.
-            Then I lead the execution and adoption to make it real.
-          </p>
-          <p class="through">
-            I'm not discovering AI now. It's the latest in a series of waves I've been part of
-            from the start: the web, UX, design systems, behavioral design.
-          </p>
-        </div>
+            <h1 id="hero-title" class="hero-h">I turn product complexity into <span id="rot" class="hl rot-phrase">systems that actually get adopted</span></h1>
+
+            <div class="lede">
+              <p class="pos">
+                I define the system and make the decisions that set the direction.
+                Then I lead the execution and adoption to make it real.
+              </p>
+              <p class="through">
+                I'm not discovering AI now. It's the latest in a series of waves I've been part of
+                from the start: the web, UX, design systems, behavioral design.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="acto-0" aria-labelledby="acto-label">
+          <div class="wrap acto-grid">
+            <div class="idx mono" aria-hidden="true">·</div>
+            <div class="acto-body">
+              <p id="acto-label" class="eyebrow">Who I am · How I work</p>
+
+              <ol class="beats" role="list">
+
+                <!-- 1 · Altitud -->
+                <li class="beat" data-reveal>
+                  <span class="beat-n mono" aria-hidden="true">01</span>
+                  <p class="beat-text beat-text--lg">
+                    Most designers hand off. I define the system, make the decisions
+                    that set direction, lead the execution, and stay until
+                    it's adopted.
+                  </p>
+                </li>
+
+                <!-- 2 · Cómo pienso -->
+                <li class="beat" data-reveal>
+                  <span class="beat-n mono" aria-hidden="true">02</span>
+                  <p class="beat-text">
+                    I look for the invariants first: what must be true regardless of
+                    implementation. Structure before system. System before screens.
+                  </p>
+                </li>
+
+                <!-- 3 · El puente -->
+                <li class="beat" data-reveal>
+                  <span class="beat-n mono" aria-hidden="true">03</span>
+                  <p class="beat-text">
+                    I speak product fluently enough to push back on direction.
+                    Engineering fluently enough to know what's real.
+                    That's not a soft skill. It's how systems actually get built.
+                  </p>
+                </li>
+
+                <!-- 4 · Autoridad tranquila -->
+                <li class="beat" data-reveal>
+                  <span class="beat-n mono" aria-hidden="true">04</span>
+                  <p class="beat-text">
+                    I've led design at global scale and built an AI-native product
+                    from zero. I don't need to be the loudest voice in the room.
+                    I need to be the most useful one.
+                  </p>
+                </li>
+
+                <!-- 5 · Arquetipo: The Infrastructure Maker -->
+                <li class="beat beat--archetype" id="beat-archetype" data-reveal>
+                  <span class="beat-n mono" aria-hidden="true">05</span>
+                  <div class="archetype-inner">
+                    <p class="beat-text archetype-setup">
+                      I built a product that reads professional trajectories.
+                      I gave it mine. It returned this:
+                    </p>
+                    <p class="archetype-label" id="archetype-label">
+                      The Infrastructure Maker
+                    </p>
+                    <p class="archetype-sub">
+                      The one who builds what needs to exist for everything else
+                      to work.
+                    </p>
+                  </div>
+                </li>
+
+                <!-- 6 · Olas semilla -->
+                <li class="beat beat--olas" data-reveal>
+                  <span class="beat-n mono" aria-hidden="true">06</span>
+                  <div class="olas-inner">
+                    <p class="beat-text olas-frame">
+                      Five waves. I don't discover categories. I arrive when
+                      they're forming.
+                    </p>
+                    <ol class="olas-list" role="list" aria-label="Industry waves">
+                      <li>The web</li>
+                      <li>Portals</li>
+                      <li>UX</li>
+                      <li>Design systems</li>
+                      <li class="ola-current">AI</li>
+                    </ol>
+                  </div>
+                </li>
+
+              </ol>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
 
-    <!-- ═══ ACTO 0 — who I am / how I work ═══ -->
-    <section class="acto-0" aria-labelledby="acto-label">
-      <div class="wrap acto-grid">
-        <div class="idx mono" aria-hidden="true">·</div>
-        <div class="acto-body">
-          <p id="acto-label" class="eyebrow">Who I am · How I work</p>
-
-          <ol class="beats" role="list">
-
-            <!-- 1 · Altitud -->
-            <li class="beat" data-reveal>
-              <span class="beat-n mono" aria-hidden="true">01</span>
-              <p class="beat-text beat-text--lg">
-                Most designers hand off. I define the system, make the decisions
-                that set direction, lead the execution, and stay until
-                it's adopted.
-              </p>
+      <!-- Floor 0 · Ruralvía cartela -->
+      <div class="pin-zone pin-zone--cartela">
+        <section class="cartela" data-theme="ruralvia" style="--z:2" aria-hidden="true">
+          <p class="cartela-eyebrow">campo y trigo</p>
+          <h2 class="cartela-title">RURALVÍA</h2>
+          <ul class="chip-field" aria-hidden="true">
+            <li class="chip" data-pos="top-left" data-depth="0.15">
+              <span class="chip-label">color.core.background.default</span>
+              <span class="chip-value">#EFEAC6</span>
             </li>
-
-            <!-- 2 · Cómo pienso -->
-            <li class="beat" data-reveal>
-              <span class="beat-n mono" aria-hidden="true">02</span>
-              <p class="beat-text">
-                I look for the invariants first: what must be true regardless of
-                implementation. Structure before system. System before screens.
-              </p>
+            <li class="chip" data-pos="top-right" data-depth="0.35">
+              <span class="chip-label">color.core.foreground.default</span>
+              <span class="chip-value">#1C3A2B</span>
             </li>
-
-            <!-- 3 · El puente -->
-            <li class="beat" data-reveal>
-              <span class="beat-n mono" aria-hidden="true">03</span>
-              <p class="beat-text">
-                I speak product fluently enough to push back on direction.
-                Engineering fluently enough to know what's real.
-                That's not a soft skill. It's how systems actually get built.
-              </p>
+            <li class="chip" data-pos="mid-left" data-depth="0.2">
+              <span class="chip-label">color.accent.default</span>
+              <span class="chip-value">#2E7D52</span>
             </li>
-
-            <!-- 4 · Autoridad tranquila -->
-            <li class="beat" data-reveal>
-              <span class="beat-n mono" aria-hidden="true">04</span>
-              <p class="beat-text">
-                I've led design at global scale and built an AI-native product
-                from zero. I don't need to be the loudest voice in the room.
-                I need to be the most useful one.
-              </p>
+            <li class="chip" data-pos="mid-right" data-depth="0.4">
+              <span class="chip-label">radius.surface</span>
+              <span class="chip-value">24px</span>
             </li>
-
-            <!-- 5 · Arquetipo: The Infrastructure Maker -->
-            <li class="beat beat--archetype" id="beat-archetype" data-reveal>
-              <span class="beat-n mono" aria-hidden="true">05</span>
-              <div class="archetype-inner">
-                <p class="beat-text archetype-setup">
-                  I built a product that reads professional trajectories.
-                  I gave it mine. It returned this:
-                </p>
-                <p class="archetype-label" id="archetype-label">
-                  The Infrastructure Maker
-                </p>
-                <p class="archetype-sub">
-                  The one who builds what needs to exist for everything else
-                  to work.
-                </p>
-              </div>
+            <li class="chip" data-pos="bottom-left" data-depth="0.25">
+              <span class="chip-label">border-width.strong</span>
+              <span class="chip-value">2px</span>
             </li>
-
-            <!-- 6 · Olas semilla -->
-            <li class="beat beat--olas" data-reveal>
-              <span class="beat-n mono" aria-hidden="true">06</span>
-              <div class="olas-inner">
-                <p class="beat-text olas-frame">
-                  Five waves. I don't discover categories. I arrive when
-                  they're forming.
-                </p>
-                <ol class="olas-list" role="list" aria-label="Industry waves">
-                  <li>The web</li>
-                  <li>Portals</li>
-                  <li>UX</li>
-                  <li>Design systems</li>
-                  <li class="ola-current">AI</li>
-                </ol>
-              </div>
+            <li class="chip" data-pos="bottom-right" data-depth="0.45">
+              <span class="chip-label">space.gutter</span>
+              <span class="chip-value">64px</span>
             </li>
-
-          </ol>
-        </div>
+          </ul>
+        </section>
       </div>
-    </section>
 
-    <!-- ═══ CONTENT AREA — morphs through universe themes ═══ -->
-    <div id="content-area">
+      <!-- Floor 1 · Ruralvía surface -->
+      <div class="pin-zone pin-zone--surface">
+        <section class="surface uni-showcase wrap" data-theme="ruralvia" data-universe="ruralvia" style="--z:3" aria-labelledby="rv-title">
+          <div class="uni-header" data-reveal>
+            <p class="eyebrow">01 · Ruralvía · 2018–2019 · Caja Rural</p>
+            <h2 id="rv-title" class="uni-tagline">An expert<br>in your corner</h2>
+          </div>
+          <div class="uni-cards">
+            <div class="uni-card" data-reveal style="transition-delay:60ms">
+              <p class="uni-card-label eyebrow">Vision</p>
+              <p class="uni-card-body">Before Cleo, Revolut, N26. We built proactive financial advice in 2018 around a single insight: users didn't need features, they needed someone in their corner.</p>
+            </div>
+            <div class="uni-card" data-reveal style="transition-delay:120ms">
+              <p class="uni-card-label eyebrow">System</p>
+              <p class="uni-card-body">Proto-design system with tokens, flows, and a UI library that scaled across 70+ financial entities within Caja Rural Group.</p>
+            </div>
+            <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+              <p class="uni-card-label eyebrow">The differentiator</p>
+              <p class="uni-card-body">El Experto, a contextual advisor embedded in the home screen. Not a chatbot. Someone who noticed things before you did.</p>
+              <a href="/work/ruralvia" class="uni-link">Read the case study ↗</a>
+            </div>
+          </div>
+        </section>
+      </div>
 
-      <!-- ── Universe 01 · Ruralvía ───────────────────────────────── -->
-      <div class="uni-trigger" id="rv-trigger" aria-hidden="true"></div>
+      <!-- Floor 0 · Flame cartela -->
+      <div class="pin-zone pin-zone--cartela">
+        <section class="cartela" data-theme="flame" style="--z:4" aria-hidden="true">
+          <p class="cartela-eyebrow">orden y escala</p>
+          <h2 class="cartela-title">FLAME</h2>
+          <ul class="chip-field" aria-hidden="true">
+            <li class="chip" data-pos="top-left" data-depth="0.15">
+              <span class="chip-label">color.core.background.default</span>
+              <span class="chip-value">#ECE9DF</span>
+            </li>
+            <li class="chip" data-pos="top-right" data-depth="0.35">
+              <span class="chip-label">color.core.foreground.default</span>
+              <span class="chip-value">#16160F</span>
+            </li>
+            <li class="chip" data-pos="mid-left" data-depth="0.2">
+              <span class="chip-label">color.accent.default</span>
+              <span class="chip-value">#E2341D</span>
+            </li>
+            <li class="chip" data-pos="mid-right" data-depth="0.4">
+              <span class="chip-label">radius.surface</span>
+              <span class="chip-value">0px</span>
+            </li>
+            <li class="chip" data-pos="bottom-left" data-depth="0.25">
+              <span class="chip-label">border-width.strong</span>
+              <span class="chip-value">4px</span>
+            </li>
+            <li class="chip" data-pos="bottom-right" data-depth="0.45">
+              <span class="chip-label">space.gutter</span>
+              <span class="chip-value">64px</span>
+            </li>
+          </ul>
+        </section>
+      </div>
 
-      <section class="uni-showcase wrap" data-universe="ruralvia" aria-labelledby="rv-title">
-        <div class="uni-header" data-reveal>
-          <p class="eyebrow">01 · Ruralvía · 2018–2019 · Caja Rural</p>
-          <h2 id="rv-title" class="uni-tagline">An expert<br>in your corner</h2>
-        </div>
-        <div class="uni-cards">
-          <div class="uni-card" data-reveal style="transition-delay:60ms">
-            <p class="uni-card-label eyebrow">Vision</p>
-            <p class="uni-card-body">Before Cleo, Revolut, N26. We built proactive financial advice in 2018 around a single insight: users didn't need features, they needed someone in their corner.</p>
+      <!-- Floor 1 · Flame surface -->
+      <div class="pin-zone pin-zone--surface">
+        <section class="surface uni-showcase wrap" data-theme="flame" data-universe="flame" style="--z:5" aria-labelledby="flame-title">
+          <div class="uni-header" data-reveal>
+            <p class="eyebrow">02 · Flame · 2020–2024 · Santander</p>
+            <h2 id="flame-title" class="uni-tagline">A system teams<br>chose to adopt</h2>
           </div>
-          <div class="uni-card" data-reveal style="transition-delay:120ms">
-            <p class="uni-card-label eyebrow">System</p>
-            <p class="uni-card-body">Proto-design system with tokens, flows, and a UI library that scaled across 70+ financial entities within Caja Rural Group.</p>
+          <div class="uni-cards">
+            <div class="uni-card" data-reveal style="transition-delay:60ms">
+              <p class="uni-card-label eyebrow">Scale</p>
+              <p class="uni-card-body">1,780+ components governed across 350+ designers and 10 countries. In banking, design coherence isn't a UX nicety: it's a trust signal.</p>
+            </div>
+            <div class="uni-card" data-reveal style="transition-delay:120ms">
+              <p class="uni-card-label eyebrow">The model</p>
+              <p class="uni-card-body">A tiered system: a global foundation with local layers. Teams moved fast locally without fragmenting the platform at scale.</p>
+            </div>
+            <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+              <p class="uni-card-label eyebrow">Impact</p>
+              <p class="uni-card-body">~35% faster feature development. I led the system, the team, and the alignment with Santander's Chief Design Officer.</p>
+              <a href="/work/flame" class="uni-link">Read the case study ↗</a>
+            </div>
           </div>
-          <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
-            <p class="uni-card-label eyebrow">The differentiator</p>
-            <p class="uni-card-body">El Experto, a contextual advisor embedded in the home screen. Not a chatbot. Someone who noticed things before you did.</p>
-            <a href="/work/ruralvia" class="uni-link">Read the case study ↗</a>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      <!-- ── Universe 02 · Flame ──────────────────────────────────── -->
-      <div class="uni-trigger uni-trigger--short" id="flame-trigger" aria-hidden="true"></div>
+      <!-- Floor 0 · Erneszt cartela -->
+      <div class="pin-zone pin-zone--cartela">
+        <section class="cartela" data-theme="erneszt" style="--z:6" aria-hidden="true">
+          <p class="cartela-eyebrow">el autómata</p>
+          <h2 class="cartela-title">ERNESZT</h2>
+          <ul class="chip-field" aria-hidden="true">
+            <li class="chip" data-pos="top-left" data-depth="0.15">
+              <span class="chip-label">color.core.background.default</span>
+              <span class="chip-value">#1A1209</span>
+            </li>
+            <li class="chip" data-pos="top-right" data-depth="0.35">
+              <span class="chip-label">color.core.foreground.default</span>
+              <span class="chip-value">#EFEAC6</span>
+            </li>
+            <li class="chip" data-pos="mid-left" data-depth="0.2">
+              <span class="chip-label">color.accent.default</span>
+              <span class="chip-value">#C9A24B</span>
+            </li>
+            <li class="chip" data-pos="mid-right" data-depth="0.4">
+              <span class="chip-label">radius.surface</span>
+              <span class="chip-value">4px</span>
+            </li>
+            <li class="chip" data-pos="bottom-left" data-depth="0.25">
+              <span class="chip-label">border-width.strong</span>
+              <span class="chip-value">2px</span>
+            </li>
+            <li class="chip" data-pos="bottom-right" data-depth="0.45">
+              <span class="chip-label">space.gutter</span>
+              <span class="chip-value">72px</span>
+            </li>
+          </ul>
+        </section>
+      </div>
 
-      <section class="uni-showcase wrap" data-universe="flame" aria-labelledby="flame-title">
-        <div class="uni-header" data-reveal>
-          <p class="eyebrow">02 · Flame · 2020–2024 · Santander</p>
-          <h2 id="flame-title" class="uni-tagline">A system teams<br>chose to adopt</h2>
-        </div>
-        <div class="uni-cards">
-          <div class="uni-card" data-reveal style="transition-delay:60ms">
-            <p class="uni-card-label eyebrow">Scale</p>
-            <p class="uni-card-body">1,780+ components governed across 350+ designers and 10 countries. In banking, design coherence isn't a UX nicety: it's a trust signal.</p>
+      <!-- Floor 1 · Erneszt surface -->
+      <div class="pin-zone pin-zone--surface">
+        <section class="surface uni-showcase wrap" data-theme="erneszt" data-universe="erneszt" style="--z:7" aria-labelledby="erneszt-title">
+          <div class="uni-header" data-reveal>
+            <p class="eyebrow">03 · Erneszt · 2026 · Self-initiated</p>
+            <h2 id="erneszt-title" class="uni-tagline">The thesis,<br>made real</h2>
           </div>
-          <div class="uni-card" data-reveal style="transition-delay:120ms">
-            <p class="uni-card-label eyebrow">The model</p>
-            <p class="uni-card-body">A tiered system: a global foundation with local layers. Teams moved fast locally without fragmenting the platform at scale.</p>
+          <div class="uni-cards">
+            <div class="uni-card" data-reveal style="transition-delay:60ms">
+              <p class="uni-card-label eyebrow">Thesis</p>
+              <p class="uni-card-body">An AI-native product, built from zero. Conceived, designed, and orchestrated end to end. The arc's climax, made real.</p>
+            </div>
+            <div class="uni-card" data-reveal style="transition-delay:120ms">
+              <p class="uni-card-label eyebrow">Emotional architecture</p>
+              <p class="uni-card-body">Designed the emotional architecture before the product: the "this is me" click of a viral test with the depth of a real coach.</p>
+            </div>
+            <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+              <p class="uni-card-label eyebrow">The product</p>
+              <p class="uni-card-body">Zoltar, an automaton that reads your trajectory and returns it as something you can finally claim. Try it free with HIREMANU.</p>
+              <a href="/work/erneszt" class="uni-link">Read the case study ↗</a>
+            </div>
           </div>
-          <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
-            <p class="uni-card-label eyebrow">Impact</p>
-            <p class="uni-card-body">~35% faster feature development. I led the system, the team, and the alignment with Santander's Chief Design Officer.</p>
-            <a href="/work/flame" class="uni-link">Read the case study ↗</a>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      <!-- ── Universe 03 · Erneszt (climax) ───────────────────────── -->
-      <div class="uni-trigger uni-trigger--short" id="erneszt-trigger" aria-hidden="true"></div>
-
-      <section class="uni-showcase wrap" data-universe="erneszt" aria-labelledby="erneszt-title">
-        <div class="uni-header" data-reveal>
-          <p class="eyebrow">03 · Erneszt · 2026 · Self-initiated</p>
-          <h2 id="erneszt-title" class="uni-tagline">The thesis,<br>made real</h2>
-        </div>
-        <div class="uni-cards">
-          <div class="uni-card" data-reveal style="transition-delay:60ms">
-            <p class="uni-card-label eyebrow">Thesis</p>
-            <p class="uni-card-body">An AI-native product, built from zero. Conceived, designed, and orchestrated end to end. The arc's climax, made real.</p>
-          </div>
-          <div class="uni-card" data-reveal style="transition-delay:120ms">
-            <p class="uni-card-label eyebrow">Emotional architecture</p>
-            <p class="uni-card-body">Designed the emotional architecture before the product: the "this is me" click of a viral test with the depth of a real coach.</p>
-          </div>
-          <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
-            <p class="uni-card-label eyebrow">The product</p>
-            <p class="uni-card-body">Zoltar, an automaton that reads your trajectory and returns it as something you can finally claim. Try it free with HIREMANU.</p>
-            <a href="/work/erneszt" class="uni-link">Read the case study ↗</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- About + closing CTA — rests in the Erneszt theme -->
-      <section id="about" class="about wrap" aria-labelledby="about-title">
+      <!-- About + closing CTA — normal flow, rests in the Erneszt theme -->
+      <section id="about" class="about wrap" data-theme="erneszt" aria-labelledby="about-title">
         <div class="idx mono">·</div>
         <div class="about-col" data-reveal>
           <p id="about-title" class="eyebrow">About</p>
@@ -234,45 +341,11 @@ import Footer from '../components/Footer.astro';
           </div>
         </div>
       </section>
-    </div><!-- /content-area -->
+    </div><!-- /panel-stack -->
   </main>
 
   <Footer />
 </Base>
-
-<!-- ═══ FLOOD SLATES — fixed overlays, one floods at each transition peak ═══ -->
-<div class="slate slate--rv" id="rv-slate" aria-hidden="true">
-  <p class="slate-eyebrow">campo y trigo</p>
-  <h2 class="slate-title">RURALVÍA</h2>
-  <dl class="slate-readout">
-    <div class="readout-row"><dt>--color-core-background-default</dt><dd>#EFEAC6</dd></div>
-    <div class="readout-row"><dt>--color-core-foreground-default</dt><dd>#1C3A2B</dd></div>
-    <div class="readout-row"><dt>--radius-surface</dt><dd>24px</dd></div>
-    <div class="readout-row"><dt>--space-gutter</dt><dd>64px</dd></div>
-  </dl>
-</div>
-
-<div class="slate slate--flame" id="flame-slate" aria-hidden="true">
-  <p class="slate-eyebrow">orden y escala</p>
-  <h2 class="slate-title">FLAME</h2>
-  <dl class="slate-readout">
-    <div class="readout-row"><dt>--color-core-background-default</dt><dd>#ECE9DF</dd></div>
-    <div class="readout-row"><dt>--color-core-foreground-default</dt><dd>#16160F</dd></div>
-    <div class="readout-row"><dt>--radius-surface</dt><dd>0px</dd></div>
-    <div class="readout-row"><dt>--space-gutter</dt><dd>64px</dd></div>
-  </dl>
-</div>
-
-<div class="slate slate--erneszt" id="erneszt-slate" aria-hidden="true">
-  <p class="slate-eyebrow">el autómata</p>
-  <h2 class="slate-title">ERNESZT</h2>
-  <dl class="slate-readout">
-    <div class="readout-row"><dt>--color-core-background-default</dt><dd>#1A1209</dd></div>
-    <div class="readout-row"><dt>--color-core-foreground-default</dt><dd>#EFEAC6</dd></div>
-    <div class="readout-row"><dt>--radius-surface</dt><dd>4px</dd></div>
-    <div class="readout-row"><dt>--space-gutter</dt><dd>72px</dd></div>
-  </dl>
-</div>
 
 <style>
   .idx { color: var(--color-core-foreground-subtle); padding-top: 26px; }
@@ -342,64 +415,96 @@ import Footer from '../components/Footer.astro';
   .pos { font-weight: 500; font-size: 23px; line-height: 1.34; letter-spacing: -0.015em; }
   .through { font-size: 15px; line-height: 1.65; color: var(--color-core-foreground-muted); }
 
-  /* ── transition trigger zones (invisible; drive the morph) */
-  .uni-trigger { height: 200vh; pointer-events: none; }
-  .uni-trigger--short { height: 160vh; }
+  /* ── panel stack: sheets that cover and reveal ───────────────────────── */
+  .panel-stack {
+    position: relative;
+    isolation: isolate; /* new stacking context so panel z-index (1-7) never collides with the header's z-index:100 */
+  }
 
-  /* ── flood slates */
-  :global(.slate) {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0; /* overridden by JS to match nav height */
-    z-index: 50;
+  .pin-zone { position: relative; }
+  .pin-zone--cartela { height: calc(100svh + 70vh); } /* 70vh dwell: how long the cartela stays pinned before the next surface covers it */
+  /* Explicit height, not min-height + padding-bottom: that combination silently breaks
+     position:sticky on the child (confirmed empirically — the sticky element ignores its
+     `top` entirely and just scrolls 1:1, even though every computed style looks correct).
+     A fixed height (same pattern as .pin-zone--cartela, which works) avoids it. 140vh total
+     comfortably exceeds .uni-showcase's own ~1-viewport content height at every breakpoint. */
+  .pin-zone--surface { height: calc(100svh + 40vh); }
+
+  .surface, .cartela {
+    position: sticky;
+    top: var(--header-h, 0px);
+    min-height: calc(100svh - var(--header-h, 0px));
+    z-index: var(--z);
+    background: var(--color-core-background-default);
+    color: var(--color-core-foreground-default);
+    font-family: var(--font-family-body);
+  }
+
+  /* Comes after the shared .surface,.cartela rule so it wins the position tie-break
+     (same specificity, later source order) — the intro is the only non-sticky panel:
+     nothing sits above it, so it never needs to release/cover, just to BE covered. */
+  .surface--intro {
+    position: relative;
+    z-index: var(--z);
+  }
+
+  .surface.uni-showcase { align-content: center; } /* vertically balances the grid rows when min-height stretches the panel taller than its content */
+
+  /* ── cartela (floor 0 title card) ── */
+  .cartela {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    opacity: 0;
-    pointer-events: none;
-    will-change: opacity;
+    gap: 18px;
+    overflow: hidden;
   }
-  :global(.slate--rv)      { background: rgba(28, 58, 43, 0.97); }
-  :global(.slate--flame)   { background: rgba(226, 52, 29, 0.97); }
-  :global(.slate--erneszt) { background: rgba(26, 18, 9, 0.97); }
-
-  :global(.slate-eyebrow) {
+  .cartela-eyebrow {
     font-family: var(--font-family-mono);
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--color-core-foreground-subtle);
   }
-  :global(.slate-title) {
+  .cartela-title {
+    font-family: var(--font-family-display);
     font-weight: 700;
     font-size: clamp(80px, 14vw, 180px);
     line-height: 0.88;
     letter-spacing: -0.01em;
     text-align: center;
+    color: var(--color-accent-default);
   }
-  /* Each flood titles itself in its universe's display face */
-  :global(.slate--rv .slate-title)      { font-family: 'Fraunces', Georgia, serif;       font-weight: 600; color: #EFEAC6; }
-  :global(.slate--flame .slate-title)   { font-family: 'Archivo Black', system-ui, sans-serif; font-weight: 400; color: #F3F1EA; }
-  :global(.slate--erneszt .slate-title) { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 700; color: #C9A24B; }
+  .cartela[data-theme="erneszt"] .cartela-title { font-style: italic; }
 
-  :global(.slate-readout) {
+  /* ── scattered token chips, parallax-driven ── */
+  .chip-field { position: absolute; inset: 0; pointer-events: none; list-style: none; }
+  .chip {
+    position: absolute;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 3px;
     font-family: var(--font-family-mono);
     font-size: 12px;
-    text-align: left;
-    list-style: none;
+    transform: translateY(var(--chip-y, 0px));
   }
-  :global(.readout-row) { display: flex; gap: 16px; align-items: baseline; }
-  :global(.readout-row dt) { color: rgba(255, 255, 255, 0.35); min-width: 80px; }
-  :global(.readout-row dd) { color: rgba(255, 255, 255, 0.8); font-weight: 700; min-width: 80px; font-variant-numeric: tabular-nums; }
+  .chip[data-pos="mid-left"],
+  .chip[data-pos="mid-right"] { transform: translateY(calc(-50% + var(--chip-y, 0px))); }
+  .chip-label { color: var(--color-core-foreground-subtle); }
+  .chip-value { color: var(--color-core-foreground-default); font-weight: 700; font-variant-numeric: tabular-nums; }
 
-  /* ── universe showcase (generic; auto-themes from content-area tokens) */
+  .chip[data-pos="top-left"]     { top: 10%;  left: var(--space-gutter); }
+  .chip[data-pos="top-right"]    { top: 10%;  right: var(--space-gutter); text-align: right; align-items: flex-end; }
+  .chip[data-pos="bottom-left"]  { bottom: 10%; left: var(--space-gutter); }
+  .chip[data-pos="bottom-right"] { bottom: 10%; right: var(--space-gutter); text-align: right; align-items: flex-end; }
+  .chip[data-pos="mid-left"]     { top: 50%; left: var(--space-gutter); }
+  .chip[data-pos="mid-right"]    { top: 50%; right: var(--space-gutter); text-align: right; align-items: flex-end; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chip { --chip-y: 0px; }
+  }
+
+  /* ── universe showcase (generic; auto-themes from its own data-theme scope) */
   .uni-showcase {
     padding: 100px var(--space-gutter) 72px; /* must restate --space-gutter: this scoped rule outranks the global .wrap padding,
                                         so leaving it as "0" silently dropped the outer gutter (56px) the header
@@ -539,8 +644,11 @@ import Footer from '../components/Footer.astro';
     .uni-showcase { grid-template-columns: 1fr; }
     .uni-header, .uni-cards { grid-column: 1; }
     .uni-cards { grid-template-columns: 1fr; }
-    .uni-trigger { height: 140vh; }
-    .uni-trigger--short { height: 120vh; }
+    .pin-zone--cartela { height: calc(100svh + 40vh); }
+    .pin-zone--surface { height: calc(100svh + 90vh); } /* mobile: cards stack to 1 column, content runs much taller than one viewport */
+    .cartela-title { font-size: clamp(56px, 16vw, 100px); }
+    .chip { font-size: 10.5px; }
+    .chip[data-pos="mid-left"], .chip[data-pos="mid-right"] { display: none; } /* avoid collision with the centered title at narrow widths */
     .acto-grid { grid-template-columns: 1fr; }
     .acto-grid > .idx { display: none; }
     .beat { grid-template-columns: 36px 1fr; gap: 0 16px; }
@@ -615,6 +723,16 @@ import Footer from '../components/Footer.astro';
     archetypeObs.observe(archetypeBeat);
   }
 
+  /* ── shared: header height → CSS var, consumed by the cover reveal (px math) and by
+     every sticky panel's `top` (panel-stack) ── */
+  function measureHeaderHeight() {
+    const h = document.querySelector('header.nav').offsetHeight;
+    document.documentElement.style.setProperty('--header-h', `${h}px`);
+    return h;
+  }
+  measureHeaderHeight();
+  window.addEventListener('resize', measureHeaderHeight, { passive: true });
+
   /* ── cover → header reveal: the cover scrolls up under the fixed header bar;
      the header content rises from the line as the name disappears (same proportion) ── */
   const navInner  = document.querySelector('header.nav .nav-inner');
@@ -625,7 +743,7 @@ import Footer from '../components/Footer.astro';
   if (navInner && coverEl && coverName && coverFoot && !reduce) {
     let barH = 0, revealStart = 0, revealSpan = 1;
     function measureReveal() {
-      barH = document.querySelector('header.nav').offsetHeight;
+      barH = measureHeaderHeight();
       coverEl.style.height = (window.innerHeight - barH) + 'px'; /* fill the viewport minus the sticky header so name + role always fit */
       const y = window.scrollY;
       const nameTop = coverName.getBoundingClientRect().top + y;
@@ -650,136 +768,27 @@ import Footer from '../components/Footer.astro';
     document.documentElement.classList.remove('morph-js');
   }
 
-  /* ── scroll-linked universe transitions ─────────────────────────────── */
-  const contentEl = document.getElementById('content-area');
-  const navEl     = document.querySelector('header.nav');
-
-  /* Token endpoints per universe — canonical from Figma modes (file 8JMA60B81nVHQKIsNRIWS7).
-     RGB arrays + scalars; fonts snap (can't interpolate), colors/radius/bw lerp. */
-  const THEMES = {
-    main: {
-      paper:[243,241,234], paper2:[236,233,223], ink:[22,22,15], muted:[79,78,68], faint:[120,118,106],
-      accent:[226,52,29], accentInk:[168,35,9], lineRgb:[20,20,12], lineStrong:[22,22,15], radius:8, bw:2, pad:56,
-      display:"'Bricolage Grotesque','Host Grotesk',system-ui,sans-serif", headline:"'Bebas Neue','Bricolage Grotesque',system-ui,sans-serif", sans:"'Host Grotesk',system-ui,sans-serif",
-    },
-    ruralvia: {
-      paper:[239,234,198], paper2:[231,224,180], ink:[28,58,43], muted:[46,125,82], faint:[111,138,116],
-      accent:[46,125,82], accentInk:[30,92,58], lineRgb:[28,58,43], lineStrong:[28,58,43], radius:24, bw:2, pad:64,
-      display:"'Fraunces',Georgia,serif", headline:"'Fraunces',Georgia,serif", sans:"'Hanken Grotesk',system-ui,sans-serif",
-    },
-    flame: {
-      paper:[236,233,223], paper2:[227,222,208], ink:[22,22,15], muted:[79,78,68], faint:[140,137,125],
-      accent:[226,52,29], accentInk:[168,35,9], lineRgb:[20,20,12], lineStrong:[22,22,15], radius:0, bw:4, pad:64,
-      display:"'Archivo Black',system-ui,sans-serif", headline:"'Archivo',system-ui,sans-serif", sans:"'Inter',system-ui,sans-serif",
-    },
-    erneszt: {
-      paper:[26,18,9], paper2:[36,26,14], ink:[239,234,198], muted:[217,194,115], faint:[154,138,88],
-      accent:[201,162,75], accentInk:[217,194,115], lineRgb:[236,234,198], lineStrong:[201,162,75], radius:4, bw:2, pad:72,
-      display:"'Playfair Display',Georgia,serif", headline:"'Playfair Display',Georgia,serif", sans:"'Lora',Georgia,serif",
-    },
-  };
-
-  const SEGMENTS = [
-    { triggerId:'rv-trigger',      slateId:'rv-slate',      from:'main',     to:'ruralvia' },
-    { triggerId:'flame-trigger',   slateId:'flame-slate',   from:'ruralvia', to:'flame'    },
-    { triggerId:'erneszt-trigger', slateId:'erneszt-slate', from:'flame',    to:'erneszt'  },
-  ].map((s) => {
-    const slateEl = document.getElementById(s.slateId);
-    return {
-      ...s,
-      triggerEl: document.getElementById(s.triggerId),
-      slateEl,
-      readoutDd: slateEl ? slateEl.querySelectorAll('.slate-readout dd') : [],
-    };
-  }).filter((s) => s.triggerEl && s.slateEl);
-
-  /* Position slates flush below nav so the frame stays visible */
-  if (navEl) SEGMENTS.forEach((s) => { s.slateEl.style.top = `${navEl.offsetHeight}px`; });
-
-  const lerp     = (a, b, t) => a + (b - a) * t;
-  const lerpRgb  = (a, b, t) => `rgb(${Math.round(lerp(a[0],b[0],t))},${Math.round(lerp(a[1],b[1],t))},${Math.round(lerp(a[2],b[2],t))})`;
-  const toHex    = (r, g, b) => '#' + [r,g,b].map((v) => Math.round(v).toString(16).padStart(2,'0')).join('');
-  const easeInOut = (t) => (t < 0.5 ? 2*t*t : -1+(4-2*t)*t);
-  const clamp    = (v) => Math.max(0, Math.min(1, v));
-
-  /* Bell-curve: slate visible 0.25 → 0.75, opaque peak at 0.5 (masks the muddy mid-morph) */
-  function slateAlpha(p) {
-    if (p <= 0.25 || p >= 0.75) return 0;
-    return Math.sin(((p - 0.25) / 0.5) * Math.PI);
+  /* ── panel-stack parallax: scattered token chips drift at different speeds while
+     their cartela is pinned. The covering motion of the panels themselves is pure
+     CSS (position:sticky) — this only drives the decorative chip drift. ── */
+  function clamp(v) { return Math.max(0, Math.min(1, v)); }
+  function cartelaProgress(pinZoneEl) {
+    const rect = pinZoneEl.getBoundingClientRect();
+    return clamp((window.innerHeight - rect.top) / rect.height);
   }
-
-  function progress(el) {
-    const rect = el.getBoundingClientRect();
-    const vh   = window.innerHeight;
-    return clamp((vh - rect.top) / (rect.height + vh));
-  }
-
-  function applyTokens(fromKey, toKey, t) {
-    if (!contentEl) return;
-    const A = THEMES[fromKey], B = THEMES[toKey], el = contentEl;
-    el.style.setProperty('--color-core-background-default',       lerpRgb(A.paper,      B.paper,      t));
-    el.style.setProperty('--color-core-background-subtle',     lerpRgb(A.paper2,     B.paper2,     t));
-    el.style.setProperty('--color-core-foreground-default',         lerpRgb(A.ink,        B.ink,        t));
-    el.style.setProperty('--color-accent-default',      lerpRgb(A.accent,     B.accent,     t));
-    el.style.setProperty('--color-accent-strong',  lerpRgb(A.accentInk,  B.accentInk,  t));
-    el.style.setProperty('--color-core-foreground-muted',       lerpRgb(A.muted,      B.muted,      t));
-    el.style.setProperty('--color-core-foreground-subtle',       lerpRgb(A.faint,      B.faint,      t));
-    el.style.setProperty('--color-core-border-default',
-      `rgba(${A.lineRgb.map((v,i) => Math.round(lerp(v, B.lineRgb[i], t))).join(',')},0.14)`);
-    el.style.setProperty('--color-core-border-strong', lerpRgb(A.lineStrong, B.lineStrong, t));
-    el.style.setProperty('--radius-surface', `${Math.round(lerp(A.radius, B.radius, t))}px`);
-    el.style.setProperty('--border-width-strong',     `${lerp(A.bw, B.bw, t).toFixed(1)}px`);
-    el.style.setProperty('--space-gutter',    `${Math.round(lerp(A.pad,    B.pad,    t))}px`);
-
-    /* Fonts can't interpolate — snap at the midpoint, hidden behind the flood slate */
-    const F = THEMES[t < 0.5 ? fromKey : toKey];
-    el.style.setProperty('--font-family-display',  F.display);
-    el.style.setProperty('--font-family-headline', F.headline);
-    el.style.setProperty('--font-family-body',     F.sans);
-  }
-
-  function updateReadout(seg, t) {
-    const A = THEMES[seg.from], B = THEMES[seg.to], dd = seg.readoutDd;
-    if (dd.length < 4) return;
-    const paper = A.paper.map((v,i) => lerp(v, B.paper[i], t));
-    const ink   = A.ink.map((v,i)   => lerp(v, B.ink[i],   t));
-    dd[0].textContent = toHex(paper[0], paper[1], paper[2]);
-    dd[1].textContent = toHex(ink[0], ink[1], ink[2]);
-    dd[2].textContent = `${Math.round(lerp(A.radius, B.radius, t))}px`;
-    dd[3].textContent = `${Math.round(lerp(A.pad,    B.pad,    t))}px`;
-  }
-
-  function update() {
-    const ps = SEGMENTS.map((s) => progress(s.triggerEl));
-    SEGMENTS.forEach((s, i) => { s.slateEl.style.opacity = String(slateAlpha(ps[i])); });
-
-    /* Walk segments in order to find the single applied theme state */
-    let fromKey = SEGMENTS[0].from, toKey = SEGMENTS[0].from, t = 0;
-    for (let i = 0; i < SEGMENTS.length; i++) {
-      const p = ps[i];
-      if (p >= 1) { fromKey = toKey = SEGMENTS[i].to; t = 0; continue; }
-      if (p <= 0) { fromKey = toKey = SEGMENTS[i].from; t = 0; break; }
-      fromKey = SEGMENTS[i].from; toKey = SEGMENTS[i].to; t = easeInOut(p);
-      updateReadout(SEGMENTS[i], t);
-      break;
-    }
-    applyTokens(fromKey, toKey, t);
-  }
-
-  if (!reduce && SEGMENTS.length) {
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update, { passive: true });
-    update();
-  } else if (reduce) {
-    /* Reduced motion: snap each universe theme as its showcase enters */
-    const showcases = document.querySelectorAll('[data-universe]');
-    const themeObs = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting && contentEl) {
-          contentEl.setAttribute('data-theme', e.target.getAttribute('data-universe'));
-        }
+  const cartelaZones = document.querySelectorAll('.pin-zone--cartela');
+  function updateParallax() {
+    cartelaZones.forEach((zone) => {
+      const p = cartelaProgress(zone);
+      zone.querySelectorAll('.chip').forEach((chip) => {
+        const depth = parseFloat(chip.dataset.depth) || 0.3;
+        chip.style.setProperty('--chip-y', `${((p - 0.5) * depth * 240).toFixed(1)}px`);
       });
-    }, { threshold: 0.4 });
-    showcases.forEach((n) => themeObs.observe(n));
+    });
+  }
+  if (!reduce && cartelaZones.length) {
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    window.addEventListener('resize', updateParallax, { passive: true });
+    updateParallax();
   }
 </script>

@@ -74,12 +74,6 @@
   --font-family-body: 'Lora', Georgia, serif;
 }
 
-#content-area {
-  background-color: var(--color-core-background-default);
-  color: var(--color-core-foreground-default);
-  font-family: var(--font-family-body);
-}
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
