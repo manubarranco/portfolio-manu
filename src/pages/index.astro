@@ -620,10 +620,11 @@ import Footer from '../components/Footer.astro';
       barH = document.querySelector('header.nav').offsetHeight;
       coverEl.style.height = (window.innerHeight - barH) + 'px'; /* fill the viewport minus the sticky header so name + role always fit */
       const y = window.scrollY;
-      const nameTop   = coverName.getBoundingClientRect().top + y;
-      const footBot   = coverFoot.getBoundingClientRect().bottom + y;
-      revealStart = nameTop - barH;                 /* name top reaches the line: starts disappearing */
-      revealSpan  = Math.max(1, (footBot - barH) - revealStart); /* until the tagline passes the line */
+      const nameTop = coverName.getBoundingClientRect().top + y;
+      const nameBot = coverName.getBoundingClientRect().bottom + y;
+      const leadIn  = (nameBot - nameTop) * 0.55; /* start before the name visually touches the line, so the header isn't slow to appear */
+      revealStart = (nameTop - barH) - leadIn;
+      revealSpan  = Math.max(1, (nameBot - barH) - revealStart); /* completes once "Barranco" has passed the line — well before the #hero anchor lands, so clicking the brand leaves no residual header motion */
     }
     function reveal() {
       let p = (window.scrollY - revealStart) / revealSpan;
