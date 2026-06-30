@@ -17,18 +17,20 @@ import Footer from '../components/Footer.astro';
   <main>
     <!-- ═══ COVER — landing masthead; scrolls up under the header as it reveals ═══ -->
     <section class="cover">
-      <div class="cover-name" aria-hidden="true">
-        <span>Manu</span>
-        <span class="accent">Barranco</span>
-      </div>
-      <div class="cover-foot">
-        <div class="cover-rule" aria-hidden="true"></div>
-        <p class="cover-tagline">Senior Design Systems Lead · AI Native Product Design</p>
+      <div class="wrap cover-inner">
+        <div class="cover-name" aria-hidden="true">
+          <span>Manu</span>
+          <span class="accent">Barranco</span>
+        </div>
+        <div class="cover-foot">
+          <div class="cover-rule" aria-hidden="true"></div>
+          <p class="cover-tagline">Senior Design Systems Lead · AI Native Product Design</p>
+        </div>
       </div>
     </section>
 
     <!-- ═══ HERO — frame; stays in main theme throughout ═══ -->
-    <section class="hero wrap" aria-labelledby="hero-title">
+    <section id="hero" class="hero wrap" aria-labelledby="hero-title">
       <div class="idx mono">00</div>
       <div class="hero-col">
         <p class="status mono"><span class="dot" aria-hidden="true"></span> Available for new challenges</p>
@@ -275,24 +277,31 @@ import Footer from '../components/Footer.astro';
 <style>
   .idx { color: var(--faint); padding-top: 26px; }
 
-  /* ── cover (landing) */
+  /* ── cover (landing) — fits the viewport; aligned to the same .wrap grid as the header */
   .cover {
-    height: 100svh;
+    height: 100svh; /* JS pins this to the visible viewport height */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 0 var(--pad);
+  }
+  .cover-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
   }
   .cover-name {
     display: flex;
     flex-direction: column;
     font-family: var(--headline);
     font-weight: 400;
-    font-size: clamp(64px, 13.3vw, 210px);
+    font-size: clamp(56px, min(12vw, 17vh), 200px);
     line-height: 0.8;
     letter-spacing: -0.01em;
     color: var(--ink);
-    margin-bottom: 4.5vh;
+    margin-top: auto;
+    margin-bottom: 5vh;
+    margin-left: -0.057em; /* optical: pull the Bebas M flush-left to match the header brand */
   }
   .cover-name .accent { color: var(--accent); }
   .cover-foot { padding-bottom: 4vh; }
@@ -314,6 +323,7 @@ import Footer from '../components/Footer.astro';
     display: grid;
     grid-template-columns: 80px 1fr;
     border-bottom: 1.5px solid var(--line-strong);
+    scroll-margin-top: 124px; /* clearance for the sticky header when jumping to #hero */
   }
   .hero-col { padding: 26px 0 64px; }
   .status { color: var(--accent-ink); text-transform: uppercase; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 9px; }
@@ -608,6 +618,7 @@ import Footer from '../components/Footer.astro';
     let barH = 0, revealStart = 0, revealSpan = 1;
     function measureReveal() {
       barH = document.querySelector('header.nav').offsetHeight;
+      coverEl.style.height = (window.innerHeight - barH) + 'px'; /* fill the viewport minus the sticky header so name + role always fit */
       const y = window.scrollY;
       const nameTop   = coverName.getBoundingClientRect().top + y;
       const footBot   = coverFoot.getBoundingClientRect().bottom + y;
