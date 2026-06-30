@@ -24,12 +24,13 @@ const links = [
 </header>
 
 <style>
-  .nav { border-bottom: 1.5px solid var(--line-strong); position: sticky; top: 0; z-index: 100; background: var(--paper); }
+  .nav { border-bottom: 1.5px solid var(--line-strong); position: sticky; top: 0; z-index: 100; background: var(--paper); overflow: hidden; }
   .nav-inner {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     padding: 22px var(--pad);
+    will-change: transform;
   }
   .brand {
     display: flex;
