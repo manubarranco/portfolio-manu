@@ -289,6 +289,9 @@ import Footer from '../components/Footer.astro';
     flex-direction: column;
     justify-content: flex-end;
     height: 100%;
+    width: 100%; /* without this, being a flex item with margin:auto sizes it by fit-content
+                    instead of stretching to .wrap's max-width — breaks the centering math
+                    and misaligns it from the header/hero, which aren't in a flex context */
   }
   .cover-name {
     display: flex;
@@ -301,7 +304,6 @@ import Footer from '../components/Footer.astro';
     color: var(--ink);
     margin-top: auto;
     margin-bottom: 5vh;
-    margin-left: -0.057em; /* optical: pull the Bebas M flush-left to match the header brand */
   }
   .cover-name .accent { color: var(--accent); }
   .cover-foot { padding-bottom: 4vh; }
@@ -399,7 +401,9 @@ import Footer from '../components/Footer.astro';
 
   /* ── universe showcase (generic; auto-themes from content-area tokens) */
   .uni-showcase {
-    padding: 100px 0 72px;
+    padding: 100px var(--pad) 72px; /* must restate --pad: this scoped rule outranks the global .wrap padding,
+                                        so leaving it as "0" silently dropped the outer gutter (56px) the header
+                                        and hero both use, under-indenting these sections by that amount */
     display: grid;
     grid-template-columns: 80px 1fr;
   }
