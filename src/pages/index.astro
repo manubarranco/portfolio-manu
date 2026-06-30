@@ -5,9 +5,24 @@ import Footer from '../components/Footer.astro';
 ---
 
 <Base>
+  <script is:inline>
+    /* Hide the morphing brand + links until JS positions them (avoids a small-logo flash) */
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('morph-js');
+    }
+  </script>
+
   <Nav />
 
   <main>
+    <!-- ═══ COVER — landing masthead; the brand morphs up through the line into the header ═══ -->
+    <section class="cover">
+      <div class="cover-foot">
+        <div class="cover-rule" aria-hidden="true"></div>
+        <p class="cover-tagline">Senior Design Systems Lead · AI Native Product Design</p>
+      </div>
+    </section>
+
     <!-- ═══ HERO — frame; stays in main theme throughout ═══ -->
     <section class="hero wrap" aria-labelledby="hero-title">
       <div class="idx mono">00</div>
@@ -255,6 +270,29 @@ import Footer from '../components/Footer.astro';
 
 <style>
   .idx { color: var(--faint); padding-top: 26px; }
+
+  /* ── cover (landing) */
+  .cover {
+    height: 100svh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .cover-foot { padding: 0 var(--pad) 4vh; }
+  .cover-rule { height: 1.5px; background: var(--line-strong); width: 100%; margin-bottom: 16px; }
+  .cover-tagline {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(17px, 3vw, 46px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+
+  /* Anti-flash: hide the brand/links until the morph script positions them (motion users only) */
+  :global(html.morph-js) header.nav .brand { visibility: hidden; }
+  :global(html.morph-js) header.nav .links { opacity: 0; }
 
   /* ── hero */
   .hero {
@@ -542,6 +580,48 @@ import Footer from '../components/Footer.astro';
       { threshold: 0.7 },
     );
     archetypeObs.observe(archetypeBeat);
+  }
+
+  /* ── cover → header morph: the giant masthead scales up through the line ──── */
+  const brandEl   = document.querySelector('header.nav .brand');
+  const linksEl   = document.querySelector('header.nav .links');
+  const coverEl   = document.querySelector('.cover');
+  const coverFoot = document.querySelector('.cover-foot');
+
+  if (brandEl && coverEl && !reduce) {
+    brandEl.style.transformOrigin = 'left top';
+    brandEl.style.willChange = 'transform';
+
+    let scaleMax = 1, travelY = 0;
+    function measureMorph() {
+      brandEl.style.transform = 'none';
+      const r = brandEl.getBoundingClientRect();
+      const restFont = parseFloat(getComputedStyle(brandEl).fontSize) || 40;
+      const giantFont = Math.min(window.innerWidth * 0.135, 220);
+      scaleMax = giantFont / restFont;
+      const giantH = r.height * scaleMax;
+      travelY = (window.innerHeight * 0.83 - giantH) - r.top; /* giant block bottom near 83vh, clear of the foot */
+    }
+    function morph() {
+      let p = window.scrollY / (window.innerHeight * 0.85);
+      p = Math.max(0, Math.min(1, p));
+      const scale = 1 + (scaleMax - 1) * (1 - p);
+      brandEl.style.transform = `translate3d(0, ${(travelY * (1 - p)).toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
+      if (linksEl) {
+        const lp = Math.max(0, Math.min(1, (p - 0.55) / 0.45));
+        linksEl.style.opacity = lp.toFixed(3);
+        linksEl.style.pointerEvents = lp > 0.5 ? 'auto' : 'none';
+      }
+      if (coverFoot) coverFoot.style.opacity = Math.max(0, 1 - p * 1.8).toFixed(3);
+    }
+    measureMorph();
+    morph();
+    document.documentElement.classList.remove('morph-js');
+    window.addEventListener('scroll', morph, { passive: true });
+    window.addEventListener('resize', () => { measureMorph(); morph(); }, { passive: true });
+  } else if (reduce) {
+    if (coverEl) coverEl.style.display = 'none';
+    document.documentElement.classList.remove('morph-js');
   }
 
   /* ── scroll-linked universe transitions ─────────────────────────────── */
