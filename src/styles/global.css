@@ -1,83 +1,83 @@
 :root {
-  --paper: #F3F1EA;
-  --paper-2: #ECE9DF;
-  --ink: #16160F;
-  --muted: #4F4E44;
-  --faint: #78766A;
-  --accent: #E2341D;
-  --accent-ink: #A82309;
-  --line: rgba(20, 20, 12, 0.14);
-  --line-strong: #16160F;
+  --color-core-background-default: #F3F1EA;
+  --color-core-background-subtle: #ECE9DF;
+  --color-core-foreground-default: #16160F;
+  --color-core-foreground-muted: #4F4E44;
+  --color-core-foreground-subtle: #78766A;
+  --color-accent-default: #E2341D;
+  --color-accent-strong: #A82309;
+  --color-core-border-default: rgba(20, 20, 12, 0.14);
+  --color-core-border-strong: #16160F;
 
-  --sans: 'Host Grotesk', system-ui, sans-serif;
-  --display: 'Bricolage Grotesque', 'Host Grotesk', system-ui, sans-serif;
-  --headline: 'Bebas Neue', 'Bricolage Grotesque', system-ui, sans-serif;
-  --mono: 'Space Mono', ui-monospace, monospace;
+  --font-family-body: 'Host Grotesk', system-ui, sans-serif;
+  --font-family-display: 'Bricolage Grotesque', 'Host Grotesk', system-ui, sans-serif;
+  --font-family-headline: 'Bebas Neue', 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-family-mono: 'Space Mono', ui-monospace, monospace;
 
-  --pad: 56px;
-  --maxw: 1180px;
-  --radius: 8px;
-  --bw: 2px;
+  --space-gutter: 56px;
+  --layout-max-width: 1180px;
+  --radius-surface: 8px;
+  --border-width-strong: 2px;
 }
 
 /* ── Universe theme tokens — canonical from Figma modes (file 8JMA60B81nVHQKIsNRIWS7).
    Reduced-motion fallback; the morphed values are set inline by JS on #content-area. */
 [data-theme="ruralvia"] {
-  --paper: #EFEAC6;
-  --paper-2: #E7E0B4;
-  --ink: #1C3A2B;
-  --muted: #2E7D52;
-  --faint: #6F8A74;
-  --accent: #2E7D52;
-  --accent-ink: #1E5C3A;
-  --line: rgba(28, 58, 43, 0.14);
-  --line-strong: #1C3A2B;
-  --radius: 24px;
-  --bw: 2px;
-  --pad: 64px;
-  --display: 'Fraunces', Georgia, serif;
-  --headline: 'Fraunces', Georgia, serif;
-  --sans: 'Hanken Grotesk', system-ui, sans-serif;
+  --color-core-background-default: #EFEAC6;
+  --color-core-background-subtle: #E7E0B4;
+  --color-core-foreground-default: #1C3A2B;
+  --color-core-foreground-muted: #2E7D52;
+  --color-core-foreground-subtle: #6F8A74;
+  --color-accent-default: #2E7D52;
+  --color-accent-strong: #1E5C3A;
+  --color-core-border-default: rgba(28, 58, 43, 0.14);
+  --color-core-border-strong: #1C3A2B;
+  --radius-surface: 24px;
+  --border-width-strong: 2px;
+  --space-gutter: 64px;
+  --font-family-display: 'Fraunces', Georgia, serif;
+  --font-family-headline: 'Fraunces', Georgia, serif;
+  --font-family-body: 'Hanken Grotesk', system-ui, sans-serif;
 }
 [data-theme="flame"] {
-  --paper: #ECE9DF;
-  --paper-2: #E3DED0;
-  --ink: #16160F;
-  --muted: #4F4E44;
-  --faint: #8C897D;
-  --accent: #E2341D;
-  --accent-ink: #A82309;
-  --line: rgba(20, 20, 12, 0.16);
-  --line-strong: #16160F;
-  --radius: 0px;
-  --bw: 4px;
-  --pad: 64px;
-  --display: 'Archivo Black', system-ui, sans-serif;
-  --headline: 'Archivo', system-ui, sans-serif;
-  --sans: 'Inter', system-ui, sans-serif;
+  --color-core-background-default: #ECE9DF;
+  --color-core-background-subtle: #E3DED0;
+  --color-core-foreground-default: #16160F;
+  --color-core-foreground-muted: #4F4E44;
+  --color-core-foreground-subtle: #8C897D;
+  --color-accent-default: #E2341D;
+  --color-accent-strong: #A82309;
+  --color-core-border-default: rgba(20, 20, 12, 0.16);
+  --color-core-border-strong: #16160F;
+  --radius-surface: 0px;
+  --border-width-strong: 4px;
+  --space-gutter: 64px;
+  --font-family-display: 'Archivo Black', system-ui, sans-serif;
+  --font-family-headline: 'Archivo', system-ui, sans-serif;
+  --font-family-body: 'Inter', system-ui, sans-serif;
 }
 [data-theme="erneszt"] {
-  --paper: #1A1209;
-  --paper-2: #241A0E;
-  --ink: #EFEAC6;
-  --muted: #D9C273;
-  --faint: #9A8A58;
-  --accent: #C9A24B;
-  --accent-ink: #D9C273;
-  --line: rgba(236, 234, 198, 0.16);
-  --line-strong: #C9A24B;
-  --radius: 4px;
-  --bw: 2px;
-  --pad: 72px;
-  --display: 'Playfair Display', Georgia, serif;
-  --headline: 'Playfair Display', Georgia, serif;
-  --sans: 'Lora', Georgia, serif;
+  --color-core-background-default: #1A1209;
+  --color-core-background-subtle: #241A0E;
+  --color-core-foreground-default: #EFEAC6;
+  --color-core-foreground-muted: #D9C273;
+  --color-core-foreground-subtle: #9A8A58;
+  --color-accent-default: #C9A24B;
+  --color-accent-strong: #D9C273;
+  --color-core-border-default: rgba(236, 234, 198, 0.16);
+  --color-core-border-strong: #C9A24B;
+  --radius-surface: 4px;
+  --border-width-strong: 2px;
+  --space-gutter: 72px;
+  --font-family-display: 'Playfair Display', Georgia, serif;
+  --font-family-headline: 'Playfair Display', Georgia, serif;
+  --font-family-body: 'Lora', Georgia, serif;
 }
 
 #content-area {
-  background-color: var(--paper);
-  color: var(--ink);
-  font-family: var(--sans);
+  background-color: var(--color-core-background-default);
+  color: var(--color-core-foreground-default);
+  font-family: var(--font-family-body);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -85,9 +85,9 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--sans);
+  background: var(--color-core-background-default);
+  color: var(--color-core-foreground-default);
+  font-family: var(--font-family-body);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -95,25 +95,25 @@ body {
 
 a { color: inherit; text-decoration: none; }
 
-::selection { background: var(--accent); color: var(--paper); }
+::selection { background: var(--color-accent-default); color: var(--color-core-background-default); }
 
-.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
+.wrap { max-width: var(--layout-max-width); margin: 0 auto; padding: 0 var(--space-gutter); }
 
 .mono {
-  font-family: var(--mono);
+  font-family: var(--font-family-mono);
   font-size: 12.5px;
   letter-spacing: 0.02em;
 }
 .eyebrow {
-  font-family: var(--mono);
+  font-family: var(--font-family-mono);
   font-size: 12.5px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--muted);
+  color: var(--color-core-foreground-muted);
 }
 
 @media (max-width: 720px) {
-  :root { --pad: 22px; }
+  :root { --space-gutter: 22px; }
 }
 
 [data-reveal] {
