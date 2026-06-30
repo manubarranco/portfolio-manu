@@ -309,10 +309,14 @@ import Footer from '../components/Footer.astro';
   .cover-tagline {
     font-family: var(--sans);
     font-weight: 500;
-    font-size: clamp(17px, 3vw, 46px);
-    line-height: 1.05;
+    font-size: clamp(17px, 2.6vw, 39px); /* capped so it never outgrows .wrap's maxw and wraps to 2 lines */
+    line-height: 1.15;
     letter-spacing: -0.015em;
     color: var(--ink);
+  }
+
+  @media (max-width: 720px) {
+    .cover-tagline { line-height: 1.3; }
   }
 
   /* Anti-flash: keep the header content tucked below the line until the reveal script runs (motion users only) */
