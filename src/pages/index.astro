@@ -449,11 +449,17 @@ import Footer from '../components/Footer.astro';
     justify-content: center;
     gap: 18px;
     overflow: hidden;
-    background: var(--color-core-background-default);
+    background: var(--cartela-bg);
     visibility: hidden;
     pointer-events: none;
   }
   .cartela.is-active { visibility: visible; }
+
+  /* Cartelas invert their universe: bold saturated backdrop + light text (the old flood-slate
+     palette). data-theme still governs the display FONT per universe; only the colors flip. */
+  .cartela[data-theme="ruralvia"] { --cartela-bg: #1C3A2B; --cartela-title: #EFEAC6; }
+  .cartela[data-theme="flame"]    { --cartela-bg: #E2341D; --cartela-title: #F3F1EA; }
+  .cartela[data-theme="erneszt"]  { --cartela-bg: #1A1209; --cartela-title: #C9A24B; }
 
   .cartela-eyebrow {
     position: relative;
@@ -464,7 +470,7 @@ import Footer from '../components/Footer.astro';
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-core-foreground-subtle);
+    color: rgba(255, 255, 255, 0.55);
   }
   .cartela-title {
     position: relative;
@@ -475,7 +481,7 @@ import Footer from '../components/Footer.astro';
     line-height: 0.88;
     letter-spacing: -0.01em;
     text-align: center;
-    color: var(--color-accent-default);
+    color: var(--cartela-title);
   }
   .cartela[data-theme="erneszt"] .cartela-title { font-style: italic; }
 
@@ -494,8 +500,8 @@ import Footer from '../components/Footer.astro';
     font-size: 12px;
     transform: translateY(calc(-50% + var(--chip-y, 0px)));
   }
-  .chip-label { color: var(--color-core-foreground-subtle); white-space: nowrap; }
-  .chip-value { color: var(--color-core-foreground-default); font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .chip-label { color: rgba(255, 255, 255, 0.42); white-space: nowrap; }
+  .chip-value { color: rgba(255, 255, 255, 0.85); font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
   @media (prefers-reduced-motion: reduce) {
     .chip { --chip-y: 0px; }
@@ -779,17 +785,23 @@ import Footer from '../components/Footer.astro';
 
   function updateCartelas() {
     const headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 0;
+    const vh = window.innerHeight;
     let activeKey = null;
     let activeProgress = 0;
 
     cartelaGaps.forEach((gap) => {
       const rect = gap.getBoundingClientRect();
-      const docTop = rect.top + window.scrollY;
-      const docBottom = docTop + rect.height;
-      const refY = window.scrollY + headerH; /* the screen point right below the header, where the cartela lives */
-      if (refY >= docTop && refY < docBottom) {
+      /* Active for the WHOLE time this gap overlaps the visible area below the header —
+         from the instant its top edge (the departing surface's bottom edge) enters from
+         the viewport bottom, through the full-screen dwell, until the next surface has
+         covered it past the header line. The fixed cartela behind then shows through the
+         transparent gap and is progressively revealed by the departing surface's rising
+         edge — no sudden pop. Later gaps win the tie so an incoming reveal takes over. */
+      if (rect.top < vh && rect.bottom > headerH) {
         activeKey = gap.dataset.cartela;
-        activeProgress = clamp((refY - docTop) / (docBottom - docTop));
+        /* 0 when the gap's top is at the viewport bottom (reveal just starting), 1 when it
+           reaches the header line (cartela fully exposed); stays 1 through dwell + cover. */
+        activeProgress = clamp((vh - rect.top) / (vh - headerH));
       }
     });
 
