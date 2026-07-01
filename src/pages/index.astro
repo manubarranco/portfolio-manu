@@ -149,25 +149,29 @@ import Footer from '../components/Footer.astro';
       <!-- Reveal window · Ruralvía cartela shows through here (fixed element lives after </Base>) -->
       <div class="cartela-gap" data-cartela="ruralvia" aria-hidden="true"></div>
 
-      <!-- Floor 1 · Ruralvía surface -->
-      <section class="surface uni-showcase wrap" data-theme="ruralvia" data-universe="ruralvia" aria-labelledby="rv-title">
-        <div class="uni-header" data-reveal>
-          <p class="eyebrow">01 · Ruralvía · 2018–2019 · Caja Rural</p>
-          <h2 id="rv-title" class="uni-tagline">An expert<br>in your corner</h2>
-        </div>
-        <div class="uni-cards">
-          <div class="uni-card" data-reveal style="transition-delay:60ms">
-            <p class="uni-card-label eyebrow">Vision</p>
-            <p class="uni-card-body">Before Cleo, Revolut, N26. We built proactive financial advice in 2018 around a single insight: users didn't need features, they needed someone in their corner.</p>
+      <!-- Floor 1 · Ruralvía surface — outer section is full-bleed (paints edge to edge,
+           no gaps at the sides that would let the cartela behind show through); the
+           grid/max-width layout lives on the inner .wrap. -->
+      <section class="surface surface--case" data-theme="ruralvia" data-universe="ruralvia" aria-labelledby="rv-title">
+        <div class="uni-showcase wrap">
+          <div class="uni-header" data-reveal>
+            <p class="eyebrow">01 · Ruralvía · 2018–2019 · Caja Rural</p>
+            <h2 id="rv-title" class="uni-tagline">An expert<br>in your corner</h2>
           </div>
-          <div class="uni-card" data-reveal style="transition-delay:120ms">
-            <p class="uni-card-label eyebrow">System</p>
-            <p class="uni-card-body">Proto-design system with tokens, flows, and a UI library that scaled across 70+ financial entities within Caja Rural Group.</p>
-          </div>
-          <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
-            <p class="uni-card-label eyebrow">The differentiator</p>
-            <p class="uni-card-body">El Experto, a contextual advisor embedded in the home screen. Not a chatbot. Someone who noticed things before you did.</p>
-            <a href="/work/ruralvia" class="uni-link">Read the case study ↗</a>
+          <div class="uni-cards">
+            <div class="uni-card" data-reveal style="transition-delay:60ms">
+              <p class="uni-card-label eyebrow">Vision</p>
+              <p class="uni-card-body">Before Cleo, Revolut, N26. We built proactive financial advice in 2018 around a single insight: users didn't need features, they needed someone in their corner.</p>
+            </div>
+            <div class="uni-card" data-reveal style="transition-delay:120ms">
+              <p class="uni-card-label eyebrow">System</p>
+              <p class="uni-card-body">Proto-design system with tokens, flows, and a UI library that scaled across 70+ financial entities within Caja Rural Group.</p>
+            </div>
+            <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+              <p class="uni-card-label eyebrow">The differentiator</p>
+              <p class="uni-card-body">El Experto, a contextual advisor embedded in the home screen. Not a chatbot. Someone who noticed things before you did.</p>
+              <a href="/work/ruralvia" class="uni-link">Read the case study ↗</a>
+            </div>
           </div>
         </div>
       </section>
@@ -176,24 +180,26 @@ import Footer from '../components/Footer.astro';
       <div class="cartela-gap" data-cartela="flame" aria-hidden="true"></div>
 
       <!-- Floor 1 · Flame surface -->
-      <section class="surface uni-showcase wrap" data-theme="flame" data-universe="flame" aria-labelledby="flame-title">
-        <div class="uni-header" data-reveal>
-          <p class="eyebrow">02 · Flame · 2020–2024 · Santander</p>
-          <h2 id="flame-title" class="uni-tagline">A system teams<br>chose to adopt</h2>
-        </div>
-        <div class="uni-cards">
-          <div class="uni-card" data-reveal style="transition-delay:60ms">
-            <p class="uni-card-label eyebrow">Scale</p>
-            <p class="uni-card-body">1,780+ components governed across 350+ designers and 10 countries. In banking, design coherence isn't a UX nicety: it's a trust signal.</p>
+      <section class="surface surface--case" data-theme="flame" data-universe="flame" aria-labelledby="flame-title">
+        <div class="uni-showcase wrap">
+          <div class="uni-header" data-reveal>
+            <p class="eyebrow">02 · Flame · 2020–2024 · Santander</p>
+            <h2 id="flame-title" class="uni-tagline">A system teams<br>chose to adopt</h2>
           </div>
-          <div class="uni-card" data-reveal style="transition-delay:120ms">
-            <p class="uni-card-label eyebrow">The model</p>
-            <p class="uni-card-body">A tiered system: a global foundation with local layers. Teams moved fast locally without fragmenting the platform at scale.</p>
-          </div>
-          <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
-            <p class="uni-card-label eyebrow">Impact</p>
-            <p class="uni-card-body">~35% faster feature development. I led the system, the team, and the alignment with Santander's Chief Design Officer.</p>
-            <a href="/work/flame" class="uni-link">Read the case study ↗</a>
+          <div class="uni-cards">
+            <div class="uni-card" data-reveal style="transition-delay:60ms">
+              <p class="uni-card-label eyebrow">Scale</p>
+              <p class="uni-card-body">1,780+ components governed across 350+ designers and 10 countries. In banking, design coherence isn't a UX nicety: it's a trust signal.</p>
+            </div>
+            <div class="uni-card" data-reveal style="transition-delay:120ms">
+              <p class="uni-card-label eyebrow">The model</p>
+              <p class="uni-card-body">A tiered system: a global foundation with local layers. Teams moved fast locally without fragmenting the platform at scale.</p>
+            </div>
+            <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+              <p class="uni-card-label eyebrow">Impact</p>
+              <p class="uni-card-body">~35% faster feature development. I led the system, the team, and the alignment with Santander's Chief Design Officer.</p>
+              <a href="/work/flame" class="uni-link">Read the case study ↗</a>
+            </div>
           </div>
         </div>
       </section>
@@ -202,24 +208,26 @@ import Footer from '../components/Footer.astro';
       <div class="cartela-gap" data-cartela="erneszt" aria-hidden="true"></div>
 
       <!-- Floor 1 · Erneszt surface -->
-      <section class="surface uni-showcase wrap" data-theme="erneszt" data-universe="erneszt" aria-labelledby="erneszt-title">
-        <div class="uni-header" data-reveal>
-          <p class="eyebrow">03 · Erneszt · 2026 · Self-initiated</p>
-          <h2 id="erneszt-title" class="uni-tagline">The thesis,<br>made real</h2>
-        </div>
-        <div class="uni-cards">
-          <div class="uni-card" data-reveal style="transition-delay:60ms">
-            <p class="uni-card-label eyebrow">Thesis</p>
-            <p class="uni-card-body">An AI-native product, built from zero. Conceived, designed, and orchestrated end to end. The arc's climax, made real.</p>
+      <section class="surface surface--case" data-theme="erneszt" data-universe="erneszt" aria-labelledby="erneszt-title">
+        <div class="uni-showcase wrap">
+          <div class="uni-header" data-reveal>
+            <p class="eyebrow">03 · Erneszt · 2026 · Self-initiated</p>
+            <h2 id="erneszt-title" class="uni-tagline">The thesis,<br>made real</h2>
           </div>
-          <div class="uni-card" data-reveal style="transition-delay:120ms">
-            <p class="uni-card-label eyebrow">Emotional architecture</p>
-            <p class="uni-card-body">Designed the emotional architecture before the product: the "this is me" click of a viral test with the depth of a real coach.</p>
-          </div>
-          <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
-            <p class="uni-card-label eyebrow">The product</p>
-            <p class="uni-card-body">Zoltar, an automaton that reads your trajectory and returns it as something you can finally claim. Try it free with HIREMANU.</p>
-            <a href="/work/erneszt" class="uni-link">Read the case study ↗</a>
+          <div class="uni-cards">
+            <div class="uni-card" data-reveal style="transition-delay:60ms">
+              <p class="uni-card-label eyebrow">Thesis</p>
+              <p class="uni-card-body">An AI-native product, built from zero. Conceived, designed, and orchestrated end to end. The arc's climax, made real.</p>
+            </div>
+            <div class="uni-card" data-reveal style="transition-delay:120ms">
+              <p class="uni-card-label eyebrow">Emotional architecture</p>
+              <p class="uni-card-body">Designed the emotional architecture before the product: the "this is me" click of a viral test with the depth of a real coach.</p>
+            </div>
+            <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+              <p class="uni-card-label eyebrow">The product</p>
+              <p class="uni-card-body">Zoltar, an automaton that reads your trajectory and returns it as something you can finally claim. Try it free with HIREMANU.</p>
+              <a href="/work/erneszt" class="uni-link">Read the case study ↗</a>
+            </div>
           </div>
         </div>
       </section>
@@ -425,7 +433,15 @@ import Footer from '../components/Footer.astro';
     min-height: calc(100vh - var(--header-h, 0px)); /* tall enough to fully cover the fixed cartela while it passes through */
   }
 
-  .surface.uni-showcase { align-content: center; } /* vertically balances the grid rows when min-height stretches the panel taller than its content */
+  /* Case-study surfaces: the outer .surface is full-bleed (its background must reach both
+     edges, or the fixed cartela behind shows through at the sides) — the .wrap inside it
+     carries the max-width/gutter. Centering the wrap vertically here replaces the old
+     align-content trick from when .surface and .uni-showcase were the same grid element. */
+  .surface--case {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
   /* Empty spacer between surfaces — has no background of its own, so the fixed cartela
      behind (shown by JS while scroll is within this element's range) shows through. This
