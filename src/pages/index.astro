@@ -584,9 +584,10 @@ import Footer from '../components/Footer.astro';
     color: var(--color-accent-default);
     border-bottom: 1.5px solid var(--color-accent-default);
     padding-bottom: 2px;
-    transition: opacity 0.12s;
+    transition: color 0.12s, background 0.12s, box-shadow 0.12s;
   }
-  .end-link:hover { opacity: 0.65; }
+  /* Same fill treatment as every other accent link on the site (nav, footer, case-study links) */
+  .end-link:hover { background: var(--color-accent-default); color: var(--color-core-background-default); box-shadow: 0 0 0 0.1em var(--color-accent-default); }
 
   /* ── acto 0 */
   .acto-0 { border-top: 1.5px solid var(--color-core-border-strong); }
