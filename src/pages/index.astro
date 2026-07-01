@@ -802,7 +802,7 @@ import Footer from '../components/Footer.astro';
     const headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 0;
     const vh = window.innerHeight;
     let activeKey = null;
-    let activeProgress = 0;
+    let activeGap = null;
 
     cartelaGaps.forEach((gap) => {
       const rect = gap.getBoundingClientRect();
@@ -814,9 +814,7 @@ import Footer from '../components/Footer.astro';
          edge — no sudden pop. Later gaps win the tie so an incoming reveal takes over. */
       if (rect.top < vh && rect.bottom > headerH) {
         activeKey = gap.dataset.cartela;
-        /* 0 when the gap's top is at the viewport bottom (reveal just starting), 1 when it
-           reaches the header line (cartela fully exposed); stays 1 through dwell + cover. */
-        activeProgress = clamp((vh - rect.top) / (vh - headerH));
+        activeGap = gap;
       }
     });
 
@@ -824,24 +822,45 @@ import Footer from '../components/Footer.astro';
       el.classList.toggle('is-active', key === activeKey);
     });
 
-    if (!activeKey || reduce) return;
+    if (!activeKey || reduce || !activeGap) return;
+
+    const rect    = activeGap.getBoundingClientRect();
+    const docTop  = rect.top + window.scrollY;
+    const docBottom = docTop + rect.height;
+    /* entryP: 0 when the gap's top is at the viewport bottom (reveal just starting), 1 once
+       it reaches the header line (departing surface fully gone, cartela fully exposed). While
+       entryP < 1, anything above the departing surface's still-covering edge is invisible —
+       chips must not rise past that line early, or they skip straight from "hidden behind the
+       departing surface" to "scrolled off past the top" without ever passing through view. */
+    const entryP  = clamp((vh - rect.top) / (vh - headerH));
+    /* pTotal: 0→1 across the WHOLE active window (reveal + the dwell after it, until the next
+       surface starts covering) — this is what each chip's own journey and value-tick run on. */
+    const pTotal  = clamp((window.scrollY - (docTop - vh)) / ((docBottom - headerH) - (docTop - vh)));
+    /* How far above/below the cartela's center the departing surface's bottom edge (the
+       reveal boundary) currently sits, in the same offset units as --chip-y. */
+    const boundaryOffset = (vh - headerH) * (0.5 - entryP);
+
     const cartela = cartelaEls[activeKey];
     cartela.querySelectorAll('.chip').forEach((chip) => {
-      /* localP shares activeProgress's 0→1 start/end with every chip (so every token has
-         settled on its final value by the time the next surface covers the cartela) but
-         each chip's own exponent bends the curve — front-loaded vs back-loaded — so they
-         tick at different rates along the way. Each chip also travels its OWN start→end
-         range (not a shared symmetric sweep) so they don't all begin or end in the same
-         horizontal row — like Matrix rain, staggered and scattered rather than a wave that
-         lines up and collides. */
+      /* Each chip's own exponent bends its timing curve — front-loaded vs back-loaded — and
+         its own start/end range means no two chips share a position or a speed: scattered and
+         staggered, like Matrix rain, rather than a synchronized wave that lines up and
+         collides. localP runs on pTotal (the full window), not just the reveal, so there's
+         room for the chip to keep climbing and exit during the dwell after it's fully shown. */
       const exponent = parseFloat(chip.dataset.depth) || 1;
-      const localP = Math.pow(activeProgress, exponent);
+      const localP = Math.pow(pTotal, exponent);
       /* start/end are fractions of viewport height, not fixed px, so the exit point always
          clears the cartela's visible half regardless of screen size — chips fully leave
          through the top rather than parking just inside the edge. */
       const startY = (parseFloat(chip.dataset.startY) || 0.3) * vh;
       const endY   = (parseFloat(chip.dataset.endY) || -0.6) * vh;
-      chip.style.setProperty('--chip-y', `${lerp(startY, endY, localP).toFixed(1)}px`);
+      const rawOffset = lerp(startY, endY, localP);
+      /* While the departing surface is still covering part of the screen, hold the chip at
+         the reveal boundary if its own curve would otherwise put it above it (hidden); once
+         entryP reaches 1 the clamp lifts entirely and the chip is free to climb the rest of
+         the way out. */
+      const chipY = entryP < 1 ? Math.max(rawOffset, boundaryOffset) : rawOffset;
+      chip.style.setProperty('--chip-y', `${chipY.toFixed(1)}px`);
 
       const valueEl = chip.querySelector('.chip-value');
       if (!valueEl) return;
