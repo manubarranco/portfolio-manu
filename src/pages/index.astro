@@ -29,15 +29,14 @@ import Footer from '../components/Footer.astro';
       </div>
     </section>
 
-    <!-- ═══ PANEL STACK — sheets that cover and reveal: floor 1 surfaces (content) +
-         floor 0 cartelas (title cards), stacked with position:sticky so each new
-         panel physically slides over the one before it. No fades, no color lerp —
-         every panel carries its own theme's tokens already applied. ═══ -->
+    <!-- ═══ PANEL STACK — floor 1 surfaces scroll normally; floor 0 cartelas are fixed
+         backdrops (see the standalone .cartela elements after </Base>) revealed only
+         through the transparent .cartela-gap spacers between surfaces. No fades, no
+         color lerp: every surface already carries its own theme's tokens. ═══ -->
     <div class="panel-stack">
 
-      <!-- Floor 1 · intro surface (Hero + Acto 0). First sheet — nothing above it to
-           release from, so it just sits in normal flow under everything that follows. -->
-      <div class="surface surface--intro" style="--z:1">
+      <!-- Floor 1 · intro surface (Hero + Acto 0) -->
+      <div class="surface surface--intro">
         <section id="hero" class="hero wrap" aria-labelledby="hero-title">
           <div class="idx mono">00</div>
           <div class="hero-col">
@@ -147,182 +146,83 @@ import Footer from '../components/Footer.astro';
         </section>
       </div>
 
-      <!-- Floor 0 · Ruralvía cartela -->
-      <div class="pin-zone pin-zone--cartela">
-        <section class="cartela" data-theme="ruralvia" style="--z:2" aria-hidden="true">
-          <p class="cartela-eyebrow">campo y trigo</p>
-          <h2 class="cartela-title">RURALVÍA</h2>
-          <ul class="chip-field" aria-hidden="true">
-            <li class="chip" style="--lane-x:6%" data-depth="0.55" data-from-rgb="243,241,234" data-to-rgb="239,234,198">
-              <span class="chip-label">color.core.background.default</span>
-              <span class="chip-value">#EFEAC6</span>
-            </li>
-            <li class="chip" style="--lane-x:22%" data-depth="0.85" data-from-rgb="22,22,15" data-to-rgb="28,58,43">
-              <span class="chip-label">color.core.foreground.default</span>
-              <span class="chip-value">#1C3A2B</span>
-            </li>
-            <li class="chip" style="--lane-x:38%" data-depth="1.0" data-from-rgb="226,52,29" data-to-rgb="46,125,82">
-              <span class="chip-label">color.accent.default</span>
-              <span class="chip-value">#2E7D52</span>
-            </li>
-            <li class="chip" style="--lane-x:58%" data-depth="1.25" data-from-num="8" data-to-num="24" data-unit="px">
-              <span class="chip-label">radius.surface</span>
-              <span class="chip-value">24px</span>
-            </li>
-            <li class="chip" style="--lane-x:74%" data-depth="1.55" data-from-num="2" data-to-num="2" data-unit="px">
-              <span class="chip-label">border-width.strong</span>
-              <span class="chip-value">2px</span>
-            </li>
-            <li class="chip" style="--lane-x:90%" data-depth="1.9" data-from-num="56" data-to-num="64" data-unit="px">
-              <span class="chip-label">space.gutter</span>
-              <span class="chip-value">64px</span>
-            </li>
-          </ul>
-        </section>
-      </div>
+      <!-- Reveal window · Ruralvía cartela shows through here (fixed element lives after </Base>) -->
+      <div class="cartela-gap" data-cartela="ruralvia" aria-hidden="true"></div>
 
       <!-- Floor 1 · Ruralvía surface -->
-      <div class="pin-zone pin-zone--surface">
-        <section class="surface uni-showcase wrap" data-theme="ruralvia" data-universe="ruralvia" style="--z:3" aria-labelledby="rv-title">
-          <div class="uni-header" data-reveal>
-            <p class="eyebrow">01 · Ruralvía · 2018–2019 · Caja Rural</p>
-            <h2 id="rv-title" class="uni-tagline">An expert<br>in your corner</h2>
+      <section class="surface uni-showcase wrap" data-theme="ruralvia" data-universe="ruralvia" aria-labelledby="rv-title">
+        <div class="uni-header" data-reveal>
+          <p class="eyebrow">01 · Ruralvía · 2018–2019 · Caja Rural</p>
+          <h2 id="rv-title" class="uni-tagline">An expert<br>in your corner</h2>
+        </div>
+        <div class="uni-cards">
+          <div class="uni-card" data-reveal style="transition-delay:60ms">
+            <p class="uni-card-label eyebrow">Vision</p>
+            <p class="uni-card-body">Before Cleo, Revolut, N26. We built proactive financial advice in 2018 around a single insight: users didn't need features, they needed someone in their corner.</p>
           </div>
-          <div class="uni-cards">
-            <div class="uni-card" data-reveal style="transition-delay:60ms">
-              <p class="uni-card-label eyebrow">Vision</p>
-              <p class="uni-card-body">Before Cleo, Revolut, N26. We built proactive financial advice in 2018 around a single insight: users didn't need features, they needed someone in their corner.</p>
-            </div>
-            <div class="uni-card" data-reveal style="transition-delay:120ms">
-              <p class="uni-card-label eyebrow">System</p>
-              <p class="uni-card-body">Proto-design system with tokens, flows, and a UI library that scaled across 70+ financial entities within Caja Rural Group.</p>
-            </div>
-            <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
-              <p class="uni-card-label eyebrow">The differentiator</p>
-              <p class="uni-card-body">El Experto, a contextual advisor embedded in the home screen. Not a chatbot. Someone who noticed things before you did.</p>
-              <a href="/work/ruralvia" class="uni-link">Read the case study ↗</a>
-            </div>
+          <div class="uni-card" data-reveal style="transition-delay:120ms">
+            <p class="uni-card-label eyebrow">System</p>
+            <p class="uni-card-body">Proto-design system with tokens, flows, and a UI library that scaled across 70+ financial entities within Caja Rural Group.</p>
           </div>
-        </section>
-      </div>
+          <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+            <p class="uni-card-label eyebrow">The differentiator</p>
+            <p class="uni-card-body">El Experto, a contextual advisor embedded in the home screen. Not a chatbot. Someone who noticed things before you did.</p>
+            <a href="/work/ruralvia" class="uni-link">Read the case study ↗</a>
+          </div>
+        </div>
+      </section>
 
-      <!-- Floor 0 · Flame cartela -->
-      <div class="pin-zone pin-zone--cartela">
-        <section class="cartela" data-theme="flame" style="--z:4" aria-hidden="true">
-          <p class="cartela-eyebrow">orden y escala</p>
-          <h2 class="cartela-title">FLAME</h2>
-          <ul class="chip-field" aria-hidden="true">
-            <li class="chip" style="--lane-x:6%" data-depth="0.55" data-from-rgb="239,234,198" data-to-rgb="236,233,223">
-              <span class="chip-label">color.core.background.default</span>
-              <span class="chip-value">#ECE9DF</span>
-            </li>
-            <li class="chip" style="--lane-x:22%" data-depth="0.85" data-from-rgb="28,58,43" data-to-rgb="22,22,15">
-              <span class="chip-label">color.core.foreground.default</span>
-              <span class="chip-value">#16160F</span>
-            </li>
-            <li class="chip" style="--lane-x:38%" data-depth="1.0" data-from-rgb="46,125,82" data-to-rgb="226,52,29">
-              <span class="chip-label">color.accent.default</span>
-              <span class="chip-value">#E2341D</span>
-            </li>
-            <li class="chip" style="--lane-x:58%" data-depth="1.25" data-from-num="24" data-to-num="0" data-unit="px">
-              <span class="chip-label">radius.surface</span>
-              <span class="chip-value">0px</span>
-            </li>
-            <li class="chip" style="--lane-x:74%" data-depth="1.55" data-from-num="2" data-to-num="4" data-unit="px">
-              <span class="chip-label">border-width.strong</span>
-              <span class="chip-value">4px</span>
-            </li>
-            <li class="chip" style="--lane-x:90%" data-depth="1.9" data-from-num="64" data-to-num="64" data-unit="px">
-              <span class="chip-label">space.gutter</span>
-              <span class="chip-value">64px</span>
-            </li>
-          </ul>
-        </section>
-      </div>
+      <!-- Reveal window · Flame cartela -->
+      <div class="cartela-gap" data-cartela="flame" aria-hidden="true"></div>
 
       <!-- Floor 1 · Flame surface -->
-      <div class="pin-zone pin-zone--surface">
-        <section class="surface uni-showcase wrap" data-theme="flame" data-universe="flame" style="--z:5" aria-labelledby="flame-title">
-          <div class="uni-header" data-reveal>
-            <p class="eyebrow">02 · Flame · 2020–2024 · Santander</p>
-            <h2 id="flame-title" class="uni-tagline">A system teams<br>chose to adopt</h2>
+      <section class="surface uni-showcase wrap" data-theme="flame" data-universe="flame" aria-labelledby="flame-title">
+        <div class="uni-header" data-reveal>
+          <p class="eyebrow">02 · Flame · 2020–2024 · Santander</p>
+          <h2 id="flame-title" class="uni-tagline">A system teams<br>chose to adopt</h2>
+        </div>
+        <div class="uni-cards">
+          <div class="uni-card" data-reveal style="transition-delay:60ms">
+            <p class="uni-card-label eyebrow">Scale</p>
+            <p class="uni-card-body">1,780+ components governed across 350+ designers and 10 countries. In banking, design coherence isn't a UX nicety: it's a trust signal.</p>
           </div>
-          <div class="uni-cards">
-            <div class="uni-card" data-reveal style="transition-delay:60ms">
-              <p class="uni-card-label eyebrow">Scale</p>
-              <p class="uni-card-body">1,780+ components governed across 350+ designers and 10 countries. In banking, design coherence isn't a UX nicety: it's a trust signal.</p>
-            </div>
-            <div class="uni-card" data-reveal style="transition-delay:120ms">
-              <p class="uni-card-label eyebrow">The model</p>
-              <p class="uni-card-body">A tiered system: a global foundation with local layers. Teams moved fast locally without fragmenting the platform at scale.</p>
-            </div>
-            <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
-              <p class="uni-card-label eyebrow">Impact</p>
-              <p class="uni-card-body">~35% faster feature development. I led the system, the team, and the alignment with Santander's Chief Design Officer.</p>
-              <a href="/work/flame" class="uni-link">Read the case study ↗</a>
-            </div>
+          <div class="uni-card" data-reveal style="transition-delay:120ms">
+            <p class="uni-card-label eyebrow">The model</p>
+            <p class="uni-card-body">A tiered system: a global foundation with local layers. Teams moved fast locally without fragmenting the platform at scale.</p>
           </div>
-        </section>
-      </div>
+          <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+            <p class="uni-card-label eyebrow">Impact</p>
+            <p class="uni-card-body">~35% faster feature development. I led the system, the team, and the alignment with Santander's Chief Design Officer.</p>
+            <a href="/work/flame" class="uni-link">Read the case study ↗</a>
+          </div>
+        </div>
+      </section>
 
-      <!-- Floor 0 · Erneszt cartela -->
-      <div class="pin-zone pin-zone--cartela">
-        <section class="cartela" data-theme="erneszt" style="--z:6" aria-hidden="true">
-          <p class="cartela-eyebrow">el autómata</p>
-          <h2 class="cartela-title">ERNESZT</h2>
-          <ul class="chip-field" aria-hidden="true">
-            <li class="chip" style="--lane-x:6%" data-depth="0.55" data-from-rgb="236,233,223" data-to-rgb="26,18,9">
-              <span class="chip-label">color.core.background.default</span>
-              <span class="chip-value">#1A1209</span>
-            </li>
-            <li class="chip" style="--lane-x:22%" data-depth="0.85" data-from-rgb="22,22,15" data-to-rgb="239,234,198">
-              <span class="chip-label">color.core.foreground.default</span>
-              <span class="chip-value">#EFEAC6</span>
-            </li>
-            <li class="chip" style="--lane-x:38%" data-depth="1.0" data-from-rgb="226,52,29" data-to-rgb="201,162,75">
-              <span class="chip-label">color.accent.default</span>
-              <span class="chip-value">#C9A24B</span>
-            </li>
-            <li class="chip" style="--lane-x:58%" data-depth="1.25" data-from-num="0" data-to-num="4" data-unit="px">
-              <span class="chip-label">radius.surface</span>
-              <span class="chip-value">4px</span>
-            </li>
-            <li class="chip" style="--lane-x:74%" data-depth="1.55" data-from-num="4" data-to-num="2" data-unit="px">
-              <span class="chip-label">border-width.strong</span>
-              <span class="chip-value">2px</span>
-            </li>
-            <li class="chip" style="--lane-x:90%" data-depth="1.9" data-from-num="64" data-to-num="72" data-unit="px">
-              <span class="chip-label">space.gutter</span>
-              <span class="chip-value">72px</span>
-            </li>
-          </ul>
-        </section>
-      </div>
+      <!-- Reveal window · Erneszt cartela -->
+      <div class="cartela-gap" data-cartela="erneszt" aria-hidden="true"></div>
 
       <!-- Floor 1 · Erneszt surface -->
-      <div class="pin-zone pin-zone--surface">
-        <section class="surface uni-showcase wrap" data-theme="erneszt" data-universe="erneszt" style="--z:7" aria-labelledby="erneszt-title">
-          <div class="uni-header" data-reveal>
-            <p class="eyebrow">03 · Erneszt · 2026 · Self-initiated</p>
-            <h2 id="erneszt-title" class="uni-tagline">The thesis,<br>made real</h2>
+      <section class="surface uni-showcase wrap" data-theme="erneszt" data-universe="erneszt" aria-labelledby="erneszt-title">
+        <div class="uni-header" data-reveal>
+          <p class="eyebrow">03 · Erneszt · 2026 · Self-initiated</p>
+          <h2 id="erneszt-title" class="uni-tagline">The thesis,<br>made real</h2>
+        </div>
+        <div class="uni-cards">
+          <div class="uni-card" data-reveal style="transition-delay:60ms">
+            <p class="uni-card-label eyebrow">Thesis</p>
+            <p class="uni-card-body">An AI-native product, built from zero. Conceived, designed, and orchestrated end to end. The arc's climax, made real.</p>
           </div>
-          <div class="uni-cards">
-            <div class="uni-card" data-reveal style="transition-delay:60ms">
-              <p class="uni-card-label eyebrow">Thesis</p>
-              <p class="uni-card-body">An AI-native product, built from zero. Conceived, designed, and orchestrated end to end. The arc's climax, made real.</p>
-            </div>
-            <div class="uni-card" data-reveal style="transition-delay:120ms">
-              <p class="uni-card-label eyebrow">Emotional architecture</p>
-              <p class="uni-card-body">Designed the emotional architecture before the product: the "this is me" click of a viral test with the depth of a real coach.</p>
-            </div>
-            <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
-              <p class="uni-card-label eyebrow">The product</p>
-              <p class="uni-card-body">Zoltar, an automaton that reads your trajectory and returns it as something you can finally claim. Try it free with HIREMANU.</p>
-              <a href="/work/erneszt" class="uni-link">Read the case study ↗</a>
-            </div>
+          <div class="uni-card" data-reveal style="transition-delay:120ms">
+            <p class="uni-card-label eyebrow">Emotional architecture</p>
+            <p class="uni-card-body">Designed the emotional architecture before the product: the "this is me" click of a viral test with the depth of a real coach.</p>
           </div>
-        </section>
-      </div>
+          <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+            <p class="uni-card-label eyebrow">The product</p>
+            <p class="uni-card-body">Zoltar, an automaton that reads your trajectory and returns it as something you can finally claim. Try it free with HIREMANU.</p>
+            <a href="/work/erneszt" class="uni-link">Read the case study ↗</a>
+          </div>
+        </div>
+      </section>
 
       <!-- About + closing CTA — normal flow, rests in the Erneszt theme -->
       <section id="about" class="about wrap" data-theme="erneszt" aria-labelledby="about-title">
@@ -346,6 +246,104 @@ import Footer from '../components/Footer.astro';
 
   <Footer />
 </Base>
+
+<!-- ═══ CARTELAS — fixed backdrops, one per universe. Always rendered at the same screen
+     position (below the header); JS shows exactly one at a time based on which
+     .cartela-gap the scroll position currently falls within. Hard visibility toggle,
+     no fade — surfaces above (z-index:10 > cartela's 5) are what create the actual
+     cover/reveal as they scroll past. ═══ -->
+<section class="cartela" data-theme="ruralvia" id="cartela-ruralvia" aria-hidden="true">
+  <p class="cartela-eyebrow">campo y trigo</p>
+  <h2 class="cartela-title">RURALVÍA</h2>
+  <ul class="chip-field" aria-hidden="true">
+    <li class="chip" style="--lane-x:6%" data-depth="0.55" data-from-rgb="243,241,234" data-to-rgb="239,234,198">
+      <span class="chip-label">color.core.background.default</span>
+      <span class="chip-value">#EFEAC6</span>
+    </li>
+    <li class="chip" style="--lane-x:22%" data-depth="0.85" data-from-rgb="22,22,15" data-to-rgb="28,58,43">
+      <span class="chip-label">color.core.foreground.default</span>
+      <span class="chip-value">#1C3A2B</span>
+    </li>
+    <li class="chip" style="--lane-x:38%" data-depth="1.0" data-from-rgb="226,52,29" data-to-rgb="46,125,82">
+      <span class="chip-label">color.accent.default</span>
+      <span class="chip-value">#2E7D52</span>
+    </li>
+    <li class="chip" style="--lane-x:58%" data-depth="1.25" data-from-num="8" data-to-num="24" data-unit="px">
+      <span class="chip-label">radius.surface</span>
+      <span class="chip-value">24px</span>
+    </li>
+    <li class="chip" style="--lane-x:74%" data-depth="1.55" data-from-num="2" data-to-num="2" data-unit="px">
+      <span class="chip-label">border-width.strong</span>
+      <span class="chip-value">2px</span>
+    </li>
+    <li class="chip" style="--lane-x:90%" data-depth="1.9" data-from-num="56" data-to-num="64" data-unit="px">
+      <span class="chip-label">space.gutter</span>
+      <span class="chip-value">64px</span>
+    </li>
+  </ul>
+</section>
+
+<section class="cartela" data-theme="flame" id="cartela-flame" aria-hidden="true">
+  <p class="cartela-eyebrow">orden y escala</p>
+  <h2 class="cartela-title">FLAME</h2>
+  <ul class="chip-field" aria-hidden="true">
+    <li class="chip" style="--lane-x:6%" data-depth="0.55" data-from-rgb="239,234,198" data-to-rgb="236,233,223">
+      <span class="chip-label">color.core.background.default</span>
+      <span class="chip-value">#ECE9DF</span>
+    </li>
+    <li class="chip" style="--lane-x:22%" data-depth="0.85" data-from-rgb="28,58,43" data-to-rgb="22,22,15">
+      <span class="chip-label">color.core.foreground.default</span>
+      <span class="chip-value">#16160F</span>
+    </li>
+    <li class="chip" style="--lane-x:38%" data-depth="1.0" data-from-rgb="46,125,82" data-to-rgb="226,52,29">
+      <span class="chip-label">color.accent.default</span>
+      <span class="chip-value">#E2341D</span>
+    </li>
+    <li class="chip" style="--lane-x:58%" data-depth="1.25" data-from-num="24" data-to-num="0" data-unit="px">
+      <span class="chip-label">radius.surface</span>
+      <span class="chip-value">0px</span>
+    </li>
+    <li class="chip" style="--lane-x:74%" data-depth="1.55" data-from-num="2" data-to-num="4" data-unit="px">
+      <span class="chip-label">border-width.strong</span>
+      <span class="chip-value">4px</span>
+    </li>
+    <li class="chip" style="--lane-x:90%" data-depth="1.9" data-from-num="64" data-to-num="64" data-unit="px">
+      <span class="chip-label">space.gutter</span>
+      <span class="chip-value">64px</span>
+    </li>
+  </ul>
+</section>
+
+<section class="cartela" data-theme="erneszt" id="cartela-erneszt" aria-hidden="true">
+  <p class="cartela-eyebrow">el autómata</p>
+  <h2 class="cartela-title">ERNESZT</h2>
+  <ul class="chip-field" aria-hidden="true">
+    <li class="chip" style="--lane-x:6%" data-depth="0.55" data-from-rgb="236,233,223" data-to-rgb="26,18,9">
+      <span class="chip-label">color.core.background.default</span>
+      <span class="chip-value">#1A1209</span>
+    </li>
+    <li class="chip" style="--lane-x:22%" data-depth="0.85" data-from-rgb="22,22,15" data-to-rgb="239,234,198">
+      <span class="chip-label">color.core.foreground.default</span>
+      <span class="chip-value">#EFEAC6</span>
+    </li>
+    <li class="chip" style="--lane-x:38%" data-depth="1.0" data-from-rgb="226,52,29" data-to-rgb="201,162,75">
+      <span class="chip-label">color.accent.default</span>
+      <span class="chip-value">#C9A24B</span>
+    </li>
+    <li class="chip" style="--lane-x:58%" data-depth="1.25" data-from-num="0" data-to-num="4" data-unit="px">
+      <span class="chip-label">radius.surface</span>
+      <span class="chip-value">4px</span>
+    </li>
+    <li class="chip" style="--lane-x:74%" data-depth="1.55" data-from-num="4" data-to-num="2" data-unit="px">
+      <span class="chip-label">border-width.strong</span>
+      <span class="chip-value">2px</span>
+    </li>
+    <li class="chip" style="--lane-x:90%" data-depth="1.9" data-from-num="64" data-to-num="72" data-unit="px">
+      <span class="chip-label">space.gutter</span>
+      <span class="chip-value">72px</span>
+    </li>
+  </ul>
+</section>
 
 <style>
   .idx { color: var(--color-core-foreground-subtle); padding-top: 26px; }
@@ -415,50 +413,48 @@ import Footer from '../components/Footer.astro';
   .pos { font-weight: 500; font-size: 23px; line-height: 1.34; letter-spacing: -0.015em; }
   .through { font-size: 15px; line-height: 1.65; color: var(--color-core-foreground-muted); }
 
-  /* ── panel stack: sheets that cover and reveal ───────────────────────── */
-  .panel-stack {
+  /* ── panel stack: surfaces scroll normally, covering the fixed cartelas behind them ── */
+  .panel-stack { position: relative; }
+
+  .surface {
     position: relative;
-    isolation: isolate; /* new stacking context so panel z-index (1-7) never collides with the header's z-index:100 */
-  }
-
-  .pin-zone { position: relative; }
-  .pin-zone--cartela { height: calc(100svh + 70vh); } /* 70vh dwell: how long the cartela stays pinned before the next surface covers it */
-  /* Explicit height, not min-height + padding-bottom: that combination silently breaks
-     position:sticky on the child (confirmed empirically — the sticky element ignores its
-     `top` entirely and just scrolls 1:1, even though every computed style looks correct).
-     A fixed height (same pattern as .pin-zone--cartela, which works) avoids it. 140vh total
-     comfortably exceeds .uni-showcase's own ~1-viewport content height at every breakpoint. */
-  .pin-zone--surface { height: calc(100svh + 40vh); }
-
-  .surface, .cartela {
-    position: sticky;
-    top: var(--header-h, 0px);
-    min-height: calc(100svh - var(--header-h, 0px));
-    z-index: var(--z);
+    z-index: 10; /* above the fixed cartelas (5), below the header (100) */
     background: var(--color-core-background-default);
     color: var(--color-core-foreground-default);
     font-family: var(--font-family-body);
-  }
-
-  /* Comes after the shared .surface,.cartela rule so it wins the position tie-break
-     (same specificity, later source order) — the intro is the only non-sticky panel:
-     nothing sits above it, so it never needs to release/cover, just to BE covered. */
-  .surface--intro {
-    position: relative;
-    z-index: var(--z);
+    min-height: calc(100vh - var(--header-h, 0px)); /* tall enough to fully cover the fixed cartela while it passes through */
   }
 
   .surface.uni-showcase { align-content: center; } /* vertically balances the grid rows when min-height stretches the panel taller than its content */
 
-  /* ── cartela (floor 0 title card) ── */
+  /* Empty spacer between surfaces — has no background of its own, so the fixed cartela
+     behind (shown by JS while scroll is within this element's range) shows through. This
+     is the ONLY place a cartela is ever visible: surfaces are opaque and cover it the
+     rest of the time. */
+  .cartela-gap { height: 130vh; }
+
+  /* ── cartela (floor 0 title card): fixed backdrop, always same screen position, never
+     scrolls. JS toggles .is-active (hard cut, no fade) based on which .cartela-gap the
+     scroll position is currently inside. ── */
   .cartela {
+    position: fixed;
+    top: var(--header-h, 0px);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 18px;
     overflow: hidden;
+    background: var(--color-core-background-default);
+    visibility: hidden;
+    pointer-events: none;
   }
+  .cartela.is-active { visibility: visible; }
+
   .cartela-eyebrow {
     position: relative;
     z-index: 1; /* the chip field is position:absolute, which paints above static-flow
@@ -645,8 +641,7 @@ import Footer from '../components/Footer.astro';
     .uni-showcase { grid-template-columns: 1fr; }
     .uni-header, .uni-cards { grid-column: 1; }
     .uni-cards { grid-template-columns: 1fr; }
-    .pin-zone--cartela { height: calc(100svh + 40vh); }
-    .pin-zone--surface { height: calc(100svh + 90vh); } /* mobile: cards stack to 1 column, content runs much taller than one viewport */
+    .cartela-gap { height: 90vh; }
     .cartela-title { font-size: clamp(56px, 16vw, 100px); }
     .chip { font-size: 10.5px; }
     .acto-grid { grid-template-columns: 1fr; }
@@ -724,7 +719,7 @@ import Footer from '../components/Footer.astro';
   }
 
   /* ── shared: header height → CSS var, consumed by the cover reveal (px math) and by
-     every sticky panel's `top` (panel-stack) ── */
+     the fixed cartelas' `top` ── */
   function measureHeaderHeight() {
     const h = document.querySelector('header.nav').offsetHeight;
     document.documentElement.style.setProperty('--header-h', `${h}px`);
@@ -768,65 +763,70 @@ import Footer from '../components/Footer.astro';
     document.documentElement.classList.remove('morph-js');
   }
 
-  /* ── cartela token chips: travel bottom→top through the cartela like credits, each at
-     its own pace, while its displayed value ticks from the previous universe's token to
-     this one's — visualizing the transformation as it happens. The covering motion of the
-     panels themselves is pure CSS (position:sticky); this only drives the chips. ── */
+  /* ── cartelas: fixed backdrops shown/hidden by scroll position, chips ticking within
+     the active one. Surfaces do the actual covering (they're normal-flow, opaque, higher
+     z-index) — this only decides WHICH cartela is exposed and drives its chips. ── */
   function clamp(v) { return Math.max(0, Math.min(1, v)); }
   function lerp(a, b, t) { return a + (b - a) * t; }
   function toHex(r, g, b) {
     return '#' + [r, g, b].map((v) => Math.round(v).toString(16).padStart(2, '0').toUpperCase()).join('');
   }
 
-  /* Progress across the cartela's actual stuck/dwell window — not the whole pin-zone,
-     which also includes the approach and release legs where it isn't at rest yet. */
-  function cartelaDwellProgress(zone, cartela) {
-    const headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 0;
-    const pzRect = zone.getBoundingClientRect();
-    const pzDocTop = pzRect.top + window.scrollY;
-    const pzDocBottom = pzDocTop + pzRect.height;
-    const cartelaH = cartela.getBoundingClientRect().height;
-    const engage = pzDocTop - headerH;
-    const release = Math.max(engage + 1, pzDocBottom - cartelaH - headerH);
-    return clamp((window.scrollY - engage) / (release - engage));
-  }
-
-  const cartelaZones = document.querySelectorAll('.pin-zone--cartela');
+  const cartelaGaps = document.querySelectorAll('.cartela-gap');
+  const cartelaEls  = {};
+  document.querySelectorAll('.cartela[data-theme]').forEach((el) => { cartelaEls[el.dataset.theme] = el; });
   const CHIP_TRAVEL = 480; /* px each chip sweeps, bottom to top, over its own eased journey */
 
-  function updateParallax() {
-    cartelaZones.forEach((zone) => {
-      const cartela = zone.querySelector('.cartela');
-      if (!cartela) return;
-      const p = cartelaDwellProgress(zone, cartela);
-      zone.querySelectorAll('.chip').forEach((chip) => {
-        /* localP shares p's 0→1 start/end with every chip (so all arrive together) but each
-           chip's own exponent bends the curve — front-loaded vs back-loaded — so they visibly
-           move and tick at different rates along the way. */
-        const exponent = parseFloat(chip.dataset.depth) || 1;
-        const localP = Math.pow(p, exponent);
-        chip.style.setProperty('--chip-y', `${(CHIP_TRAVEL / 2 - localP * CHIP_TRAVEL).toFixed(1)}px`);
+  function updateCartelas() {
+    const headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 0;
+    let activeKey = null;
+    let activeProgress = 0;
 
-        const valueEl = chip.querySelector('.chip-value');
-        if (!valueEl) return;
-        if (chip.dataset.fromRgb) {
-          const from = chip.dataset.fromRgb.split(',').map(Number);
-          const to = chip.dataset.toRgb.split(',').map(Number);
-          valueEl.textContent = toHex(
-            lerp(from[0], to[0], localP),
-            lerp(from[1], to[1], localP),
-            lerp(from[2], to[2], localP),
-          );
-        } else if (chip.dataset.fromNum) {
-          const from = parseFloat(chip.dataset.fromNum), to = parseFloat(chip.dataset.toNum);
-          valueEl.textContent = `${Math.round(lerp(from, to, localP))}${chip.dataset.unit || ''}`;
-        }
-      });
+    cartelaGaps.forEach((gap) => {
+      const rect = gap.getBoundingClientRect();
+      const docTop = rect.top + window.scrollY;
+      const docBottom = docTop + rect.height;
+      const refY = window.scrollY + headerH; /* the screen point right below the header, where the cartela lives */
+      if (refY >= docTop && refY < docBottom) {
+        activeKey = gap.dataset.cartela;
+        activeProgress = clamp((refY - docTop) / (docBottom - docTop));
+      }
+    });
+
+    Object.entries(cartelaEls).forEach(([key, el]) => {
+      el.classList.toggle('is-active', key === activeKey);
+    });
+
+    if (!activeKey || reduce) return;
+    const cartela = cartelaEls[activeKey];
+    cartela.querySelectorAll('.chip').forEach((chip) => {
+      /* localP shares activeProgress's 0→1 start/end with every chip (so all arrive
+         together, right as the next surface is about to cover the cartela) but each
+         chip's own exponent bends the curve — front-loaded vs back-loaded — so they
+         visibly move and tick at different rates along the way. */
+      const exponent = parseFloat(chip.dataset.depth) || 1;
+      const localP = Math.pow(activeProgress, exponent);
+      chip.style.setProperty('--chip-y', `${(CHIP_TRAVEL / 2 - localP * CHIP_TRAVEL).toFixed(1)}px`);
+
+      const valueEl = chip.querySelector('.chip-value');
+      if (!valueEl) return;
+      if (chip.dataset.fromRgb) {
+        const from = chip.dataset.fromRgb.split(',').map(Number);
+        const to = chip.dataset.toRgb.split(',').map(Number);
+        valueEl.textContent = toHex(
+          lerp(from[0], to[0], localP),
+          lerp(from[1], to[1], localP),
+          lerp(from[2], to[2], localP),
+        );
+      } else if (chip.dataset.fromNum) {
+        const from = parseFloat(chip.dataset.fromNum), to = parseFloat(chip.dataset.toNum);
+        valueEl.textContent = `${Math.round(lerp(from, to, localP))}${chip.dataset.unit || ''}`;
+      }
     });
   }
-  if (!reduce && cartelaZones.length) {
-    window.addEventListener('scroll', updateParallax, { passive: true });
-    window.addEventListener('resize', updateParallax, { passive: true });
-    updateParallax();
+  if (cartelaGaps.length) {
+    window.addEventListener('scroll', updateCartelas, { passive: true });
+    window.addEventListener('resize', updateCartelas, { passive: true });
+    updateCartelas();
   }
 </script>
