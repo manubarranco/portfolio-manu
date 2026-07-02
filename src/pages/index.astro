@@ -2,175 +2,240 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { getCollection } from 'astro:content';
-
-const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Base>
+  <script is:inline>
+    /* Hide the morphing brand + links until JS positions them (avoids a small-logo flash) */
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('morph-js');
+    }
+  </script>
+
   <Nav />
 
   <main>
-    <!-- ═══ HERO — frame; stays in main theme throughout ═══ -->
-    <section class="hero wrap" aria-labelledby="hero-title">
-      <div class="idx mono">00</div>
-      <div class="hero-col">
-        <p class="status mono"><span class="dot" aria-hidden="true"></span> Available for new challenges</p>
-
-        <h1 id="hero-title" class="hero-h">I turn product complexity into <span id="rot" class="hl rot-phrase">systems that actually get adopted</span></h1>
-
-        <div class="lede">
-          <p class="pos">
-            I define the system and make the decisions that set the direction.
-            Then I lead the execution and adoption to make it real.
-          </p>
-          <p class="through">
-            I'm not discovering AI now. It's the latest in a series of waves I've been part of
-            from the start: the web, UX, design systems, behavioral design.
-          </p>
+    <!-- ═══ COVER — landing masthead; scrolls up under the header as it reveals ═══ -->
+    <section class="cover">
+      <div class="wrap cover-inner">
+        <div class="cover-name" aria-hidden="true">
+          <span>Manu</span>
+          <span class="accent">Barranco</span>
+        </div>
+        <div class="cover-foot">
+          <div class="cover-rule" aria-hidden="true"></div>
+          <p class="cover-tagline">Senior Design Systems Lead · AI Native Product Design</p>
         </div>
       </div>
     </section>
 
-    <!-- ═══ ACTO 0 — who I am / how I work ═══ -->
-    <section class="acto-0" aria-labelledby="acto-label">
-      <div class="wrap acto-grid">
-        <div class="idx mono" aria-hidden="true">·</div>
-        <div class="acto-body">
-          <p id="acto-label" class="eyebrow">Who I am · How I work</p>
+    <!-- ═══ PANEL STACK — floor 1 surfaces scroll normally; floor 0 cartelas are fixed
+         backdrops (see the standalone .cartela elements after </Base>) revealed only
+         through the transparent .cartela-gap spacers between surfaces. No fades, no
+         color lerp: every surface already carries its own theme's tokens. ═══ -->
+    <div class="panel-stack">
 
-          <ol class="beats" role="list">
+      <!-- Floor 1 · intro surface (Hero + Acto 0) -->
+      <div class="surface surface--intro">
+        <section id="hero" class="hero wrap" aria-labelledby="hero-title">
+          <div class="idx mono">00</div>
+          <div class="hero-col">
+            <p class="status mono"><span class="dot" aria-hidden="true"></span> Available for new challenges</p>
 
-            <!-- 1 · Altitud -->
-            <li class="beat" data-reveal>
-              <span class="beat-n mono" aria-hidden="true">01</span>
-              <p class="beat-text beat-text--lg">
-                Most designers hand off. I define the system, make the decisions
-                that set direction, lead the execution, and stay until
-                it's adopted.
+            <h1 id="hero-title" class="hero-h">I turn product complexity into <span id="rot" class="hl rot-phrase">systems that actually get adopted</span></h1>
+
+            <div class="lede">
+              <p class="pos">
+                I define the system and make the decisions that set the direction.
+                Then I lead the execution and adoption to make it real.
               </p>
-            </li>
-
-            <!-- 2 · Cómo pienso -->
-            <li class="beat" data-reveal>
-              <span class="beat-n mono" aria-hidden="true">02</span>
-              <p class="beat-text">
-                I look for the invariants first: what must be true regardless of
-                implementation. Structure before system. System before screens.
+              <p class="through">
+                I'm not discovering AI now. It's the latest in a series of waves I've been part of
+                from the start: the web, UX, design systems, behavioral design.
               </p>
-            </li>
+            </div>
+          </div>
+        </section>
 
-            <!-- 3 · El puente -->
-            <li class="beat" data-reveal>
-              <span class="beat-n mono" aria-hidden="true">03</span>
-              <p class="beat-text">
-                I speak product fluently enough to push back on direction.
-                Engineering fluently enough to know what's real.
-                That's not a soft skill. It's how systems actually get built.
-              </p>
-            </li>
+        <section class="acto-0" aria-labelledby="acto-label">
+          <div class="wrap acto-grid">
+            <div class="idx mono" aria-hidden="true">·</div>
+            <div class="acto-body">
+              <p id="acto-label" class="eyebrow">Who I am · How I work</p>
 
-            <!-- 4 · Autoridad tranquila -->
-            <li class="beat" data-reveal>
-              <span class="beat-n mono" aria-hidden="true">04</span>
-              <p class="beat-text">
-                I've led design at global scale and built an AI-native product
-                from zero. I don't need to be the loudest voice in the room.
-                I need to be the most useful one.
-              </p>
-            </li>
+              <ol class="beats" role="list">
 
-            <!-- 5 · Arquetipo: The Infrastructure Maker -->
-            <li class="beat beat--archetype" id="beat-archetype" data-reveal>
-              <span class="beat-n mono" aria-hidden="true">05</span>
-              <div class="archetype-inner">
-                <p class="beat-text archetype-setup">
-                  I built a product that reads professional trajectories.
-                  I gave it mine. It returned this:
-                </p>
-                <p class="archetype-label" id="archetype-label">
-                  The Infrastructure Maker
-                </p>
-                <p class="archetype-sub">
-                  The one who builds what needs to exist for everything else
-                  to work.
-                </p>
-              </div>
-            </li>
+                <!-- 1 · Altitud -->
+                <li class="beat" data-reveal>
+                  <span class="beat-n mono" aria-hidden="true">01</span>
+                  <p class="beat-text beat-text--lg">
+                    Most designers hand off. I define the system, make the decisions
+                    that set direction, lead the execution, and stay until
+                    it's adopted.
+                  </p>
+                </li>
 
-            <!-- 6 · Olas semilla -->
-            <li class="beat beat--olas" data-reveal>
-              <span class="beat-n mono" aria-hidden="true">06</span>
-              <div class="olas-inner">
-                <p class="beat-text olas-frame">
-                  Five waves. I don't discover categories. I arrive when
-                  they're forming.
-                </p>
-                <ol class="olas-list" role="list" aria-label="Industry waves">
-                  <li>The web</li>
-                  <li>Portals</li>
-                  <li>UX</li>
-                  <li>Design systems</li>
-                  <li class="ola-current">AI</li>
-                </ol>
-              </div>
-            </li>
+                <!-- 2 · Cómo pienso -->
+                <li class="beat" data-reveal>
+                  <span class="beat-n mono" aria-hidden="true">02</span>
+                  <p class="beat-text">
+                    I look for the invariants first: what must be true regardless of
+                    implementation. Structure before system. System before screens.
+                  </p>
+                </li>
 
-          </ol>
-        </div>
+                <!-- 3 · El puente -->
+                <li class="beat" data-reveal>
+                  <span class="beat-n mono" aria-hidden="true">03</span>
+                  <p class="beat-text">
+                    I speak product fluently enough to push back on direction.
+                    Engineering fluently enough to know what's real.
+                    That's not a soft skill. It's how systems actually get built.
+                  </p>
+                </li>
+
+                <!-- 4 · Autoridad tranquila -->
+                <li class="beat" data-reveal>
+                  <span class="beat-n mono" aria-hidden="true">04</span>
+                  <p class="beat-text">
+                    I've led design at global scale and built an AI-native product
+                    from zero. I don't need to be the loudest voice in the room.
+                    I need to be the most useful one.
+                  </p>
+                </li>
+
+                <!-- 5 · Arquetipo: The Infrastructure Maker -->
+                <li class="beat beat--archetype" id="beat-archetype" data-reveal>
+                  <span class="beat-n mono" aria-hidden="true">05</span>
+                  <div class="archetype-inner">
+                    <p class="beat-text archetype-setup">
+                      I built a product that reads professional trajectories.
+                      I gave it mine. It returned this:
+                    </p>
+                    <p class="archetype-label" id="archetype-label">
+                      The Infrastructure Maker
+                    </p>
+                    <p class="archetype-sub">
+                      The one who builds what needs to exist for everything else
+                      to work.
+                    </p>
+                  </div>
+                </li>
+
+                <!-- 6 · Olas semilla -->
+                <li class="beat beat--olas" data-reveal>
+                  <span class="beat-n mono" aria-hidden="true">06</span>
+                  <div class="olas-inner">
+                    <p class="beat-text olas-frame">
+                      Five waves. I don't discover categories. I arrive when
+                      they're forming.
+                    </p>
+                    <ol class="olas-list" role="list" aria-label="Industry waves">
+                      <li>The web</li>
+                      <li>Portals</li>
+                      <li>UX</li>
+                      <li>Design systems</li>
+                      <li class="ola-current">AI</li>
+                    </ol>
+                  </div>
+                </li>
+
+              </ol>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
 
-    <!-- ═══ CONTENT AREA — morphs from main → Ruralvía tokens ═══ -->
-    <div id="content-area">
+      <!-- Reveal window · Ruralvía cartela shows through here (fixed element lives after </Base>) -->
+      <div class="cartela-gap" data-cartela="ruralvia" aria-hidden="true"></div>
 
-      <!-- 200vh scroll trigger zone (invisible, drives the animation) -->
-      <div id="rv-trigger" aria-hidden="true"></div>
-
-      <!-- Ruralvía showcase: first content in the new theme -->
-      <section class="rv-showcase wrap" aria-labelledby="rv-title">
-        <div class="rv-header" data-reveal>
-          <p class="eyebrow">01 · Ruralvía · 2018–2019 · Caja Rural</p>
-          <h2 id="rv-title" class="rv-tagline">An expert<br>in your corner</h2>
-        </div>
-        <div class="rv-cards">
-          <div class="rv-card" data-reveal style="transition-delay:60ms">
-            <p class="rv-card-label eyebrow">Vision</p>
-            <p class="rv-card-body">Before Cleo, Revolut, N26. We built proactive financial advice in 2018 around a single insight: users didn't need features, they needed someone in their corner.</p>
+      <!-- Floor 1 · Ruralvía surface — outer section is full-bleed (paints edge to edge,
+           no gaps at the sides that would let the cartela behind show through); the
+           grid/max-width layout lives on the inner .wrap. -->
+      <section class="surface surface--case" data-theme="ruralvia" data-universe="ruralvia" aria-labelledby="rv-title">
+        <div class="uni-showcase wrap">
+          <div class="uni-header" data-reveal>
+            <p class="eyebrow">01 · Ruralvía · 2018–2019 · Caja Rural</p>
+            <h2 id="rv-title" class="uni-tagline">An expert<br>in your corner</h2>
           </div>
-          <div class="rv-card" data-reveal style="transition-delay:120ms">
-            <p class="rv-card-label eyebrow">System</p>
-            <p class="rv-card-body">Proto-design system with tokens, flows, and a UI library that scaled across 70+ financial entities within Caja Rural Group.</p>
-          </div>
-          <div class="rv-card rv-card--cta" data-reveal style="transition-delay:180ms">
-            <p class="rv-card-label eyebrow">The differentiator</p>
-            <p class="rv-card-body">El Experto — a contextual advisor embedded in the home screen. Not a chatbot. Someone who noticed things before you did.</p>
-            <a href="/work/ruralvia" class="rv-link">Read the case study ↗</a>
+          <div class="uni-cards">
+            <div class="uni-card" data-reveal style="transition-delay:60ms">
+              <p class="uni-card-label eyebrow">Vision</p>
+              <p class="uni-card-body">Before Cleo, Revolut, N26. We built proactive financial advice in 2018 around a single insight: users didn't need features, they needed someone in their corner.</p>
+            </div>
+            <div class="uni-card" data-reveal style="transition-delay:120ms">
+              <p class="uni-card-label eyebrow">System</p>
+              <p class="uni-card-body">Proto-design system with tokens, flows, and a UI library that scaled across 70+ financial entities within Caja Rural Group.</p>
+            </div>
+            <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+              <p class="uni-card-label eyebrow">The differentiator</p>
+              <p class="uni-card-body">El Experto, a contextual advisor embedded in the home screen. Not a chatbot. Someone who noticed things before you did.</p>
+              <a href="/work/ruralvia" class="uni-link">Read the case study ↗</a>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- Work arc -->
-      <section id="work" class="arc wrap" aria-labelledby="arc-title">
-        <div class="idx mono">01</div>
-        <p id="arc-title" class="eyebrow arc-label">The arc · abstraction, scaled</p>
-        <ol class="stages">
-          {work.map((c, i) => (
-            <li class={`stage${c.data.aiNative ? ' is-ai' : ''}`} data-reveal style={`transition-delay:${i * 90}ms`}>
-              <a href={`/work/${c.id}`}>
-                <span class="n mono">{c.data.index}<span class="go" aria-hidden="true">↗</span></span>
-                <h2 class="t">{c.data.title}</h2>
-                <p class="d">{c.data.blurb}</p>
-                <p class="meta mono">{c.data.years} · {c.data.stage}</p>
-              </a>
-            </li>
-          ))}
-        </ol>
+      <!-- Reveal window · Flame cartela -->
+      <div class="cartela-gap" data-cartela="flame" aria-hidden="true"></div>
+
+      <!-- Floor 1 · Flame surface -->
+      <section class="surface surface--case" data-theme="flame" data-universe="flame" aria-labelledby="flame-title">
+        <div class="uni-showcase wrap">
+          <div class="uni-header" data-reveal>
+            <p class="eyebrow">02 · Flame · 2020–2024 · Santander</p>
+            <h2 id="flame-title" class="uni-tagline">A system teams<br>chose to adopt</h2>
+          </div>
+          <div class="uni-cards">
+            <div class="uni-card" data-reveal style="transition-delay:60ms">
+              <p class="uni-card-label eyebrow">Scale</p>
+              <p class="uni-card-body">1,780+ components governed across 350+ designers and 10 countries. In banking, design coherence isn't a UX nicety: it's a trust signal.</p>
+            </div>
+            <div class="uni-card" data-reveal style="transition-delay:120ms">
+              <p class="uni-card-label eyebrow">The model</p>
+              <p class="uni-card-body">A tiered system: a global foundation with local layers. Teams moved fast locally without fragmenting the platform at scale.</p>
+            </div>
+            <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+              <p class="uni-card-label eyebrow">Impact</p>
+              <p class="uni-card-body">~35% faster feature development. I led the system, the team, and the alignment with Santander's Chief Design Officer.</p>
+              <a href="/work/flame" class="uni-link">Read the case study ↗</a>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <!-- About -->
+      <!-- Reveal window · Erneszt cartela -->
+      <div class="cartela-gap" data-cartela="erneszt" aria-hidden="true"></div>
+
+      <!-- Floor 1 · Erneszt surface -->
+      <section class="surface surface--case" data-theme="erneszt" data-universe="erneszt" aria-labelledby="erneszt-title">
+        <div class="uni-showcase wrap">
+          <div class="uni-header" data-reveal>
+            <p class="eyebrow">03 · Erneszt · 2026 · Self-initiated</p>
+            <h2 id="erneszt-title" class="uni-tagline">The thesis,<br>made real</h2>
+          </div>
+          <div class="uni-cards">
+            <div class="uni-card" data-reveal style="transition-delay:60ms">
+              <p class="uni-card-label eyebrow">Thesis</p>
+              <p class="uni-card-body">An AI-native product, built from zero. Conceived, designed, and orchestrated end to end. The arc's climax, made real.</p>
+            </div>
+            <div class="uni-card" data-reveal style="transition-delay:120ms">
+              <p class="uni-card-label eyebrow">Emotional architecture</p>
+              <p class="uni-card-body">Designed the emotional architecture before the product: the "this is me" click of a viral test with the depth of a real coach.</p>
+            </div>
+            <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
+              <p class="uni-card-label eyebrow">The product</p>
+              <p class="uni-card-body">Zoltar, an automaton that reads your trajectory and returns it as something you can finally claim. Try it free with HIREMANU.</p>
+              <a href="/work/erneszt" class="uni-link">Read the case study ↗</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About + closing CTA — normal flow, rests in the main theme (frame color, same as
+           the header) so links keep contrast against the accent, unlike a universe theme. -->
       <section id="about" class="about wrap" aria-labelledby="about-title">
-        <div class="idx mono">02</div>
+        <div class="idx mono">·</div>
         <div class="about-col" data-reveal>
           <p id="about-title" class="eyebrow">About</p>
           <p class="about-body">
@@ -179,171 +244,419 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
             then leading the execution and adoption that make it real. I've led design at scale
             and built an AI-native product from zero.
           </p>
+          <div class="end-cta">
+            <p class="end-line">Available for new challenges.</p>
+            <a href="/contact" class="end-link mono">Get in touch ↗</a>
+          </div>
         </div>
       </section>
-    </div><!-- /content-area -->
+    </div><!-- /panel-stack -->
   </main>
 
   <Footer />
 </Base>
 
-<!-- ═══ SLATE — fixed overlay, appears mid-transition ═══ -->
-<div id="rv-slate" aria-hidden="true">
-  <p class="slate-eyebrow">campo y trigo</p>
-  <h2 class="slate-title">RURALVÍA</h2>
-  <dl class="slate-readout">
-    <div class="readout-row"><dt>--paper</dt><dd id="ro-paper">#F3F1EA</dd></div>
-    <div class="readout-row"><dt>--ink</dt><dd id="ro-ink">#16160F</dd></div>
-    <div class="readout-row"><dt>--radius</dt><dd id="ro-radius">0px</dd></div>
-    <div class="readout-row"><dt>--pad</dt><dd id="ro-pad">56px</dd></div>
-  </dl>
-</div>
+<!-- ═══ CARTELAS — fixed backdrops, one per universe. Always rendered at the same screen
+     position (below the header); JS shows exactly one at a time based on which
+     .cartela-gap the scroll position currently falls within. Hard visibility toggle,
+     no fade — surfaces above (z-index:10 > cartela's 5) are what create the actual
+     cover/reveal as they scroll past. ═══ -->
+<section class="cartela" data-theme="ruralvia" id="cartela-ruralvia" aria-hidden="true">
+  <p class="cartela-eyebrow">campo y trigo</p>
+  <h2 class="cartela-title">RURALVÍA</h2>
+  <ul class="chip-field" aria-hidden="true">
+    <li class="chip" style="--lane-x:4%" data-depth="0.6" data-start-y="0.29" data-end-y="-0.62" data-from-rgb="243,241,234" data-to-rgb="239,234,198">
+      <span class="chip-label">color.core.background.default</span>
+      <span class="chip-value">#EFEAC6</span>
+    </li>
+    <li class="chip" style="--lane-x:19%" data-depth="1.15" data-start-y="0.38" data-end-y="-0.75" data-from-rgb="22,22,15" data-to-rgb="28,58,43">
+      <span class="chip-label">color.core.foreground.default</span>
+      <span class="chip-value">#1C3A2B</span>
+    </li>
+    <li class="chip" style="--lane-x:41%" data-depth="0.75" data-start-y="0.23" data-end-y="-0.85" data-from-rgb="226,52,29" data-to-rgb="46,125,82">
+      <span class="chip-label">color.accent.default</span>
+      <span class="chip-value">#2E7D52</span>
+    </li>
+    <li class="chip" style="--lane-x:63%" data-depth="1.6" data-start-y="0.42" data-end-y="-0.65" data-from-num="8" data-to-num="24" data-unit="px">
+      <span class="chip-label">radius.surface</span>
+      <span class="chip-value">24px</span>
+    </li>
+    <li class="chip" style="--lane-x:77%" data-depth="0.5" data-start-y="0.26" data-end-y="-0.80" data-from-num="2" data-to-num="2" data-unit="px">
+      <span class="chip-label">border-width.strong</span>
+      <span class="chip-value">2px</span>
+    </li>
+    <li class="chip" style="--lane-x:93%" data-depth="2.0" data-start-y="0.33" data-end-y="-0.55" data-from-num="56" data-to-num="64" data-unit="px">
+      <span class="chip-label">space.gutter</span>
+      <span class="chip-value">64px</span>
+    </li>
+  </ul>
+</section>
+
+<section class="cartela" data-theme="flame" id="cartela-flame" aria-hidden="true">
+  <p class="cartela-eyebrow">orden y escala</p>
+  <h2 class="cartela-title">FLAME</h2>
+  <ul class="chip-field" aria-hidden="true">
+    <li class="chip" style="--lane-x:4%" data-depth="0.6" data-start-y="0.29" data-end-y="-0.62" data-from-rgb="239,234,198" data-to-rgb="236,233,223">
+      <span class="chip-label">color.core.background.default</span>
+      <span class="chip-value">#ECE9DF</span>
+    </li>
+    <li class="chip" style="--lane-x:19%" data-depth="1.15" data-start-y="0.38" data-end-y="-0.75" data-from-rgb="28,58,43" data-to-rgb="22,22,15">
+      <span class="chip-label">color.core.foreground.default</span>
+      <span class="chip-value">#16160F</span>
+    </li>
+    <li class="chip" style="--lane-x:41%" data-depth="0.75" data-start-y="0.23" data-end-y="-0.85" data-from-rgb="46,125,82" data-to-rgb="226,52,29">
+      <span class="chip-label">color.accent.default</span>
+      <span class="chip-value">#E2341D</span>
+    </li>
+    <li class="chip" style="--lane-x:63%" data-depth="1.6" data-start-y="0.42" data-end-y="-0.65" data-from-num="24" data-to-num="0" data-unit="px">
+      <span class="chip-label">radius.surface</span>
+      <span class="chip-value">0px</span>
+    </li>
+    <li class="chip" style="--lane-x:77%" data-depth="0.5" data-start-y="0.26" data-end-y="-0.80" data-from-num="2" data-to-num="4" data-unit="px">
+      <span class="chip-label">border-width.strong</span>
+      <span class="chip-value">4px</span>
+    </li>
+    <li class="chip" style="--lane-x:93%" data-depth="2.0" data-start-y="0.33" data-end-y="-0.55" data-from-num="64" data-to-num="64" data-unit="px">
+      <span class="chip-label">space.gutter</span>
+      <span class="chip-value">64px</span>
+    </li>
+  </ul>
+</section>
+
+<section class="cartela" data-theme="erneszt" id="cartela-erneszt" aria-hidden="true">
+  <p class="cartela-eyebrow">el autómata</p>
+  <h2 class="cartela-title">ERNESZT</h2>
+  <ul class="chip-field" aria-hidden="true">
+    <li class="chip" style="--lane-x:4%" data-depth="0.6" data-start-y="0.29" data-end-y="-0.62" data-from-rgb="236,233,223" data-to-rgb="26,18,9">
+      <span class="chip-label">color.core.background.default</span>
+      <span class="chip-value">#1A1209</span>
+    </li>
+    <li class="chip" style="--lane-x:19%" data-depth="1.15" data-start-y="0.38" data-end-y="-0.75" data-from-rgb="22,22,15" data-to-rgb="239,234,198">
+      <span class="chip-label">color.core.foreground.default</span>
+      <span class="chip-value">#EFEAC6</span>
+    </li>
+    <li class="chip" style="--lane-x:41%" data-depth="0.75" data-start-y="0.23" data-end-y="-0.85" data-from-rgb="226,52,29" data-to-rgb="201,162,75">
+      <span class="chip-label">color.accent.default</span>
+      <span class="chip-value">#C9A24B</span>
+    </li>
+    <li class="chip" style="--lane-x:63%" data-depth="1.6" data-start-y="0.42" data-end-y="-0.65" data-from-num="0" data-to-num="4" data-unit="px">
+      <span class="chip-label">radius.surface</span>
+      <span class="chip-value">4px</span>
+    </li>
+    <li class="chip" style="--lane-x:77%" data-depth="0.5" data-start-y="0.26" data-end-y="-0.80" data-from-num="4" data-to-num="2" data-unit="px">
+      <span class="chip-label">border-width.strong</span>
+      <span class="chip-value">2px</span>
+    </li>
+    <li class="chip" style="--lane-x:93%" data-depth="2.0" data-start-y="0.33" data-end-y="-0.55" data-from-num="64" data-to-num="72" data-unit="px">
+      <span class="chip-label">space.gutter</span>
+      <span class="chip-value">72px</span>
+    </li>
+  </ul>
+</section>
 
 <style>
-  .idx { color: var(--faint); padding-top: 26px; }
+  .idx { color: var(--color-core-foreground-subtle); padding-top: 26px; }
+
+  /* ── cover (landing) — fits the viewport; aligned to the same .wrap grid as the header */
+  .cover {
+    height: 100svh; /* JS pins this to the visible viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .cover-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    width: 100%; /* without this, being a flex item with margin:auto sizes it by fit-content
+                    instead of stretching to .wrap's max-width — breaks the centering math
+                    and misaligns it from the header/hero, which aren't in a flex context */
+  }
+  .cover-name {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-family-headline);
+    font-weight: 400;
+    font-size: clamp(72px, min(20vw, 28vh), 240px);
+    line-height: 0.8;
+    letter-spacing: -0.01em;
+    color: var(--color-core-foreground-default);
+    margin-top: auto;
+    margin-bottom: 5vh;
+  }
+  .cover-name .accent { color: var(--color-accent-default); }
+  .cover-foot { padding-bottom: 4vh; }
+  .cover-rule { height: 1.5px; background: var(--color-core-border-strong); width: 100%; margin-bottom: 16px; }
+  .cover-tagline {
+    font-family: var(--font-family-body);
+    font-weight: 500;
+    font-size: clamp(17px, 2.6vw, 39px); /* capped so it never outgrows .wrap's maxw and wraps to 2 lines */
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--color-core-foreground-default);
+  }
+
+  @media (max-width: 720px) {
+    .cover-tagline { line-height: 1.3; }
+  }
+
+  /* Anti-flash: keep the header content tucked below the line until the reveal script runs (motion users only) */
+  :global(html.morph-js) header.nav .nav-inner { transform: translateY(140%); }
 
   /* ── hero */
   .hero {
     display: grid;
     grid-template-columns: 80px 1fr;
-    border-bottom: 1.5px solid var(--line-strong);
+    border-bottom: 1.5px solid var(--color-core-border-strong);
+    scroll-margin-top: 124px; /* clearance for the sticky header when jumping to #hero */
   }
   .hero-col { padding: 26px 0 64px; }
-  .status { color: var(--accent-ink); text-transform: uppercase; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 9px; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-  .hero-h { font-family: var(--display); font-weight: 800; font-size: clamp(34px, 6.8vw, 80px); line-height: 1.0; letter-spacing: -0.02em; max-width: 18ch; margin-top: 44px; }
-  .hl { color: var(--accent); }
+  .status { color: var(--color-accent-strong); text-transform: uppercase; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 9px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent-default); }
+  .hero-h { font-family: var(--font-family-display); font-weight: 800; font-size: clamp(34px, 6.8vw, 80px); line-height: 1.0; letter-spacing: -0.02em; max-width: 18ch; margin-top: 44px; }
+  .hl { color: var(--color-accent-default); }
   .rot-phrase { display: block; text-wrap: balance; min-height: 2em; transition: opacity 0.22s ease; }
   .rot-phrase.is-out { opacity: 0; }
   .lede { margin-top: 44px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; max-width: 920px; }
   .pos { font-weight: 500; font-size: 23px; line-height: 1.34; letter-spacing: -0.015em; }
-  .through { font-size: 15px; line-height: 1.65; color: var(--muted); }
+  .through { font-size: 15px; line-height: 1.65; color: var(--color-core-foreground-muted); }
 
-  /* ── transition trigger zone */
-  #rv-trigger {
-    height: 200vh;
-    pointer-events: none;
+  /* ── panel stack: surfaces scroll normally, covering the fixed cartelas behind them ── */
+  .panel-stack { position: relative; }
+
+  .surface {
+    position: relative;
+    z-index: 10; /* above the fixed cartelas (5), below the header (100) */
+    background: var(--color-core-background-default);
+    color: var(--color-core-foreground-default);
+    font-family: var(--font-family-body);
+    min-height: calc(100vh - var(--header-h, 0px)); /* tall enough to fully cover the fixed cartela while it passes through */
   }
 
-  /* ── slate */
-  :global(#rv-slate) {
+  /* Case-study surfaces: the outer .surface is full-bleed (its background must reach both
+     edges, or the fixed cartela behind shows through at the sides) — the .wrap inside it
+     carries the max-width/gutter. Centering the wrap vertically here replaces the old
+     align-content trick from when .surface and .uni-showcase were the same grid element. */
+  .surface--case {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Empty spacer between surfaces — has no background of its own, so the fixed cartela
+     behind (shown by JS while scroll is within this element's range) shows through. This
+     is the ONLY place a cartela is ever visible: surfaces are opaque and cover it the
+     rest of the time. */
+  .cartela-gap { height: 130vh; }
+
+  /* ── cartela (floor 0 title card): fixed backdrop, always same screen position, never
+     scrolls. JS toggles .is-active (hard cut, no fade) based on which .cartela-gap the
+     scroll position is currently inside. ── */
+  .cartela {
     position: fixed;
+    top: var(--header-h, 0px);
     left: 0;
     right: 0;
     bottom: 0;
-    top: 0; /* overridden by JS to match nav height */
-    z-index: 50;
+    z-index: 5;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    background: rgba(28, 58, 43, 0.97);
-    opacity: 0;
+    gap: 18px;
+    overflow: hidden;
+    background: var(--cartela-bg);
+    visibility: hidden;
     pointer-events: none;
-    will-change: opacity;
   }
-  :global(.slate-eyebrow) {
-    font-family: var(--mono);
+  .cartela.is-active { visibility: visible; }
+
+  /* Cartelas invert their universe: bold saturated backdrop + light text (the old flood-slate
+     palette). data-theme still governs the display FONT per universe; only the colors flip. */
+  .cartela[data-theme="ruralvia"] {
+    --cartela-bg: #00804E;
+    --cartela-title: #ECD643;
+  }
+  /* photo sits on the flat --cartela-bg as its own layer (not baked into .cartela's
+     background) so it can carry its own blend mode + opacity, matching the Figma treatment
+     (hard-light, 75%) instead of a flat scrim. */
+  .cartela[data-theme="ruralvia"]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('/cartelas/ruralvia-wheat.jpg');
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: hard-light;
+    opacity: 0.75;
+  }
+  .cartela[data-theme="flame"] {
+    --cartela-bg: #F61000;
+    --cartela-title: #FFFFFF;
+  }
+  .cartela[data-theme="flame"]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('/cartelas/flame-fire.jpg');
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: hard-light;
+  }
+  .cartela[data-theme="erneszt"]  { --cartela-bg: #1A1209; --cartela-title: #C9A24B; }
+
+  .cartela-eyebrow {
+    position: relative;
+    z-index: 1; /* the chip field is position:absolute, which paints above static-flow
+                   content by default — lift the title/eyebrow above it so traveling
+                   chips read as passing behind, not obscuring it */
+    font-family: var(--font-family-mono);
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: rgba(239, 234, 198, 0.6);
+    color: rgba(255, 255, 255, 0.55);
   }
-  :global(.slate-title) {
-    font-family: var(--headline);
-    font-weight: 400;
+  .cartela-title {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-family-display);
+    font-weight: 700;
     font-size: clamp(80px, 14vw, 180px);
     line-height: 0.88;
     letter-spacing: -0.01em;
-    color: #EFEAC6;
     text-align: center;
+    color: var(--cartela-title);
   }
-  :global(.slate-readout) {
+  .cartela[data-theme="erneszt"] .cartela-title { font-style: italic; }
+  /* ratio locked to the Figma reference (24px offset / 4px outline at 241px font-size),
+     expressed in em so it scales with .cartela-title's clamp() instead of going flat/thin
+     on smaller viewports. Outline is built from 8 solid text-shadow copies instead of
+     -webkit-text-stroke: the stroke hack draws along each glyph's outline path, and on a
+     bold display face that self-intersects (tight counters, crossbars) it shows through
+     as visible seams instead of a clean flattened silhouette. */
+  .cartela[data-theme="ruralvia"] .cartela-title {
+    text-shadow:
+       0.017em     0px    0 #0E5400,
+      -0.017em     0px    0 #0E5400,
+       0px     0.017em    0 #0E5400,
+       0px    -0.017em    0 #0E5400,
+       0.017em  0.017em   0 #0E5400,
+      -0.017em  0.017em   0 #0E5400,
+       0.017em -0.017em   0 #0E5400,
+      -0.017em -0.017em   0 #0E5400,
+      -0.1em    0.1em     0 #0E5400;
+  }
+  /* subtle lifted shadow, per Figma (25px up / 206px reference font-size ≈ 0.121em) */
+  .cartela[data-theme="flame"] .cartela-title {
+    text-shadow: 0 -0.121em 0 rgba(0, 0, 0, 0.25);
+  }
+
+  /* ── token chips: travel bottom→top through the cartela at different speeds and X lanes,
+     like credits scrolling — each one's displayed value ticks from the previous universe's
+     token to this one's as it climbs, so the transformation reads as it happens. ── */
+  .chip-field { position: absolute; inset: 0; pointer-events: none; list-style: none; overflow: hidden; }
+  .chip {
+    position: absolute;
+    top: 50%;
+    left: var(--lane-x);
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    font-family: var(--mono);
+    gap: 3px;
+    font-family: var(--font-family-mono);
     font-size: 12px;
-    text-align: left;
-    list-style: none;
+    transform: translateY(calc(-50% + var(--chip-y, 0px)));
   }
-  :global(.readout-row) {
-    display: flex;
-    gap: 16px;
-    align-items: baseline;
+  /* text-shadow (not just opacity) is what keeps these readable now that ruralvia/flame sit
+     on photos instead of a flat color — a tight dark halo adapts to whatever's behind the
+     chip at that moment (bright wheat highlights included), unlike a fixed-opacity color
+     alone. Harmless on erneszt's flat near-black backdrop, where it's barely visible. */
+  .chip-label {
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.9), 0 0 6px rgba(0, 0, 0, 0.75), 0 1px 2px rgba(0, 0, 0, 0.9);
+    white-space: nowrap;
   }
-  :global(.readout-row dt) { color: rgba(239, 234, 198, 0.35); min-width: 80px; }
-  :global(.readout-row dd) { color: rgba(239, 234, 198, 0.75); font-weight: 700; min-width: 80px; font-variant-numeric: tabular-nums; }
+  .chip-value {
+    color: rgba(255, 255, 255, 0.98);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.9), 0 0 6px rgba(0, 0, 0, 0.75), 0 1px 2px rgba(0, 0, 0, 0.9);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
 
-  /* ── Ruralvía showcase */
-  .rv-showcase {
-    padding: 100px 0 72px;
+  @media (prefers-reduced-motion: reduce) {
+    .chip { --chip-y: 0px; }
+  }
+
+  /* ── universe showcase (generic; auto-themes from its own data-theme scope) */
+  .uni-showcase {
+    padding: 100px var(--space-gutter) 72px; /* must restate --space-gutter: this scoped rule outranks the global .wrap padding,
+                                        so leaving it as "0" silently dropped the outer gutter (56px) the header
+                                        and hero both use, under-indenting these sections by that amount */
     display: grid;
     grid-template-columns: 80px 1fr;
   }
-  .rv-header { grid-column: 2; margin-bottom: 56px; }
-  .rv-tagline {
-    font-family: var(--headline);
+  .uni-header { grid-column: 2; margin-bottom: 56px; }
+  .uni-tagline {
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: clamp(64px, 10vw, 128px);
     line-height: 0.88;
     letter-spacing: -0.01em;
-    color: var(--ink);
+    color: var(--color-core-foreground-default);
     margin-top: 20px;
   }
-  .rv-cards {
+  .uni-cards {
     grid-column: 2;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
   }
-  .rv-card {
-    background: var(--paper-2);
-    border-radius: var(--radius);
+  .uni-card {
+    background: var(--color-core-background-subtle);
+    border: var(--border-width-strong) solid var(--color-core-border-default);
+    border-radius: var(--radius-surface);
     padding: 32px;
     display: flex;
     flex-direction: column;
     gap: 12px;
   }
-  .rv-card-label { margin-bottom: 4px; }
-  .rv-card-body { font-size: 15px; line-height: 1.6; color: var(--muted); flex: 1; }
-  .rv-link {
+  .uni-card-label { margin-bottom: 4px; }
+  .uni-card-body { font-size: 15px; line-height: 1.6; color: var(--color-core-foreground-muted); flex: 1; }
+  .uni-link {
     display: inline-block;
     margin-top: 20px;
-    font-family: var(--mono);
+    font-family: var(--font-family-mono);
     font-size: 12.5px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: var(--accent);
+    color: var(--color-accent-default);
     transition: color 0.12s, background 0.12s, box-shadow 0.12s;
   }
-  .rv-link:hover { background: var(--accent); color: var(--paper); box-shadow: 0 0 0 0.1em var(--accent); }
+  .uni-link:hover { background: var(--color-accent-default); color: var(--color-core-background-default); box-shadow: 0 0 0 0.1em var(--color-accent-default); }
 
-  /* ── arc */
-  .arc { display: grid; grid-template-columns: 80px 1fr; padding-top: 0; border-top: 1.5px solid var(--line-strong); margin-top: 72px; }
-  .arc-label { grid-column: 2; padding: 26px 0 20px; }
-  .stages { grid-column: 2; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); }
-  .stage + .stage { border-left: 1.5px solid var(--line); }
-  .stage a { display: block; padding: 6px 28px 40px; height: 100%; border-radius: var(--radius); transition: background 0.15s; }
-  .stage:first-child a { padding-left: 0; border-radius: 0; }
-  .stage a:hover { background: var(--paper-2); }
-  .stage .n { color: var(--accent); font-weight: 700; font-size: 13px; display: flex; justify-content: space-between; }
-  .stage .go { color: var(--faint); transition: transform 0.15s, color 0.15s; }
-  .stage a:hover .go { transform: translate(3px, -3px); color: var(--accent); }
-  .stage .t { font-family: var(--headline); font-weight: 400; font-size: 38px; line-height: 0.95; letter-spacing: -0.02em; margin: 12px 0 8px; }
-  .stage .d { font-size: 14px; line-height: 1.55; color: var(--muted); }
-  .stage .meta { color: var(--faint); margin-top: 16px; text-transform: uppercase; font-size: 11px; }
-  .stage.is-ai .t::after { content: ' ▮'; color: var(--accent); font-size: 0.6em; vertical-align: 0.18em; }
-
-  /* ── about */
-  .about { display: grid; grid-template-columns: 80px 1fr; border-top: 1.5px solid var(--line); margin-top: 64px; }
+  /* ── about + closing cta */
+  .about { display: grid; grid-template-columns: 80px 1fr; border-top: 1.5px solid var(--color-core-border-default); margin-top: 64px; padding-bottom: 96px; }
   .about-col { padding: 26px 0 0; max-width: 680px; }
   .about-col .eyebrow { margin-bottom: 18px; }
   .about-body { font-size: 19px; line-height: 1.55; letter-spacing: -0.01em; }
+  .end-cta { margin-top: 40px; display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+  .end-line { font-size: 19px; letter-spacing: -0.01em; color: var(--color-core-foreground-default); }
+  .end-link {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-accent-default);
+    border-bottom: 1.5px solid var(--color-accent-default);
+    padding-bottom: 2px;
+    transition: color 0.12s, background 0.12s, box-shadow 0.12s;
+  }
+  /* Same fill treatment as every other accent link on the site (nav, footer, case-study links) */
+  .end-link:hover { background: var(--color-accent-default); color: var(--color-core-background-default); box-shadow: 0 0 0 0.1em var(--color-accent-default); }
 
   /* ── acto 0 */
-  .acto-0 { border-top: 1.5px solid var(--line-strong); }
+  .acto-0 { border-top: 1.5px solid var(--color-core-border-strong); }
   .acto-grid {
     display: grid;
     grid-template-columns: 80px 1fr;
@@ -351,16 +664,16 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
   .acto-body { padding: 26px 0 0; }
   .acto-body > .eyebrow { padding-bottom: 36px; display: block; }
 
-  .beats { list-style: none; border-top: 1.5px solid var(--line); }
+  .beats { list-style: none; border-top: 1.5px solid var(--color-core-border-default); }
   .beat {
     display: grid;
     grid-template-columns: 48px 1fr;
     gap: 0 24px;
     padding: 36px 0;
-    border-bottom: 1.5px solid var(--line);
+    border-bottom: 1.5px solid var(--color-core-border-default);
     align-items: start;
   }
-  .beat-n { color: var(--faint); padding-top: 3px; }
+  .beat-n { color: var(--color-core-foreground-subtle); padding-top: 3px; }
   .beat-text { font-size: 17px; line-height: 1.65; letter-spacing: -0.01em; }
   .beat-text--lg {
     font-size: 21px;
@@ -372,56 +685,55 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
   /* beat 5 — archetype */
   .beat--archetype { align-items: start; }
   .archetype-inner { display: flex; flex-direction: column; gap: 0; }
-  .archetype-setup { color: var(--muted); margin-bottom: 20px; }
+  .archetype-setup { color: var(--color-core-foreground-muted); margin-bottom: 20px; }
   .archetype-label {
-    font-family: var(--display);
+    font-family: var(--font-family-display);
     font-weight: 800;
     font-size: clamp(28px, 4.5vw, 52px);
     line-height: 1.0;
     letter-spacing: -0.025em;
-    color: var(--ink);
+    color: var(--color-core-foreground-default);
     transition: color 0.45s ease;
   }
   .archetype-label.is-gold { color: #A87C2A; }
   .archetype-sub {
     font-size: 14px;
     line-height: 1.55;
-    color: var(--faint);
+    color: var(--color-core-foreground-subtle);
     margin-top: 12px;
     max-width: 46ch;
   }
 
   /* beat 6 — olas */
-  .olas-frame { color: var(--muted); margin-bottom: 20px; }
+  .olas-frame { color: var(--color-core-foreground-muted); margin-bottom: 20px; }
   .olas-list {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 4px 0;
-    font-family: var(--mono);
+    font-family: var(--font-family-mono);
     font-size: 12.5px;
     letter-spacing: 0.02em;
   }
   .olas-list li { display: flex; align-items: center; }
   .olas-list li:not(:last-child)::after {
     content: '→';
-    color: var(--accent);
+    color: var(--color-accent-default);
     margin: 0 10px;
   }
-  .ola-current { color: var(--accent); font-weight: 700; }
+  .ola-current { color: var(--color-accent-default); font-weight: 700; }
 
   @media (max-width: 720px) {
-    .hero, .arc, .about { grid-template-columns: 1fr; }
+    .hero, .about { grid-template-columns: 1fr; }
     .idx { display: none; }
-    .arc-label, .stages, .arc { grid-column: 1; }
     .lede { grid-template-columns: 1fr; gap: 24px; }
-    .stages { grid-template-columns: 1fr; }
-    .stage + .stage { border-left: 0; border-top: 1.5px solid var(--line); }
-    .stage a, .stage:first-child a { padding: 24px 0; }
-    .rv-showcase { grid-template-columns: 1fr; }
-    .rv-header, .rv-cards { grid-column: 1; }
-    .rv-cards { grid-template-columns: 1fr; }
+    .uni-showcase { grid-template-columns: 1fr; }
+    .uni-header, .uni-cards { grid-column: 1; }
+    .uni-cards { grid-template-columns: 1fr; }
+    .cartela-gap { height: 90vh; }
+    .cartela-title { font-size: clamp(56px, 16vw, 100px); }
+    .chip { font-size: 10.5px; }
     .acto-grid { grid-template-columns: 1fr; }
     .acto-grid > .idx { display: none; }
     .beat { grid-template-columns: 36px 1fr; gap: 0 16px; }
@@ -482,9 +794,7 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
             archetypeLabel.style.fontFamily = "'Playfair Display', Georgia, serif";
             archetypeLabel.style.fontStyle  = 'italic';
             archetypeLabel.classList.add('is-gold');
-            setTimeout(() => {
-              archetypeLabel.classList.remove('is-gold');
-            }, 1300);
+            setTimeout(() => { archetypeLabel.classList.remove('is-gold'); }, 1300);
             setTimeout(() => {
               archetypeLabel.style.fontFamily = '';
               archetypeLabel.style.fontStyle  = '';
@@ -498,105 +808,147 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     archetypeObs.observe(archetypeBeat);
   }
 
-  /* ── scroll-linked transition: main → Ruralvía ─────────────────────── */
-  const trigger   = document.getElementById('rv-trigger');
-  const contentEl = document.getElementById('content-area');
-  const slate     = document.getElementById('rv-slate');
-  const navEl     = document.querySelector('header.nav');
+  /* ── shared: header height → CSS var, consumed by the cover reveal (px math) and by
+     the fixed cartelas' `top` ── */
+  function measureHeaderHeight() {
+    const h = document.querySelector('header.nav').offsetHeight;
+    document.documentElement.style.setProperty('--header-h', `${h}px`);
+    return h;
+  }
+  measureHeaderHeight();
+  window.addEventListener('resize', measureHeaderHeight, { passive: true });
 
-  /* Position slate flush below nav so the frame stays visible */
-  if (slate && navEl) slate.style.top = `${navEl.offsetHeight}px`;
+  /* ── cover → header reveal: the cover scrolls up under the fixed header bar;
+     the header content rises from the line as the name disappears (same proportion) ── */
+  const navInner  = document.querySelector('header.nav .nav-inner');
+  const coverEl   = document.querySelector('.cover');
+  const coverName = document.querySelector('.cover-name');
+  const coverFoot = document.querySelector('.cover-foot');
 
-  const roPaper  = document.getElementById('ro-paper');
-  const roInk    = document.getElementById('ro-ink');
-  const roRadius = document.getElementById('ro-radius');
-  const roPad    = document.getElementById('ro-pad');
+  if (navInner && coverEl && coverName && coverFoot && !reduce) {
+    let barH = 0, revealStart = 0, revealSpan = 1;
+    function measureReveal() {
+      barH = measureHeaderHeight();
+      coverEl.style.height = (window.innerHeight - barH) + 'px'; /* fill the viewport minus the sticky header so name + role always fit */
+      const y = window.scrollY;
+      const nameTop = coverName.getBoundingClientRect().top + y;
+      const nameBot = coverName.getBoundingClientRect().bottom + y;
+      const leadIn  = (nameBot - nameTop) * 0.55; /* start before the name visually touches the line, so the header isn't slow to appear */
+      revealStart = (nameTop - barH) - leadIn;
+      revealSpan  = Math.max(1, (nameBot - barH) - revealStart); /* completes once "Barranco" has passed the line — well before the #hero anchor lands, so clicking the brand leaves no residual header motion */
+    }
+    function reveal() {
+      let p = (window.scrollY - revealStart) / revealSpan;
+      p = Math.max(0, Math.min(1, p));
+      /* header content tucked below the line at p=0, risen into place in the same proportion the cover disappears */
+      navInner.style.transform = `translateY(${((1 - p) * barH).toFixed(1)}px)`;
+    }
+    measureReveal();
+    reveal();
+    document.documentElement.classList.remove('morph-js');
+    window.addEventListener('scroll', reveal, { passive: true });
+    window.addEventListener('resize', () => { measureReveal(); reveal(); }, { passive: true });
+  } else if (reduce) {
+    if (coverEl) coverEl.style.display = 'none';
+    document.documentElement.classList.remove('morph-js');
+  }
 
-  /* Token endpoints — RGB arrays */
-  const MAIN = {
-    paper:      [243, 241, 234],
-    paper2:     [236, 233, 223],
-    ink:        [22,  22,  15 ],
-    accent:     [226, 52,  29 ],
-    accentInk:  [168, 35,  9  ],
-    muted:      [79,  78,  68 ],
-    faint:      [120, 118, 106],
-    lineRgb:    [20,  20,  12 ],
-    lineStrong: [22,  22,  15 ],
-    radius: 0, pad: 56,
-  };
-  const RV = {
-    paper:      [239, 234, 198],
-    paper2:     [232, 226, 176],
-    ink:        [28,  58,  43 ],
-    accent:     [46,  125, 82 ],
-    accentInk:  [30,  92,  58 ],
-    muted:      [58,  84,  69 ],
-    faint:      [92,  122, 104],
-    lineRgb:    [28,  58,  43 ],
-    lineStrong: [28,  58,  43 ],
-    radius: 18, pad: 64,
-  };
-
+  /* ── cartelas: fixed backdrops shown/hidden by scroll position, chips ticking within
+     the active one. Surfaces do the actual covering (they're normal-flow, opaque, higher
+     z-index) — this only decides WHICH cartela is exposed and drives its chips. ── */
+  function clamp(v) { return Math.max(0, Math.min(1, v)); }
   function lerp(a, b, t) { return a + (b - a) * t; }
-  function lerpRgb(a, b, t) {
-    return `rgb(${Math.round(lerp(a[0],b[0],t))},${Math.round(lerp(a[1],b[1],t))},${Math.round(lerp(a[2],b[2],t))})`;
-  }
   function toHex(r, g, b) {
-    return '#' + [r,g,b].map((v) => Math.round(v).toString(16).padStart(2,'0')).join('');
-  }
-  function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
-
-  /* Bell-curve: visible progress 0.25 → 0.75, peak at 0.5 */
-  function slateAlpha(p) {
-    if (p <= 0.25 || p >= 0.75) return 0;
-    return Math.sin(((p - 0.25) / 0.5) * Math.PI);
+    return '#' + [r, g, b].map((v) => Math.round(v).toString(16).padStart(2, '0').toUpperCase()).join('');
   }
 
-  function applyTokens(t) {
-    if (!contentEl) return;
-    const el = contentEl;
-    el.style.setProperty('--paper',      lerpRgb(MAIN.paper,      RV.paper,      t));
-    el.style.setProperty('--paper-2',    lerpRgb(MAIN.paper2,     RV.paper2,     t));
-    el.style.setProperty('--ink',        lerpRgb(MAIN.ink,        RV.ink,        t));
-    el.style.setProperty('--accent',     lerpRgb(MAIN.accent,     RV.accent,     t));
-    el.style.setProperty('--accent-ink', lerpRgb(MAIN.accentInk,  RV.accentInk,  t));
-    el.style.setProperty('--muted',      lerpRgb(MAIN.muted,      RV.muted,      t));
-    el.style.setProperty('--faint',      lerpRgb(MAIN.faint,      RV.faint,      t));
-    el.style.setProperty('--line',
-      `rgba(${MAIN.lineRgb.map((v,i) => Math.round(lerp(v, RV.lineRgb[i], t))).join(',')},0.14)`);
-    el.style.setProperty('--line-strong', lerpRgb(MAIN.lineStrong, RV.lineStrong, t));
-    el.style.setProperty('--radius',  `${Math.round(lerp(MAIN.radius, RV.radius, t))}px`);
-    el.style.setProperty('--pad',     `${Math.round(lerp(MAIN.pad,    RV.pad,    t))}px`);
+  const cartelaGaps = document.querySelectorAll('.cartela-gap');
+  const cartelaEls  = {};
+  document.querySelectorAll('.cartela[data-theme]').forEach((el) => { cartelaEls[el.dataset.theme] = el; });
 
-    /* Tick the readout */
-    const pr = MAIN.paper.map((v,i) => Math.round(lerp(v, RV.paper[i], t)));
-    const ir = MAIN.ink.map((v,i)   => Math.round(lerp(v, RV.ink[i],   t)));
-    if (roPaper)  roPaper.textContent  = toHex(...pr);
-    if (roInk)    roInk.textContent    = toHex(...ir);
-    if (roRadius) roRadius.textContent = `${Math.round(lerp(MAIN.radius, RV.radius, t))}px`;
-    if (roPad)    roPad.textContent    = `${Math.round(lerp(MAIN.pad,    RV.pad,    t))}px`;
+  function updateCartelas() {
+    const headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 0;
+    const vh = window.innerHeight;
+    let activeKey = null;
+    let activeGap = null;
+
+    cartelaGaps.forEach((gap) => {
+      const rect = gap.getBoundingClientRect();
+      /* Active for the WHOLE time this gap overlaps the visible area below the header —
+         from the instant its top edge (the departing surface's bottom edge) enters from
+         the viewport bottom, through the full-screen dwell, until the next surface has
+         covered it past the header line. The fixed cartela behind then shows through the
+         transparent gap and is progressively revealed by the departing surface's rising
+         edge — no sudden pop. Later gaps win the tie so an incoming reveal takes over. */
+      if (rect.top < vh && rect.bottom > headerH) {
+        activeKey = gap.dataset.cartela;
+        activeGap = gap;
+      }
+    });
+
+    Object.entries(cartelaEls).forEach(([key, el]) => {
+      el.classList.toggle('is-active', key === activeKey);
+    });
+
+    if (!activeKey || reduce || !activeGap) return;
+
+    const rect    = activeGap.getBoundingClientRect();
+    const docTop  = rect.top + window.scrollY;
+    const docBottom = docTop + rect.height;
+    /* entryP: 0 when the gap's top is at the viewport bottom (reveal just starting), 1 once
+       it reaches the header line (departing surface fully gone, cartela fully exposed). While
+       entryP < 1, anything above the departing surface's still-covering edge is invisible —
+       chips must not rise past that line early, or they skip straight from "hidden behind the
+       departing surface" to "scrolled off past the top" without ever passing through view. */
+    const entryP  = clamp((vh - rect.top) / (vh - headerH));
+    /* pTotal: 0→1 across the WHOLE active window (reveal + the dwell after it, until the next
+       surface starts covering) — this is what each chip's own journey and value-tick run on. */
+    const pTotal  = clamp((window.scrollY - (docTop - vh)) / ((docBottom - headerH) - (docTop - vh)));
+    /* How far above/below the cartela's center the departing surface's bottom edge (the
+       reveal boundary) currently sits, in the same offset units as --chip-y. */
+    const boundaryOffset = (vh - headerH) * (0.5 - entryP);
+
+    const cartela = cartelaEls[activeKey];
+    cartela.querySelectorAll('.chip').forEach((chip) => {
+      /* Each chip's own exponent bends its timing curve — front-loaded vs back-loaded — and
+         its own start/end range means no two chips share a position or a speed: scattered and
+         staggered, like Matrix rain, rather than a synchronized wave that lines up and
+         collides. localP runs on pTotal (the full window), not just the reveal, so there's
+         room for the chip to keep climbing and exit during the dwell after it's fully shown. */
+      const exponent = parseFloat(chip.dataset.depth) || 1;
+      const localP = Math.pow(pTotal, exponent);
+      /* start/end are fractions of viewport height, not fixed px, so the exit point always
+         clears the cartela's visible half regardless of screen size — chips fully leave
+         through the top rather than parking just inside the edge. */
+      const startY = (parseFloat(chip.dataset.startY) || 0.3) * vh;
+      const endY   = (parseFloat(chip.dataset.endY) || -0.6) * vh;
+      const rawOffset = lerp(startY, endY, localP);
+      /* While the departing surface is still covering part of the screen, hold the chip at
+         the reveal boundary if its own curve would otherwise put it above it (hidden); once
+         entryP reaches 1 the clamp lifts entirely and the chip is free to climb the rest of
+         the way out. */
+      const chipY = entryP < 1 ? Math.max(rawOffset, boundaryOffset) : rawOffset;
+      chip.style.setProperty('--chip-y', `${chipY.toFixed(1)}px`);
+
+      const valueEl = chip.querySelector('.chip-value');
+      if (!valueEl) return;
+      if (chip.dataset.fromRgb) {
+        const from = chip.dataset.fromRgb.split(',').map(Number);
+        const to = chip.dataset.toRgb.split(',').map(Number);
+        valueEl.textContent = toHex(
+          lerp(from[0], to[0], localP),
+          lerp(from[1], to[1], localP),
+          lerp(from[2], to[2], localP),
+        );
+      } else if (chip.dataset.fromNum) {
+        const from = parseFloat(chip.dataset.fromNum), to = parseFloat(chip.dataset.toNum);
+        valueEl.textContent = `${Math.round(lerp(from, to, localP))}${chip.dataset.unit || ''}`;
+      }
+    });
   }
-
-  function updateTransition() {
-    if (!trigger || !slate) return;
-    const rect = trigger.getBoundingClientRect();
-    const vh   = window.innerHeight;
-    let p = (vh - rect.top) / (rect.height + vh);
-    p = Math.max(0, Math.min(1, p));
-    applyTokens(easeInOut(p));
-    slate.style.opacity = String(slateAlpha(p));
-  }
-
-  if (!reduce && trigger) {
-    window.addEventListener('scroll', updateTransition, { passive: true });
-    updateTransition();
-  } else if (reduce && trigger && contentEl) {
-    /* Reduced motion: snap Ruralvía theme on entry */
-    new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) contentEl.setAttribute('data-theme', 'ruralvia');
-      });
-    }).observe(trigger);
+  if (cartelaGaps.length) {
+    window.addEventListener('scroll', updateCartelas, { passive: true });
+    window.addEventListener('resize', updateCartelas, { passive: true });
+    updateCartelas();
   }
 </script>

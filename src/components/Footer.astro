@@ -18,25 +18,25 @@ const year = new Date().getFullYear();
 
 <style>
   .foot {
-    border-top: 1.5px solid var(--line-strong);
+    border-top: 1.5px solid var(--color-core-border-strong);
     margin-top: 120px;
     padding: 64px 0 48px;
   }
   .foot-inner { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; }
   .cta .eyebrow { margin-bottom: 16px; }
   .big {
-    font-family: var(--display);
+    font-family: var(--font-family-display);
     font-weight: 800;
     font-size: clamp(28px, 5vw, 52px);
     letter-spacing: -0.02em;
     line-height: 1.02;
     display: inline-block;
   }
-  .big:hover { color: var(--accent); }
-  .meta { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; font-family: var(--mono); font-size: 13px; }
+  .big:hover { color: var(--color-accent-default); }
+  .meta { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; font-family: var(--font-family-mono); font-size: 13px; }
   .meta a { transition: color 0.12s, background 0.12s, box-shadow 0.12s; }
-  .meta a:hover { background: var(--accent); color: var(--paper); box-shadow: 0 0 0 0.12em var(--accent); }
-  .meta .faint { color: var(--faint); }
+  .meta a:hover { background: var(--color-accent-default); color: var(--color-core-background-default); box-shadow: 0 0 0 0.12em var(--color-accent-default); }
+  .meta .faint { color: var(--color-core-foreground-subtle); }
   @media (max-width: 640px) {
     .meta { align-items: flex-start; }
   }
