@@ -474,8 +474,38 @@ import Footer from '../components/Footer.astro';
 
   /* Cartelas invert their universe: bold saturated backdrop + light text (the old flood-slate
      palette). data-theme still governs the display FONT per universe; only the colors flip. */
-  .cartela[data-theme="ruralvia"] { --cartela-bg: #1C3A2B; --cartela-title: #EFEAC6; }
-  .cartela[data-theme="flame"]    { --cartela-bg: #E2341D; --cartela-title: #F3F1EA; }
+  .cartela[data-theme="ruralvia"] {
+    --cartela-bg: #00804E;
+    --cartela-title: #ECD643;
+  }
+  /* photo sits on the flat --cartela-bg as its own layer (not baked into .cartela's
+     background) so it can carry its own blend mode + opacity, matching the Figma treatment
+     (hard-light, 75%) instead of a flat scrim. */
+  .cartela[data-theme="ruralvia"]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('/cartelas/ruralvia-wheat.jpg');
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: hard-light;
+    opacity: 0.75;
+  }
+  .cartela[data-theme="flame"] {
+    --cartela-bg: #F61000;
+    --cartela-title: #FFFFFF;
+  }
+  .cartela[data-theme="flame"]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('/cartelas/flame-fire.jpg');
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: hard-light;
+  }
   .cartela[data-theme="erneszt"]  { --cartela-bg: #1A1209; --cartela-title: #C9A24B; }
 
   .cartela-eyebrow {
@@ -501,6 +531,28 @@ import Footer from '../components/Footer.astro';
     color: var(--cartela-title);
   }
   .cartela[data-theme="erneszt"] .cartela-title { font-style: italic; }
+  /* ratio locked to the Figma reference (24px offset / 4px outline at 241px font-size),
+     expressed in em so it scales with .cartela-title's clamp() instead of going flat/thin
+     on smaller viewports. Outline is built from 8 solid text-shadow copies instead of
+     -webkit-text-stroke: the stroke hack draws along each glyph's outline path, and on a
+     bold display face that self-intersects (tight counters, crossbars) it shows through
+     as visible seams instead of a clean flattened silhouette. */
+  .cartela[data-theme="ruralvia"] .cartela-title {
+    text-shadow:
+       0.017em     0px    0 #0E5400,
+      -0.017em     0px    0 #0E5400,
+       0px     0.017em    0 #0E5400,
+       0px    -0.017em    0 #0E5400,
+       0.017em  0.017em   0 #0E5400,
+      -0.017em  0.017em   0 #0E5400,
+       0.017em -0.017em   0 #0E5400,
+      -0.017em -0.017em   0 #0E5400,
+      -0.1em    0.1em     0 #0E5400;
+  }
+  /* subtle lifted shadow, per Figma (25px up / 206px reference font-size ≈ 0.121em) */
+  .cartela[data-theme="flame"] .cartela-title {
+    text-shadow: 0 -0.121em 0 rgba(0, 0, 0, 0.25);
+  }
 
   /* ── token chips: travel bottom→top through the cartela at different speeds and X lanes,
      like credits scrolling — each one's displayed value ticks from the previous universe's
@@ -517,8 +569,22 @@ import Footer from '../components/Footer.astro';
     font-size: 12px;
     transform: translateY(calc(-50% + var(--chip-y, 0px)));
   }
-  .chip-label { color: rgba(255, 255, 255, 0.42); white-space: nowrap; }
-  .chip-value { color: rgba(255, 255, 255, 0.85); font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  /* text-shadow (not just opacity) is what keeps these readable now that ruralvia/flame sit
+     on photos instead of a flat color — a tight dark halo adapts to whatever's behind the
+     chip at that moment (bright wheat highlights included), unlike a fixed-opacity color
+     alone. Harmless on erneszt's flat near-black backdrop, where it's barely visible. */
+  .chip-label {
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.9), 0 0 6px rgba(0, 0, 0, 0.75), 0 1px 2px rgba(0, 0, 0, 0.9);
+    white-space: nowrap;
+  }
+  .chip-value {
+    color: rgba(255, 255, 255, 0.98);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.9), 0 0 6px rgba(0, 0, 0, 0.75), 0 1px 2px rgba(0, 0, 0, 0.9);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .chip { --chip-y: 0px; }
