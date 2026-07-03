@@ -506,7 +506,20 @@ import Footer from '../components/Footer.astro';
     background-position: center;
     mix-blend-mode: hard-light;
   }
-  .cartela[data-theme="erneszt"]  { --cartela-bg: #1A1209; --cartela-title: #C9A24B; }
+  .cartela[data-theme="erneszt"] {
+    --cartela-bg: #E95900;
+    --cartela-title: #D0A136;
+  }
+  .cartela[data-theme="erneszt"]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('/cartelas/erneszt-gears.jpg');
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: hard-light;
+  }
 
   .cartela-eyebrow {
     position: relative;
@@ -531,7 +544,6 @@ import Footer from '../components/Footer.astro';
     text-align: center;
     color: var(--cartela-title);
   }
-  .cartela[data-theme="erneszt"] .cartela-title { font-style: italic; }
   /* ratio locked to the Figma reference (24px offset / 4px outline at 241px font-size),
      expressed in em so it scales with .cartela-title's clamp() instead of going flat/thin
      on smaller viewports. Outline is built from 8 solid text-shadow copies instead of
@@ -553,6 +565,20 @@ import Footer from '../components/Footer.astro';
   /* subtle lifted shadow, per Figma (25px up / 206px reference font-size ≈ 0.121em) */
   .cartela[data-theme="flame"] .cartela-title {
     text-shadow: 0 -0.121em 0 rgba(0, 0, 0, 0.25);
+  }
+  /* outline + drop shadow, per Figma (6px outline / 21px down offset at 206px reference
+     font-size). Outline built the same way as ruralvia's, above. */
+  .cartela[data-theme="erneszt"] .cartela-title {
+    text-shadow:
+       0.029em     0px    0 #000000,
+      -0.029em     0px    0 #000000,
+       0px     0.029em    0 #000000,
+       0px    -0.029em    0 #000000,
+       0.029em  0.029em   0 #000000,
+      -0.029em  0.029em   0 #000000,
+       0.029em -0.029em   0 #000000,
+      -0.029em -0.029em   0 #000000,
+       0px      0.102em   0 #000000;
   }
 
   /* ── token chips: travel bottom→top through the cartela at different speeds and X lanes,

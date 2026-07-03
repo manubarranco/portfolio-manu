@@ -69,9 +69,10 @@
   --radius-surface: 4px;
   --border-width-strong: 2px;
   --space-gutter: 72px;
-  --font-family-display: 'Playfair Display', Georgia, serif;
+  --font-family-display: 'Bigshot One', 'Playfair Display', Georgia, serif;
   --font-family-headline: 'Playfair Display', Georgia, serif;
   --font-family-body: 'Lora', Georgia, serif;
+  --font-family-mono: 'Kode Mono', ui-monospace, monospace;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
