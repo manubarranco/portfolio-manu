@@ -16,7 +16,7 @@ const d = item.data;
 
 <Base title={`${d.title} · Manu Barranco`} description={d.summary}>
   <Nav />
-  <article class={`cs${d.aiNative ? ' is-ai' : ''}`}>
+  <article class={`cs${d.aiNative ? ' is-ai' : ''}`} data-theme={item.id}>
     <header class="cs-head wrap">
       <p class="eyebrow">{d.category}</p>
       <h1>{d.title}</h1>
@@ -44,6 +44,11 @@ const d = item.data;
 </Base>
 
 <style>
+  /* re-anchor the themed vars here: `data-theme` on <article> redefines the custom
+     properties for its subtree, but `color`/`background` inherited from <body> already
+     resolved against the untouched :root values — only elements that reference the vars
+     directly inside the scope pick up the new theme. */
+  .cs { background: var(--color-core-background-default); color: var(--color-core-foreground-default); font-family: var(--font-family-body); }
   .cs-head { padding-top: 64px; }
   .cs-head .eyebrow { color: var(--color-accent-strong); }
   .cs-head h1 { font-family: var(--font-family-display); font-weight: 800; font-size: clamp(48px, 10vw, 104px); line-height: 0.94; letter-spacing: -0.02em; margin: 18px 0; }
