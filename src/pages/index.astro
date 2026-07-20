@@ -154,6 +154,20 @@ import Footer from '../components/Footer.astro';
             </div>
           </div>
         </section>
+
+        <section class="work-intro" aria-labelledby="work-intro-label">
+          <div class="wrap acto-grid">
+            <div class="idx mono" aria-hidden="true">·</div>
+            <div class="acto-body" data-reveal>
+              <p id="work-intro-label" class="eyebrow">Selected work · Three systems</p>
+              <p class="beat-text beat-text--lg work-intro-lead">
+                Three projects, three eras of the same conviction: build the
+                structure others build on. Each one keeps its own universe.
+              </p>
+              <p class="work-intro-kicker">The tokens change. The thinking doesn't.</p>
+            </div>
+          </div>
+        </section>
       </div>
 
       <!-- Reveal window · Ruralvía cartela shows through here (fixed element lives after </Base>) -->
@@ -735,6 +749,18 @@ import Footer from '../components/Footer.astro';
     line-height: 1.4;
     font-weight: 500;
     letter-spacing: -0.02em;
+  }
+
+  /* ── work intro (bridge from Acto 0 into the three universes) */
+  .work-intro { border-top: 1.5px solid var(--color-core-border-strong); }
+  .work-intro .acto-body { padding: 26px 0 96px; }
+  .work-intro-lead { max-width: 30ch; }
+  .work-intro-kicker {
+    margin-top: 28px;
+    font-family: var(--font-family-mono);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: var(--color-accent-default);
   }
 
   /* beat 5 — archetype */
