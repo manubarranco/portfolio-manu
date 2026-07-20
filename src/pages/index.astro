@@ -42,16 +42,13 @@ import Footer from '../components/Footer.astro';
           <div class="hero-col">
             <p class="status mono"><span class="dot" aria-hidden="true"></span> Available for new challenges</p>
 
-            <h1 id="hero-title" class="hero-h">I turn product complexity into <span id="rot" class="hl rot-phrase">systems that actually get adopted</span></h1>
+            <h1 id="hero-title" class="hero-h">I design the systems <span class="hl">other designers build on.</span></h1>
 
             <div class="lede">
               <p class="pos">
-                I define the system and make the decisions that set the direction.
-                Then I lead the execution and adoption to make it real.
-              </p>
-              <p class="through">
-                I'm not discovering AI now. It's the latest in a series of waves I've been part of
-                from the start: the web, UX, design systems, behavioral design.
+                Design systems at global banking scale. AI-native product built from zero.
+                I define the system, make the decisions that set direction,
+                and stay until it's adopted.
               </p>
             </div>
           </div>
@@ -65,61 +62,56 @@ import Footer from '../components/Footer.astro';
 
               <ol class="beats" role="list">
 
-                <!-- 1 · Altitud -->
+                <!-- 1 · Origen autodidacta -->
                 <li class="beat" data-reveal>
                   <span class="beat-n mono" aria-hidden="true">01</span>
                   <p class="beat-text beat-text--lg">
-                    Most designers hand off. I define the system, make the decisions
-                    that set direction, lead the execution, and stay until
-                    it's adopted.
+                    Self-taught graphic designer. I fell in love with design while
+                    studying something else, and paid my way doing freelance print
+                    work, where mistakes are expensive.
                   </p>
                 </li>
 
-                <!-- 2 · Cómo pienso -->
+                <!-- 2 · La web, 1996 -->
                 <li class="beat" data-reveal>
                   <span class="beat-n mono" aria-hidden="true">02</span>
                   <p class="beat-text">
-                    I look for the invariants first: what must be true regardless of
-                    implementation. Structure before system. System before screens.
+                    In 1996 a client recommended me for a job at Telefónica.
+                    I became a web designer when nobody quite knew what that was,
+                    writing my own HTML, CSS and Javascript. I never left the web.
                   </p>
                 </li>
 
-                <!-- 3 · El puente -->
+                <!-- 3 · Portales: Lycos + ya.com -->
                 <li class="beat" data-reveal>
                   <span class="beat-n mono" aria-hidden="true">03</span>
                   <p class="beat-text">
-                    I speak product fluently enough to push back on direction.
-                    Engineering fluently enough to know what's real.
-                    That's not a soft skill. It's how systems actually get built.
+                    By 1999 I was Head of Content at Lycos Spain, leading a
+                    25-person editorial team. Then product manager at ya.com,
+                    building premium products in the portal era. The industry
+                    kept pulling me toward management.
                   </p>
                 </li>
 
-                <!-- 4 · Autoridad tranquila -->
+                <!-- 4 · Nurun: la marea de la gestión -->
                 <li class="beat" data-reveal>
                   <span class="beat-n mono" aria-hidden="true">04</span>
                   <p class="beat-text">
-                    I've led design at global scale and built an AI-native product
-                    from zero. I don't need to be the loudest voice in the room.
-                    I need to be the most useful one.
+                    At Nurun I ran projects, then the project management department,
+                    then founded and led its UX practice. A seat on the management
+                    committee, and a little further from the craft every year.
                   </p>
                 </li>
 
-                <!-- 5 · Arquetipo: The Infrastructure Maker -->
-                <li class="beat beat--archetype" id="beat-archetype" data-reveal>
+                <!-- 5 · La vuelta al craft: Sngular → Flame -->
+                <li class="beat" data-reveal>
                   <span class="beat-n mono" aria-hidden="true">05</span>
-                  <div class="archetype-inner">
-                    <p class="beat-text archetype-setup">
-                      I built a product that reads professional trajectories.
-                      I gave it mine. It returned this:
-                    </p>
-                    <p class="archetype-label" id="archetype-label">
-                      The Infrastructure Maker
-                    </p>
-                    <p class="archetype-sub">
-                      The one who builds what needs to exist for everything else
-                      to work.
-                    </p>
-                  </div>
+                  <p class="beat-text">
+                    So I made a deliberate choice: back to design. At Sngular I
+                    guided the redesign of mobile banking for Spain's rural banks
+                    and built my first design system there. The next one was
+                    global: Flame, at Santander.
+                  </p>
                 </li>
 
                 <!-- 6 · Olas semilla -->
@@ -137,6 +129,24 @@ import Footer from '../components/Footer.astro';
                       <li>Design systems</li>
                       <li class="ola-current">AI</li>
                     </ol>
+                  </div>
+                </li>
+
+                <!-- 7 · Arquetipo: The Infrastructure Maker -->
+                <li class="beat beat--archetype" id="beat-archetype" data-reveal>
+                  <span class="beat-n mono" aria-hidden="true">07</span>
+                  <div class="archetype-inner">
+                    <p class="beat-text archetype-setup">
+                      I built a product that reads professional trajectories.
+                      I gave it mine. It returned this:
+                    </p>
+                    <p class="archetype-label" id="archetype-label">
+                      The Infrastructure Maker
+                    </p>
+                    <p class="archetype-sub">
+                      The one who builds what needs to exist for everything else
+                      to work.
+                    </p>
                   </div>
                 </li>
 
@@ -239,10 +249,9 @@ import Footer from '../components/Footer.astro';
         <div class="about-col" data-reveal>
           <p id="about-title" class="eyebrow">About</p>
           <p class="about-body">
-            I'm a systems thinker with a pull toward structure and abstraction. My strength is the
-            early definition: shaping the system and making the decisions that set the direction,
-            then leading the execution and adoption that make it real. I've led design at scale
-            and built an AI-native product from zero.
+            I'm a systems thinker with a pull toward structure and abstraction. My strength is
+            the early definition: finding the invariants, the things that must be true regardless
+            of implementation. Structure before system. System before screens.
           </p>
           <div class="end-cta">
             <p class="end-line">Available for new challenges.</p>
@@ -416,8 +425,6 @@ import Footer from '../components/Footer.astro';
   .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent-default); }
   .hero-h { font-family: var(--font-family-display); font-weight: 800; font-size: clamp(34px, 6.8vw, 80px); line-height: 1.0; letter-spacing: -0.02em; max-width: 18ch; margin-top: 44px; }
   .hl { color: var(--color-accent-default); }
-  .rot-phrase { display: block; text-wrap: balance; min-height: 2em; transition: opacity 0.22s ease; }
-  .rot-phrase.is-out { opacity: 0; }
   .lede { margin-top: 44px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; max-width: 920px; }
   .pos { font-weight: 500; font-size: 23px; line-height: 1.34; letter-spacing: -0.015em; }
   .through { font-size: 15px; line-height: 1.65; color: var(--color-core-foreground-muted); }
@@ -791,26 +798,7 @@ import Footer from '../components/Footer.astro';
 </style>
 
 <script>
-  /* ── rotating phrases */
-  const phrases = [
-    'systems that actually get adopted',
-    'decisions that set direction',
-    'products ready for AI',
-    'systems built to scale',
-  ];
-  const rotEl = document.getElementById('rot');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (rotEl && !reduce) {
-    let i = 0;
-    setInterval(() => {
-      rotEl.classList.add('is-out');
-      setTimeout(() => {
-        i = (i + 1) % phrases.length;
-        rotEl.textContent = phrases[i];
-        rotEl.classList.remove('is-out');
-      }, 240);
-    }, 3400);
-  }
 
   /* ── reveal on scroll */
   const revealEls = document.querySelectorAll('[data-reveal]');
