@@ -120,6 +120,22 @@ const d = item.data;
   }
   .prose :global(.callout strong) { color: var(--color-accent-strong); font-weight: 700; }
 
+  /* diagrams — inline SVGs themed via the case's data-theme vars */
+  .prose :global(figure.diagram) { margin: 2.4em 0; }
+  .prose :global(figure.diagram svg) { display: block; width: 100%; height: auto; }
+  .prose :global(figure.diagram figcaption) { font-family: var(--font-family-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-core-foreground-subtle); margin-top: 10px; }
+  .prose :global(svg .dg-stroke) { stroke: var(--color-accent-default); fill: none; stroke-width: 1.5; }
+  .prose :global(svg .dg-stroke--soft) { stroke: var(--color-core-foreground-subtle); fill: none; stroke-width: 1; }
+  .prose :global(svg .dg-arrow) { fill: var(--color-accent-default); }
+  .prose :global(svg .dg-panel) { fill: var(--color-core-background-subtle); stroke: var(--color-accent-default); stroke-width: 1.5; }
+  .prose :global(svg .dg-panel--ghost) { fill: none; stroke: var(--color-core-foreground-subtle); stroke-width: 1; stroke-dasharray: 4 4; }
+  .prose :global(svg .dg-title) { fill: var(--color-core-foreground-default); font-family: var(--font-family-headline); font-size: 19px; }
+  .prose :global(svg .dg-body) { fill: var(--color-core-foreground-muted); font-family: var(--font-family-body); font-size: 12.5px; }
+  .prose :global(svg .dg-label) { fill: var(--color-accent-strong); font-family: var(--font-family-mono); font-size: 10.5px; letter-spacing: 0.08em; }
+  .prose :global(svg .dg-label--subtle) { fill: var(--color-core-foreground-subtle); font-family: var(--font-family-mono); font-size: 10.5px; letter-spacing: 0.08em; }
+  .prose :global(svg .dg-dim) { opacity: 0.55; }
+  .prose :global(svg .dg-x) { stroke: var(--color-core-foreground-subtle); stroke-width: 1.5; }
+
   .prose :global(figure.shot) { margin: 2.2em 0; }
   .prose :global(figure.shot img) { display: block; width: 100%; height: auto; border: 1.5px solid var(--color-core-border-default); background: var(--color-core-background-subtle); }
   .prose :global(figure.shot figcaption) { font-family: var(--font-family-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-core-foreground-subtle); margin-top: 10px; }
