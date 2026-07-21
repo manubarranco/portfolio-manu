@@ -119,34 +119,19 @@ import Footer from '../components/Footer.astro';
                   <span class="beat-n mono" aria-hidden="true">06</span>
                   <div class="olas-inner">
                     <p class="beat-text olas-frame">
-                      Five waves. I don't discover categories. I arrive when
-                      they're forming.
+                      Did you notice the pattern? I tend to arrive just as a
+                      category is forming, and then learn as much as I can,
+                      as fast as I can.
                     </p>
                     <ol class="olas-list" role="list" aria-label="Industry waves">
                       <li>The web</li>
                       <li>Portals</li>
                       <li>UX</li>
+                      <li>Agile</li>
+                      <li>Human centered design</li>
                       <li>Design systems</li>
-                      <li class="ola-current">AI</li>
                     </ol>
-                  </div>
-                </li>
-
-                <!-- 7 · Arquetipo: The Infrastructure Maker -->
-                <li class="beat beat--archetype" id="beat-archetype" data-reveal>
-                  <span class="beat-n mono" aria-hidden="true">07</span>
-                  <div class="archetype-inner">
-                    <p class="beat-text archetype-setup">
-                      I built a product that reads professional trajectories.
-                      I gave it mine. It returned this:
-                    </p>
-                    <p class="archetype-label" id="archetype-label">
-                      The Infrastructure Maker
-                    </p>
-                    <p class="archetype-sub">
-                      The one who builds what needs to exist for everything else
-                      to work.
-                    </p>
+                    <p class="olas-now">Now I'm doing it again with AI.</p>
                   </div>
                 </li>
 
@@ -763,30 +748,8 @@ import Footer from '../components/Footer.astro';
     color: var(--color-accent-default);
   }
 
-  /* beat 5 — archetype */
-  .beat--archetype { align-items: start; }
-  .archetype-inner { display: flex; flex-direction: column; gap: 0; }
-  .archetype-setup { color: var(--color-core-foreground-muted); margin-bottom: 20px; }
-  .archetype-label {
-    font-family: var(--font-family-display);
-    font-weight: 800;
-    font-size: clamp(28px, 4.5vw, 52px);
-    line-height: 1.0;
-    letter-spacing: -0.025em;
-    color: var(--color-core-foreground-default);
-    transition: color 0.45s ease;
-  }
-  .archetype-label.is-gold { color: #A87C2A; }
-  .archetype-sub {
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--color-core-foreground-subtle);
-    margin-top: 12px;
-    max-width: 46ch;
-  }
-
   /* beat 6 — olas */
-  .olas-frame { color: var(--color-core-foreground-muted); margin-bottom: 20px; }
+  .olas-frame { margin-bottom: 22px; }
   .olas-list {
     list-style: none;
     display: flex;
@@ -803,7 +766,13 @@ import Footer from '../components/Footer.astro';
     color: var(--color-accent-default);
     margin: 0 10px;
   }
-  .ola-current { color: var(--color-accent-default); font-weight: 700; }
+  .olas-now {
+    margin-top: 24px;
+    font-size: 21px;
+    line-height: 1.4;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
 
   @media (max-width: 720px) {
     .hero, .about { grid-template-columns: 1fr; }
@@ -840,34 +809,6 @@ import Footer from '../components/Footer.astro';
     revealEls.forEach((n) => io.observe(n));
   } else {
     revealEls.forEach((n) => n.classList.add('in'));
-  }
-
-  /* ── beat 5: archetype gold flash */
-  const archetypeBeat  = document.getElementById('beat-archetype');
-  const archetypeLabel = document.getElementById('archetype-label');
-
-  if (archetypeBeat && archetypeLabel && !reduce) {
-    let fired = false;
-    const archetypeObs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting && !fired) {
-            fired = true;
-            archetypeLabel.style.fontFamily = "'Playfair Display', Georgia, serif";
-            archetypeLabel.style.fontStyle  = 'italic';
-            archetypeLabel.classList.add('is-gold');
-            setTimeout(() => { archetypeLabel.classList.remove('is-gold'); }, 1300);
-            setTimeout(() => {
-              archetypeLabel.style.fontFamily = '';
-              archetypeLabel.style.fontStyle  = '';
-            }, 1750);
-            archetypeObs.disconnect();
-          }
-        });
-      },
-      { threshold: 0.7 },
-    );
-    archetypeObs.observe(archetypeBeat);
   }
 
   /* ── shared: header height → CSS var, consumed by the cover reveal (px math) and by
