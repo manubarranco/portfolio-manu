@@ -890,12 +890,12 @@ import Footer from '../components/Footer.astro';
     transition: transform 0.14s ease, box-shadow 0.14s ease, background 0.14s ease;
   }
   .btn--primary {
-    background: var(--color-accent-default);
-    color: var(--color-core-background-default);
+    background: var(--color-accent-strong);
+    color: var(--color-on-accent);
     box-shadow: var(--shadow-card);
   }
   /* on hover the button swaps its elevation primitive: the card shadow gives way to the halo */
-  .btn--primary:hover { background: var(--color-accent-strong); transform: translate(2px, 2px); box-shadow: var(--shadow-halo); }
+  .btn--primary:hover { transform: translate(2px, 2px); box-shadow: var(--shadow-halo); }
   .btn--primary:active { transform: translate(4px, 4px); box-shadow: none; }
   .btn:focus-visible { outline: var(--border-width-strong) solid var(--color-core-border-strong); outline-offset: 3px; }
   .uni-cta-note { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-core-foreground-subtle); }
@@ -910,13 +910,13 @@ import Footer from '../components/Footer.astro';
   .end-link {
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: var(--color-accent-default);
+    color: var(--color-accent-strong);
     border-bottom: 1.5px solid var(--color-accent-default);
     padding-bottom: 2px;
     transition: color 0.12s, background 0.12s, box-shadow 0.12s;
   }
   /* Same fill treatment as every other accent link on the site (nav, footer, case-study links) */
-  .end-link:hover { background: var(--color-accent-default); color: var(--color-core-background-default); box-shadow: 0 0 0 0.1em var(--color-accent-default); }
+  .end-link:hover { background: var(--color-accent-strong); color: var(--color-on-accent); box-shadow: 0 0 0 0.1em var(--color-accent-strong); }
 
   /* ── acto 0 */
   .acto-0 { border-top: 1.5px solid var(--color-core-border-strong); }
@@ -954,7 +954,8 @@ import Footer from '../components/Footer.astro';
     font-family: var(--font-family-mono);
     font-size: 14px;
     letter-spacing: 0.04em;
-    color: var(--color-accent-default);
+    /* small text on accent uses the strong step: accent-default only clears AA at display sizes */
+    color: var(--color-accent-strong);
   }
 
   /* beat 6 — olas */

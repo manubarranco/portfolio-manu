@@ -3,9 +3,12 @@
   --color-core-background-subtle: #ECE9DF;
   --color-core-foreground-default: #16160F;
   --color-core-foreground-muted: #4F4E44;
-  --color-core-foreground-subtle: #78766A;
+  --color-core-foreground-subtle: #666458;
   --color-accent-default: #E2341D;
   --color-accent-strong: #A82309;
+  /* text placed on an accent-filled surface (buttons). Paired with --color-accent-strong
+     as the fill, every universe clears WCAG AA. */
+  --color-on-accent: #FFFFFF;
   --color-core-border-default: rgba(20, 20, 12, 0.14);
   --color-core-border-strong: #16160F;
 
@@ -38,10 +41,11 @@
   --color-core-background-default: #EFEAC6;
   --color-core-background-subtle: #E7E0B4;
   --color-core-foreground-default: #1C3A2B;
-  --color-core-foreground-muted: #2E7D52;
-  --color-core-foreground-subtle: #6F8A74;
+  --color-core-foreground-muted: #22603F;
+  --color-core-foreground-subtle: #41604A;
   --color-accent-default: #2E7D52;
   --color-accent-strong: #1E5C3A;
+  --color-on-accent: #FFFFFF;
   --color-core-border-default: rgba(28, 58, 43, 0.14);
   --color-core-border-strong: #1C3A2B;
   --radius-surface: 24px;
@@ -62,9 +66,10 @@
   --color-core-background-subtle: #C3CFD9;
   --color-core-foreground-default: #101A22;
   --color-core-foreground-muted: #41525F;
-  --color-core-foreground-subtle: #6B7C89;
+  --color-core-foreground-subtle: #475764;
   --color-accent-default: #E2341D;
   --color-accent-strong: #A82309;
+  --color-on-accent: #FFFFFF;
   --color-core-border-default: rgba(16, 36, 54, 0.22);
   --color-core-border-strong: #1B2C39;
   --radius-surface: 0px;
@@ -90,6 +95,7 @@
   --color-core-foreground-subtle: #9A8A58;
   --color-accent-default: #C9A24B;
   --color-accent-strong: #D9C273;
+  --color-on-accent: #1A1209;
   --color-core-border-default: rgba(236, 234, 198, 0.16);
   --color-core-border-strong: #C9A24B;
   --radius-surface: 4px;
