@@ -72,8 +72,8 @@ const d = item.data;
 
   /* prose */
   .prose { max-width: 70ch; font-size: 18px; line-height: 1.7; }
-  .prose :global(h2) { font-family: var(--font-family-headline); font-weight: 400; font-size: clamp(34px, 4.4vw, 50px); line-height: 1.0; letter-spacing: -0.02em; margin: 1.8em 0 0.7em; padding-bottom: 0.1em; border-bottom: 2px solid var(--color-accent-default); }
-  .prose :global(h3) { font-family: var(--font-family-headline); font-weight: 400; font-size: clamp(26px, 3vw, 32px); line-height: 1.0; letter-spacing: -0.02em; margin: 1.7em 0 0.3em; }
+  .prose :global(h2) { font-family: var(--font-family-headline); font-weight: var(--font-weight-headline); font-size: clamp(34px, 4.4vw, 50px); line-height: 1.0; letter-spacing: -0.02em; margin: 1.8em 0 0.7em; padding-bottom: 0.1em; border-bottom: 2px solid var(--color-accent-default); }
+  .prose :global(h3) { font-family: var(--font-family-headline); font-weight: var(--font-weight-headline); font-size: clamp(26px, 3vw, 32px); line-height: 1.0; letter-spacing: -0.02em; margin: 1.7em 0 0.3em; }
   .prose :global(h2:first-child), .prose :global(h3:first-child) { margin-top: 0; }
   .prose :global(p) { margin: 0 0 1.1em; }
   .prose :global(strong) { font-weight: 600; }
@@ -104,7 +104,7 @@ const d = item.data;
     margin: 2em 0;
   }
   .prose :global(.metric) { background: var(--color-core-background-default); padding: 22px 18px; display: flex; flex-direction: column; gap: 6px; }
-  .prose :global(.metric .num) { font-family: var(--font-family-headline); font-weight: 400; font-size: clamp(36px, 4.6vw, 52px); line-height: 0.95; letter-spacing: -0.02em; color: var(--color-accent-default); }
+  .prose :global(.metric .num) { font-family: var(--font-family-headline); font-weight: var(--font-weight-headline); font-size: clamp(36px, 4.6vw, 52px); line-height: 0.95; letter-spacing: -0.02em; color: var(--color-accent-default); }
   .prose :global(.metric .lbl) { font-family: var(--font-family-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-core-foreground-muted); }
 
   .prose :global(.video) { position: relative; aspect-ratio: 16 / 9; margin: 2em 0; border: 1.5px solid var(--color-core-border-strong); background: var(--color-core-foreground-default); }

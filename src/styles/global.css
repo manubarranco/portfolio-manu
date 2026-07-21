@@ -18,6 +18,18 @@
   --layout-max-width: 1180px;
   --radius-surface: 8px;
   --border-width-strong: 2px;
+  /* display size and headline weight are per-universe decisions: wide faces need a smaller
+     ceiling, condensed ones need more weight to hold the same presence */
+  --type-display: clamp(64px, 10vw, 128px);
+  --font-weight-headline: 400;
+
+  /* elevation — three primitives, plus one semantic alias. Components only ever ask for
+     --shadow-card; each universe points that alias at the primitive that fits its voice,
+     so the same component changes personality with no markup fork. */
+  --shadow-block: 6px 6px 0 rgba(20, 20, 12, 0.16);
+  --shadow-halo: 0 0 0 6px rgba(226, 52, 29, 0.10);
+  --shadow-ridge: 0 2px 0 rgba(20, 20, 12, 0.20), 0 14px 26px -14px rgba(20, 20, 12, 0.35);
+  --shadow-card: var(--shadow-block);
 }
 
 /* ── Universe theme tokens — canonical from Figma modes (file 8JMA60B81nVHQKIsNRIWS7).
@@ -35,26 +47,40 @@
   --radius-surface: 24px;
   --border-width-strong: 2px;
   --space-gutter: 64px;
+  /* soft, organic: a printed offset block */
+  --shadow-block: 10px 10px 0 rgba(28, 58, 43, 0.16);
+  --shadow-halo: 0 0 0 9px rgba(46, 125, 82, 0.12);
+  --shadow-ridge: 0 3px 0 rgba(28, 58, 43, 0.20), 0 20px 32px -20px rgba(28, 58, 43, 0.45);
+  --shadow-card: var(--shadow-block);
   --font-family-display: 'Stack Sans Headline', 'Fraunces', Georgia, serif;
   --font-family-headline: 'Fraunces', Georgia, serif;
   --font-family-body: 'Hanken Grotesk', system-ui, sans-serif;
 }
 [data-theme="flame"] {
-  --color-core-background-default: #ECE9DF;
-  --color-core-background-subtle: #E3DED0;
-  --color-core-foreground-default: #16160F;
-  --color-core-foreground-muted: #4F4E44;
-  --color-core-foreground-subtle: #8C897D;
+  /* steel: sampled from the blue-grey ground Flame's own mockups sit on */
+  --color-core-background-default: #D3DCE4;
+  --color-core-background-subtle: #C3CFD9;
+  --color-core-foreground-default: #101A22;
+  --color-core-foreground-muted: #41525F;
+  --color-core-foreground-subtle: #6B7C89;
   --color-accent-default: #E2341D;
   --color-accent-strong: #A82309;
-  --color-core-border-default: rgba(20, 20, 12, 0.16);
-  --color-core-border-strong: #16160F;
+  --color-core-border-default: rgba(16, 36, 54, 0.22);
+  --color-core-border-strong: #1B2C39;
   --radius-surface: 0px;
   --border-width-strong: 4px;
   --space-gutter: 64px;
-  --font-family-display: 'Archivo Black', system-ui, sans-serif;
-  --font-family-headline: 'Archivo', system-ui, sans-serif;
-  --font-family-body: 'Inter', system-ui, sans-serif;
+  /* hard, systematic: no blur anywhere */
+  --shadow-block: 12px 12px 0 #1B2C39;
+  --shadow-halo: 0 0 0 6px rgba(226, 52, 29, 0.22);
+  --shadow-ridge: 0 5px 0 #1B2C39;
+  --shadow-card: var(--shadow-ridge);
+  --type-display: clamp(42px, 6.6vw, 84px);
+  --font-weight-headline: 700;
+  --font-family-display: 'Unbounded', system-ui, sans-serif;
+  --font-family-headline: 'Big Shoulders Display', 'Archivo Narrow', system-ui, sans-serif;
+  --font-family-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-family-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
 [data-theme="erneszt"] {
   --color-core-background-default: #1A1209;
@@ -69,6 +95,11 @@
   --radius-surface: 4px;
   --border-width-strong: 2px;
   --space-gutter: 72px;
+  /* lamplight: gold bleeding into the dark */
+  --shadow-block: 8px 8px 0 rgba(201, 162, 75, 0.22);
+  --shadow-halo: 0 0 46px rgba(201, 162, 75, 0.30);
+  --shadow-ridge: 0 2px 0 rgba(201, 162, 75, 0.45), 0 22px 40px -22px #000;
+  --shadow-card: var(--shadow-halo);
   --font-family-display: 'Bigshot One', 'Playfair Display', Georgia, serif;
   --font-family-headline: 'Playfair Display', Georgia, serif;
   --font-family-body: 'Lora', Georgia, serif;
