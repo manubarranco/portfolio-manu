@@ -18,6 +18,10 @@
   --layout-max-width: 1180px;
   --radius-surface: 8px;
   --border-width-strong: 2px;
+  /* display size and headline weight are per-universe decisions: wide faces need a smaller
+     ceiling, condensed ones need more weight to hold the same presence */
+  --type-display: clamp(64px, 10vw, 128px);
+  --font-weight-headline: 400;
 
   /* elevation — three primitives, plus one semantic alias. Components only ever ask for
      --shadow-card; each universe points that alias at the primitive that fits its voice,
@@ -53,26 +57,30 @@
   --font-family-body: 'Hanken Grotesk', system-ui, sans-serif;
 }
 [data-theme="flame"] {
-  --color-core-background-default: #ECE9DF;
-  --color-core-background-subtle: #E3DED0;
-  --color-core-foreground-default: #16160F;
-  --color-core-foreground-muted: #4F4E44;
-  --color-core-foreground-subtle: #8C897D;
+  /* steel: sampled from the blue-grey ground Flame's own mockups sit on */
+  --color-core-background-default: #D3DCE4;
+  --color-core-background-subtle: #C3CFD9;
+  --color-core-foreground-default: #101A22;
+  --color-core-foreground-muted: #41525F;
+  --color-core-foreground-subtle: #6B7C89;
   --color-accent-default: #E2341D;
   --color-accent-strong: #A82309;
-  --color-core-border-default: rgba(20, 20, 12, 0.16);
-  --color-core-border-strong: #16160F;
+  --color-core-border-default: rgba(16, 36, 54, 0.22);
+  --color-core-border-strong: #1B2C39;
   --radius-surface: 0px;
   --border-width-strong: 4px;
   --space-gutter: 64px;
   /* hard, systematic: no blur anywhere */
-  --shadow-block: 12px 12px 0 #16160F;
-  --shadow-halo: 0 0 0 6px rgba(226, 52, 29, 0.20);
-  --shadow-ridge: 0 5px 0 #16160F;
+  --shadow-block: 12px 12px 0 #1B2C39;
+  --shadow-halo: 0 0 0 6px rgba(226, 52, 29, 0.22);
+  --shadow-ridge: 0 5px 0 #1B2C39;
   --shadow-card: var(--shadow-ridge);
-  --font-family-display: 'Archivo Black', system-ui, sans-serif;
-  --font-family-headline: 'Archivo', system-ui, sans-serif;
-  --font-family-body: 'Inter', system-ui, sans-serif;
+  --type-display: clamp(42px, 6.6vw, 84px);
+  --font-weight-headline: 700;
+  --font-family-display: 'Unbounded', system-ui, sans-serif;
+  --font-family-headline: 'Big Shoulders Display', 'Archivo Narrow', system-ui, sans-serif;
+  --font-family-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-family-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
 [data-theme="erneszt"] {
   --color-core-background-default: #1A1209;
