@@ -19,11 +19,13 @@
   --radius-surface: 8px;
   --border-width-strong: 2px;
 
-  /* elevation — one contract, three expressions. Each universe redefines these, so the
-     same card component shifts its shadow personality with no markup fork. */
+  /* elevation — three primitives, plus one semantic alias. Components only ever ask for
+     --shadow-card; each universe points that alias at the primitive that fits its voice,
+     so the same component changes personality with no markup fork. */
   --shadow-block: 6px 6px 0 rgba(20, 20, 12, 0.16);
   --shadow-halo: 0 0 0 6px rgba(226, 52, 29, 0.10);
   --shadow-ridge: 0 2px 0 rgba(20, 20, 12, 0.20), 0 14px 26px -14px rgba(20, 20, 12, 0.35);
+  --shadow-card: var(--shadow-block);
 }
 
 /* ── Universe theme tokens — canonical from Figma modes (file 8JMA60B81nVHQKIsNRIWS7).
@@ -41,10 +43,11 @@
   --radius-surface: 24px;
   --border-width-strong: 2px;
   --space-gutter: 64px;
-  /* soft, organic: a printed offset block and a wide green halo */
+  /* soft, organic: a printed offset block */
   --shadow-block: 10px 10px 0 rgba(28, 58, 43, 0.16);
   --shadow-halo: 0 0 0 9px rgba(46, 125, 82, 0.12);
   --shadow-ridge: 0 3px 0 rgba(28, 58, 43, 0.20), 0 20px 32px -20px rgba(28, 58, 43, 0.45);
+  --shadow-card: var(--shadow-block);
   --font-family-display: 'Stack Sans Headline', 'Fraunces', Georgia, serif;
   --font-family-headline: 'Fraunces', Georgia, serif;
   --font-family-body: 'Hanken Grotesk', system-ui, sans-serif;
@@ -66,6 +69,7 @@
   --shadow-block: 12px 12px 0 #16160F;
   --shadow-halo: 0 0 0 6px rgba(226, 52, 29, 0.20);
   --shadow-ridge: 0 5px 0 #16160F;
+  --shadow-card: var(--shadow-ridge);
   --font-family-display: 'Archivo Black', system-ui, sans-serif;
   --font-family-headline: 'Archivo', system-ui, sans-serif;
   --font-family-body: 'Inter', system-ui, sans-serif;
@@ -87,6 +91,7 @@
   --shadow-block: 8px 8px 0 rgba(201, 162, 75, 0.22);
   --shadow-halo: 0 0 46px rgba(201, 162, 75, 0.30);
   --shadow-ridge: 0 2px 0 rgba(201, 162, 75, 0.45), 0 22px 40px -22px #000;
+  --shadow-card: var(--shadow-halo);
   --font-family-display: 'Bigshot One', 'Playfair Display', Georgia, serif;
   --font-family-headline: 'Playfair Display', Georgia, serif;
   --font-family-body: 'Lora', Georgia, serif;

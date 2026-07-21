@@ -197,29 +197,28 @@ import Footer from '../components/Footer.astro';
             </div>
 
             <div class="uni-stack">
-              <article class="card card--block" data-token="shadow.block" data-reveal style="transition-delay:80ms">
+              <article class="card" data-reveal style="transition-delay:80ms">
                 <p class="card-label eyebrow">Context</p>
                 <p class="card-body">Mobile banking for the 70+ rural banks of Caja Rural Group. Research showed people did exactly two things in the app: check the balance and transfer. Everything else was ignored, confusing or not trusted.</p>
               </article>
-              <article class="card card--ridge" data-token="shadow.ridge" data-reveal style="transition-delay:140ms">
+              <article class="card" data-reveal style="transition-delay:140ms">
                 <p class="card-label eyebrow">The move</p>
                 <p class="card-body">El Experto: a contextual advisor on the home screen. Not a chatbot. Proactive alerts, spending made legible, and a direct line to your real human advisor. Backed by a proto-design system with tokens and a component library.</p>
               </article>
+              <article class="card card--note" data-reveal style="transition-delay:200ms">
+                <p class="card-label eyebrow">What I learned</p>
+                <ul class="note-list">
+                  <li>Research can rewrite the brief. We were asked for a redesign and came back with a five-year direction.</li>
+                  <li>Trust was the asset, not the interface. Closeness was the thing worth porting to mobile.</li>
+                  <li>What we shipped in 2018 is what Cleo and N26 sell today. Being early only counts if you can prove it.</li>
+                </ul>
+              </article>
             </div>
-
-            <aside class="note card--halo" data-reveal style="transition-delay:200ms">
-              <p class="note-label mono">What I learned</p>
-              <ul class="note-list">
-                <li>Research can rewrite the brief. We were asked for a redesign and came back with a five-year direction.</li>
-                <li>Trust was the asset, not the interface. Closeness was the thing worth porting to mobile.</li>
-                <li>What we shipped in 2018 is what Cleo and N26 sell today. Being early only counts if you can prove it.</li>
-              </ul>
-            </aside>
           </div>
 
           <div class="uni-cta" data-reveal>
-            <a href="/work/ruralvia" class="btn btn--primary">Read the case study</a>
             <span class="uni-cta-note mono">Research · vision · proto-design system</span>
+            <a href="/work/ruralvia" class="btn btn--primary">Read the case study</a>
           </div>
         </div>
       </section>
@@ -230,24 +229,62 @@ import Footer from '../components/Footer.astro';
       <!-- Floor 1 · Flame surface -->
       <section class="surface surface--case" data-theme="flame" data-universe="flame" aria-labelledby="flame-title">
         <div class="uni-showcase wrap">
+          <div class="uni-rail" aria-hidden="true">
+            <span class="uni-rail-num">02</span>
+            <span class="uni-rail-rule"></span>
+            <span class="uni-rail-year mono">2020–2024</span>
+          </div>
+
           <div class="uni-header" data-reveal>
-            <p class="eyebrow">02 · Flame · 2020–2024 · Santander</p>
+            <p class="eyebrow">Flame · Santander</p>
             <h2 id="flame-title" class="uni-tagline">A system teams<br>chose to adopt</h2>
           </div>
-          <div class="uni-cards">
-            <div class="uni-card" data-reveal style="transition-delay:60ms">
-              <p class="uni-card-label eyebrow">Scale</p>
-              <p class="uni-card-body">1,780+ components governed across 350+ designers and 10 countries. In banking, design coherence isn't a UX nicety: it's a trust signal.</p>
+
+          <div class="uni-spread">
+            <div class="specimen-col">
+              <figure class="specimen" data-reveal>
+                <div class="specimen-frame">
+                  <img src="/work/flame/flame-ui.webp" alt="Flame running in production across Santander's banking apps" loading="lazy" />
+                </div>
+                <figcaption class="specimen-strip mono">
+                  <span>flame-ui.webp</span>
+                  <span>in production · 10 countries</span>
+                </figcaption>
+              </figure>
+              <figure class="specimen specimen--detail" data-reveal style="transition-delay:120ms">
+                <div class="specimen-frame">
+                  <img src="/work/flame/sticker-sheet.webp" alt="The tiered component system: global foundation and local layers" loading="lazy" />
+                </div>
+                <figcaption class="specimen-strip mono">
+                  <span>sticker-sheet.webp</span>
+                  <span>global foundation · local layers</span>
+                </figcaption>
+              </figure>
             </div>
-            <div class="uni-card" data-reveal style="transition-delay:120ms">
-              <p class="uni-card-label eyebrow">The model</p>
-              <p class="uni-card-body">A tiered system: a global foundation with local layers. Teams moved fast locally without fragmenting the platform at scale.</p>
+
+            <div class="uni-stack">
+              <article class="card" data-reveal style="transition-delay:80ms">
+                <p class="card-label eyebrow">Context</p>
+                <p class="card-body">Santander's global design system: 1,780+ components governed across 350+ designers and 10 countries. In banking, coherence isn't a UX nicety, it's a trust signal. The real risk was never visual: a global system imposed top-down simply gets ignored.</p>
+              </article>
+              <article class="card" data-reveal style="transition-delay:140ms">
+                <p class="card-label eyebrow">The move</p>
+                <p class="card-body">Design for adoption: a tiered model with a global foundation and local layers, so teams moved fast without fragmenting the platform. Then a shared European tier, co-designed across markets. Then Flame 4.0, a deliberate breaking change to rebuild governance. ~35% faster feature development.</p>
+              </article>
+              <article class="card card--note" data-reveal style="transition-delay:200ms">
+                <p class="card-label eyebrow">What I learned</p>
+                <ul class="note-list">
+                  <li>Adoption beats control. A system nobody chooses to use is just an expensive library.</li>
+                  <li>Consensus can outrun hierarchy. The European tier ended up better than the original global reference.</li>
+                  <li>Sometimes you break the system to keep it alive. 4.0 traded freedom for a protected core.</li>
+                </ul>
+              </article>
             </div>
-            <div class="uni-card uni-card--cta" data-reveal style="transition-delay:180ms">
-              <p class="uni-card-label eyebrow">Impact</p>
-              <p class="uni-card-body">~35% faster feature development. I led the system, the team, and the alignment with Santander's Chief Design Officer.</p>
-              <a href="/work/flame" class="uni-link">Read the case study ↗</a>
-            </div>
+          </div>
+
+          <div class="uni-cta" data-reveal>
+            <span class="uni-cta-note mono">Governance · adoption · design ops</span>
+            <a href="/work/flame" class="btn btn--primary">Read the case study</a>
           </div>
         </div>
       </section>
@@ -734,7 +771,7 @@ import Footer from '../components/Footer.astro';
     align-items: start;
   }
 
-  .specimen-col { grid-column: 1; grid-row: 1 / span 2; display: flex; flex-direction: column; gap: 26px; }
+  .specimen-col { grid-column: 1; display: flex; flex-direction: column; gap: 26px; }
   .specimen-frame {
     border: var(--border-width-strong) solid var(--color-core-border-strong);
     border-radius: var(--radius-surface);
@@ -760,56 +797,21 @@ import Footer from '../components/Footer.astro';
     color: var(--color-core-foreground-subtle);
   }
 
-  .uni-stack { grid-column: 2; grid-row: 1; display: flex; flex-direction: column; gap: 22px; }
+  .uni-stack { grid-column: 2; display: flex; flex-direction: column; gap: 22px; }
 
-  /* card — one component, three elevations, all token-driven */
+  /* card — one component; its elevation comes from the universe's --shadow-card alias */
   .card {
-    position: relative;
     background: var(--color-core-background-subtle);
     border: var(--border-width-strong) solid var(--color-core-border-default);
     border-radius: var(--radius-surface);
     padding: 28px 30px;
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    box-shadow: var(--shadow-card);
   }
-  .card--block { box-shadow: var(--shadow-block); }
-  .card--ridge { box-shadow: var(--shadow-ridge); }
-  .card--halo { box-shadow: var(--shadow-halo); }
-  .card:hover { transform: translateY(-2px); }
-  /* inspector tell: the elevation token surfaces on hover */
-  .card[data-token]::after {
-    content: attr(data-token);
-    position: absolute;
-    top: 10px;
-    right: 14px;
-    font-family: var(--font-family-mono);
-    font-size: 9.5px;
-    letter-spacing: 0.06em;
-    color: var(--color-core-foreground-subtle);
-    opacity: 0;
-    transition: opacity 0.18s ease;
-  }
-  .card[data-token]:hover::after { opacity: 1; }
   .card-label { margin-bottom: 10px; }
   .card-body { font-size: 15px; line-height: 1.62; color: var(--color-core-foreground-muted); }
 
-  /* the note — the postit that survived from 2019 */
-  .note {
-    grid-column: 2;
-    grid-row: 2;
-    background: var(--color-core-background-default);
-    border: var(--border-width-strong) solid var(--color-core-border-strong);
-    border-radius: var(--radius-surface);
-    padding: 26px 28px;
-    margin-right: -18px;
-    transform: rotate(-1.5deg);
-  }
-  .note-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--color-accent-default);
-    margin-bottom: 14px;
-  }
+  /* the note variant — the postit that survived from 2019, now a proper card */
+  .card--note { border-color: var(--color-core-border-strong); }
   .note-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
   .note-list li {
     position: relative;
@@ -852,8 +854,9 @@ import Footer from '../components/Footer.astro';
   .btn--primary {
     background: var(--color-accent-default);
     color: var(--color-core-background-default);
-    box-shadow: var(--shadow-block);
+    box-shadow: var(--shadow-card);
   }
+  /* on hover the button swaps its elevation primitive: the card shadow gives way to the halo */
   .btn--primary:hover { background: var(--color-accent-strong); transform: translate(2px, 2px); box-shadow: var(--shadow-halo); }
   .btn--primary:active { transform: translate(4px, 4px); box-shadow: none; }
   .btn:focus-visible { outline: var(--border-width-strong) solid var(--color-core-border-strong); outline-offset: 3px; }
@@ -950,9 +953,8 @@ import Footer from '../components/Footer.astro';
     .uni-header, .uni-spread, .uni-cta { grid-column: 1; }
     .uni-rail { display: none; }
     .uni-spread { grid-template-columns: 1fr; gap: 20px; }
-    .specimen-col, .uni-stack, .note { grid-column: 1; grid-row: auto; }
-    .note { margin-right: 0; transform: none; }
-    .uni-cta { margin-top: 40px; }
+    .specimen-col, .uni-stack { grid-column: 1; grid-row: auto; }
+    .uni-cta { margin-top: 40px; flex-direction: column-reverse; align-items: stretch; }
     .btn { width: 100%; text-align: center; }
     .cartela-gap { height: 90vh; }
     .cartela-title { font-size: clamp(56px, 16vw, 100px); }
