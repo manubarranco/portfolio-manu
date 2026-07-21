@@ -42,19 +42,26 @@ import Footer from '../components/Footer.astro';
           <div class="hero-col">
             <p class="status mono"><span class="dot" aria-hidden="true"></span> Available for new challenges</p>
 
-            <h1 id="hero-title" class="hero-h">I design the systems <span class="hl">other designers build on.</span></h1>
+            <h1 id="hero-title" class="hero-h">I design the infrastructure <span class="hl">other people move through without friction.</span></h1>
 
             <div class="lede">
               <p class="pos">
-                Design systems at global banking scale. AI-native product built from zero.
-                I define the system, make the decisions that set direction,
-                and stay until it's adopted.
+                I'm a systems thinker with a pull toward structure and abstraction.
+                Call me a firestarter: I get something moving, then leave to light
+                the next fire, and the team stays warm at the one I built.
+              </p>
+              <p class="through">
+                I enjoy connecting dots, shaping processes, and turning complexity
+                into something teams can reason about. My background in design,
+                behavior and human-centered thinking shapes how I approach problems:
+                patterns, constraints, context. In an AI-driven world, that way of
+                thinking feels more relevant than ever.
               </p>
             </div>
           </div>
         </section>
 
-        <section class="acto-0" aria-labelledby="acto-label">
+        <section id="about" class="acto-0" aria-labelledby="acto-label">
           <div class="wrap acto-grid">
             <div class="idx mono" aria-hidden="true">·</div>
             <div class="acto-body">
@@ -357,15 +364,9 @@ import Footer from '../components/Footer.astro';
 
       <!-- About + closing CTA — normal flow, rests in the main theme (frame color, same as
            the header) so links keep contrast against the accent, unlike a universe theme. -->
-      <section id="about" class="about wrap" aria-labelledby="about-title">
+      <section class="closing wrap">
         <div class="idx mono">·</div>
-        <div class="about-col" data-reveal>
-          <p id="about-title" class="eyebrow">About</p>
-          <p class="about-body">
-            I'm a systems thinker with a pull toward structure and abstraction. My strength is
-            the early definition: finding the invariants, the things that must be true regardless
-            of implementation. Structure before system. System before screens.
-          </p>
+        <div class="closing-col" data-reveal>
           <div class="end-cta">
             <p class="end-line">Available for new challenges.</p>
             <a href="/contact" class="end-link mono">Get in touch ↗</a>
@@ -901,11 +902,9 @@ import Footer from '../components/Footer.astro';
   .uni-cta-note { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-core-foreground-subtle); }
 
   /* ── about + closing cta */
-  .about { display: grid; grid-template-columns: 80px 1fr; border-top: 1.5px solid var(--color-core-border-default); margin-top: 64px; padding-bottom: 96px; }
-  .about-col { padding: 26px 0 0; max-width: 680px; }
-  .about-col .eyebrow { margin-bottom: 18px; }
-  .about-body { font-size: 19px; line-height: 1.55; letter-spacing: -0.01em; }
-  .end-cta { margin-top: 40px; display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+  .closing { display: grid; grid-template-columns: 80px 1fr; border-top: 1.5px solid var(--color-core-border-default); margin-top: 64px; padding-bottom: 96px; }
+  .closing-col { padding: 26px 0 0; max-width: 680px; }
+  .end-cta { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
   .end-line { font-size: 19px; letter-spacing: -0.01em; color: var(--color-core-foreground-default); }
   .end-link {
     text-transform: uppercase;
@@ -985,7 +984,7 @@ import Footer from '../components/Footer.astro';
   }
 
   @media (max-width: 720px) {
-    .hero, .about { grid-template-columns: 1fr; }
+    .hero, .closing { grid-template-columns: 1fr; }
     .idx { display: none; }
     .lede { grid-template-columns: 1fr; gap: 24px; }
     .uni-showcase { grid-template-columns: 1fr; }
