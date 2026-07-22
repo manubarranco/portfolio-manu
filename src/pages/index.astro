@@ -280,7 +280,7 @@ import Footer from '../components/Footer.astro';
           </div>
 
           <figure class="uni-hero" data-reveal>
-            <img src="/work/erneszt/automaton.webp" alt="The Erneszt automaton, the character that reads your trajectory" loading="lazy" />
+            <img src="/work/erneszt/trading-cards.webp" alt="An Erneszt archetype card and share prompt, the shareable artifact at the end of the conversation" loading="lazy" />
           </figure>
 
           <div class="uni-cards-row">
@@ -746,6 +746,15 @@ import Footer from '../components/Footer.astro';
     width: 100%;
     height: auto;
     border-radius: var(--radius-surface);
+  }
+  /* Erneszt's hero is the square card+share composite (1:1), not a landscape screenshot like
+     the other two universes — full-width would render it ~1:1 tall, noticeably taller than the
+     section around it. Cap the height and center it instead of stretching to the column width. */
+  [data-universe="erneszt"] .uni-hero img {
+    width: auto;
+    max-width: 100%;
+    max-height: 600px;
+    margin: 0 auto;
   }
   .uni-cards-row {
     grid-column: 2;
