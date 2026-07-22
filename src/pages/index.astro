@@ -182,7 +182,7 @@ import Footer from '../components/Footer.astro';
 
           <div class="uni-header" data-reveal>
             <p class="eyebrow">Ruralvía · Caja Rural</p>
-            <h2 id="rv-title" class="uni-tagline">An expert<br>in your corner</h2>
+            <h2 id="rv-title" class="uni-tagline">An expert <br>in your corner</h2>
           </div>
 
           <figure class="uni-hero" data-reveal>
@@ -229,7 +229,7 @@ import Footer from '../components/Footer.astro';
 
           <div class="uni-header" data-reveal>
             <p class="eyebrow">Flame · Santander</p>
-            <h2 id="flame-title" class="uni-tagline">A system teams<br>chose to adopt</h2>
+            <h2 id="flame-title" class="uni-tagline">A system teams <br>chose to adopt</h2>
           </div>
 
           <figure class="uni-hero" data-reveal>
@@ -276,7 +276,7 @@ import Footer from '../components/Footer.astro';
 
           <div class="uni-header" data-reveal>
             <p class="eyebrow">Erneszt · Self-initiated</p>
-            <h2 id="erneszt-title" class="uni-tagline">The thesis,<br>made real</h2>
+            <h2 id="erneszt-title" class="uni-tagline">The thesis, <br>made real</h2>
           </div>
 
           <figure class="uni-hero" data-reveal>
@@ -914,10 +914,19 @@ import Footer from '../components/Footer.astro';
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          if (!e.isIntersecting) return;
+          /* a fast trackpad flick can land a section already half (or fully) in view before
+             the fade-in has had any time to run, which reads as a blank screen for a beat.
+             If the element arrives already well into the viewport, skip the transition
+             instead of animating something that should have just been there. */
+          if (e.intersectionRatio > 0.5) e.target.classList.add('in-instant');
+          e.target.classList.add('in');
+          io.unobserve(e.target);
         });
       },
-      { rootMargin: '0px 0px -12% 0px' },
+      /* positive bottom margin grows the trigger zone below the fold, so the fade-in starts
+         before the section is actually visible instead of right as it arrives */
+      { rootMargin: '0px 0px 20% 0px', threshold: [0, 0.5] },
     );
     revealEls.forEach((n) => io.observe(n));
   } else {

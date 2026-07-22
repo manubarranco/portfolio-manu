@@ -11,7 +11,7 @@ const year = new Date().getFullYear();
     <div class="meta">
       <a href="https://linkedin.com/in/manubarranco">LinkedIn</a>
       <a href="mailto:mbarranco@gmail.com">Email</a>
-      <span class="faint">© {year} Manu Barranco</span>
+      <span class="faint"><span class="copy">©</span> {year} Manu Barranco</span>
     </div>
   </div>
 </footer>
@@ -34,9 +34,12 @@ const year = new Date().getFullYear();
   }
   .big:hover { color: var(--color-accent-default); }
   .meta { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; font-family: var(--font-family-mono); font-size: 13px; }
-  .meta a { transition: color 0.12s, background 0.12s, box-shadow 0.12s; }
+  .meta a { display: inline-block; padding: 8px 4px; margin: -8px -4px; transition: color 0.12s, background 0.12s, box-shadow 0.12s; }
   .meta a:hover { background: var(--color-accent-default); color: var(--color-core-background-default); box-shadow: 0 0 0 0.12em var(--color-accent-default); }
   .meta .faint { color: var(--color-core-foreground-subtle); }
+  /* Space Mono draws © high relative to the surrounding digits/letters, reading as a stray
+     superscript — nudge it back down to the text baseline. */
+  .meta .copy { position: relative; top: 0.12em; }
   @media (max-width: 640px) {
     .meta { align-items: flex-start; }
   }

@@ -43,6 +43,21 @@ const d = item.data;
   <Footer />
 </Base>
 
+<script>
+  /* show the diagram scroll hint only when a diagram actually overflows its container —
+     re-checked on resize since the 640px mobile floor may or may not exceed the viewport
+     depending on exact width */
+  function checkDiagramOverflow() {
+    document.querySelectorAll('.diagram-scroll').forEach((el) => {
+      const figure = el.closest('figure.diagram');
+      if (!figure) return;
+      figure.classList.toggle('is-scrollable', el.scrollWidth > el.clientWidth + 1);
+    });
+  }
+  checkDiagramOverflow();
+  window.addEventListener('resize', checkDiagramOverflow, { passive: true });
+</script>
+
 <style>
   /* re-anchor the themed vars here: `data-theme` on <article> redefines the custom
      properties for its subtree, but `color`/`background` inherited from <body> already
@@ -122,8 +137,45 @@ const d = item.data;
 
   /* diagrams — inline SVGs themed via the case's data-theme vars */
   .prose :global(figure.diagram) { margin: 2.4em 0; }
+  /* .diagram-frame (not the figure, which also contains the figcaption below) is the
+     positioning context for the hint badge, so it hugs the bottom-right of the image itself
+     rather than the bottom of the whole figure. .diagram-scroll is the actual scroll
+     container, kept separate so the badge — a sibling, not its child — stays pinned in place
+     as the user scrolls the diagram instead of scrolling away with it. */
+  .prose :global(figure.diagram .diagram-frame) { position: relative; }
+  .prose :global(figure.diagram .diagram-scroll) { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .prose :global(figure.diagram svg) { display: block; width: 100%; height: auto; }
   .prose :global(figure.diagram figcaption) { font-family: var(--font-family-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-core-foreground-subtle); margin-top: 10px; }
+  /* scroll affordance — only shown (via .is-scrollable, toggled in the script below) when the
+     diagram actually overflows. A solid filled chip, unlike the diagram's own flat inline
+     labels, so it doesn't read as one more piece of the diagram content. */
+  .prose :global(figure.diagram .diagram-hint) {
+    display: none;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    font-family: var(--font-family-mono);
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-on-accent);
+    background: var(--color-accent-strong);
+    border-radius: var(--radius-surface);
+    box-shadow: var(--shadow-card);
+  }
+  .prose :global(figure.diagram.is-scrollable .diagram-hint) { display: inline-flex; }
+  .prose :global(figure.diagram .diagram-hint-arrow) { display: inline-block; animation: diagram-hint-nudge 1.4s ease-in-out infinite; }
+  @keyframes diagram-hint-nudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(3px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prose :global(figure.diagram .diagram-hint-arrow) { animation: none; }
+  }
   .prose :global(svg .dg-stroke) { stroke: var(--color-accent-default); fill: none; stroke-width: 1.5; }
   .prose :global(svg .dg-stroke--soft) { stroke: var(--color-core-foreground-subtle); fill: none; stroke-width: 1; }
   .prose :global(svg .dg-arrow) { fill: var(--color-accent-default); }
@@ -143,8 +195,20 @@ const d = item.data;
   .prose :global(.shot-row figure.shot) { margin: 0; }
 
   @media (max-width: 860px) {
-    .cs-body { grid-template-columns: 1fr; gap: 32px; }
+    /* minmax(0, ...) not a bare 1fr: without the 0 floor, the diagrams' 640px mobile
+       min-width (below) inflates this single track to fit them, blowing the whole page
+       out to 640px wide instead of letting the figure's own overflow-x:auto absorb it. */
+    .cs-body { grid-template-columns: minmax(0, 1fr); gap: 32px; }
     .meta { position: static; flex-direction: row; flex-wrap: wrap; gap: 24px 40px; }
     .prose :global(.metrics) { grid-template-columns: repeat(2, 1fr); }
   }
+
+  @media (max-width: 720px) {
+    /* below this, width:100% shrinks the 960-wide diagrams past legibility (measured: 231px
+       container → 0.24× scale → ~2.5px effective text). Hold them at a readable floor and let
+       the figure's own overflow-x:auto handle the rest instead of squeezing the text away. */
+    .prose :global(figure.diagram svg) { width: auto; min-width: 640px; }
+  }
+
+  .cs-foot a { padding: 8px 4px; margin: -8px -4px; display: inline-block; }
 </style>
