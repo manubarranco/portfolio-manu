@@ -151,7 +151,7 @@ import Footer from '../components/Footer.astro';
           </div>
         </section>
 
-        <section class="work-intro" aria-labelledby="work-intro-label">
+        <section id="work" class="work-intro" aria-labelledby="work-intro-label">
           <div class="wrap acto-grid">
             <div class="idx mono" aria-hidden="true">·</div>
             <div class="acto-body" data-reveal>
@@ -470,6 +470,8 @@ import Footer from '../components/Footer.astro';
     border-bottom: 1.5px solid var(--color-core-border-strong);
     scroll-margin-top: 124px; /* clearance for the sticky header when jumping to #hero */
   }
+  /* same clearance for the other two nav targets (header is ~111px tall) */
+  #about, #work { scroll-margin-top: 136px; }
   .hero-col { padding: 26px 0 64px; }
   .status { color: var(--color-accent-strong); text-transform: uppercase; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 9px; }
   .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent-default); }
