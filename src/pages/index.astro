@@ -309,17 +309,6 @@ import Footer from '../components/Footer.astro';
         </div>
       </section>
 
-      <!-- About + closing CTA — normal flow, rests in the main theme (frame color, same as
-           the header) so links keep contrast against the accent, unlike a universe theme. -->
-      <section class="closing wrap">
-        <div class="idx mono">·</div>
-        <div class="closing-col" data-reveal>
-          <div class="end-cta">
-            <p class="end-line">Available for new challenges.</p>
-            <a href="/contact" class="end-link mono">Get in touch ↗</a>
-          </div>
-        </div>
-      </section>
     </div><!-- /panel-stack -->
   </main>
 
@@ -827,22 +816,6 @@ import Footer from '../components/Footer.astro';
   .btn:focus-visible { outline: var(--border-width-strong) solid var(--color-core-border-strong); outline-offset: 3px; }
   .uni-cta-note { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-core-foreground-subtle); }
 
-  /* ── about + closing cta */
-  .closing { display: grid; grid-template-columns: 80px 1fr; border-top: 1.5px solid var(--color-core-border-default); margin-top: 64px; padding-bottom: 96px; }
-  .closing-col { padding: 26px 0 0; max-width: 680px; }
-  .end-cta { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
-  .end-line { font-size: 19px; letter-spacing: -0.01em; color: var(--color-core-foreground-default); }
-  .end-link {
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--color-accent-strong);
-    border-bottom: 1.5px solid var(--color-accent-default);
-    padding-bottom: 2px;
-    transition: color 0.12s, background 0.12s, box-shadow 0.12s;
-  }
-  /* Same fill treatment as every other accent link on the site (nav, footer, case-study links) */
-  .end-link:hover { background: var(--color-accent-strong); color: var(--color-on-accent); box-shadow: 0 0 0 0.1em var(--color-accent-strong); }
-
   /* ── acto 0 */
   .acto-0 { border-top: 1.5px solid var(--color-core-border-strong); }
   .acto-grid {
@@ -910,7 +883,7 @@ import Footer from '../components/Footer.astro';
   }
 
   @media (max-width: 720px) {
-    .hero, .closing { grid-template-columns: 1fr; }
+    .hero { grid-template-columns: 1fr; }
     .idx { display: none; }
     .lede { grid-template-columns: 1fr; gap: 24px; }
     .uni-showcase { grid-template-columns: 1fr; }
