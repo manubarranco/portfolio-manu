@@ -42,21 +42,25 @@ import Footer from '../components/Footer.astro';
           <div class="hero-col">
             <p class="status mono"><span class="dot" aria-hidden="true"></span> Available for new challenges</p>
 
-            <h1 id="hero-title" class="hero-h">I design the infrastructure <span class="hl">other people move through without friction.</span></h1>
+            <h1 id="hero-title" class="hero-h">I design the infrastructure <span class="hl">that makes everyone else's work easier.</span></h1>
 
             <div class="lede">
               <p class="pos">
                 I'm a systems thinker with a pull toward structure and abstraction.
-                Call me a firestarter: I get something moving, then leave to light
-                the next fire, and the team stays warm at the one I built.
-              </p>
-              <p class="through">
-                I enjoy connecting dots, shaping processes, and turning complexity
-                into something teams can reason about. My background in design,
-                behavior and human-centered thinking shapes how I approach problems:
+                My background in design, behavior and human-centered thinking shapes how I approach problems:
                 patterns, constraints, context. In an AI-driven world, that way of
                 thinking feels more relevant than ever.
               </p>
+              <div class="through">
+                <p>
+                  Call me a firestarter: I get something moving, then move to light
+                  up the next fire, while the team stays warm at the one I built.
+                </p>
+                <p>
+                  I enjoy shaping processes and turning complexity
+                  into something teams can reason about.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -541,7 +545,7 @@ import Footer from '../components/Footer.astro';
   .hl { color: var(--color-accent-default); }
   .lede { margin-top: 44px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; max-width: 920px; }
   .pos { font-weight: 500; font-size: 23px; line-height: 1.34; letter-spacing: -0.015em; }
-  .through { font-size: 15px; line-height: 1.65; color: var(--color-core-foreground-muted); }
+  .through { font-size: 15px; line-height: 1.65; color: var(--color-core-foreground-muted); display: flex; flex-direction: column; gap: 14px; }
 
   /* ── panel stack: surfaces scroll normally, covering the fixed cartelas behind them ── */
   .panel-stack { position: relative; }
