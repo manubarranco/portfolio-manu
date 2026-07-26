@@ -37,7 +37,6 @@ const d = item.data;
 
     <nav class="cs-foot wrap" aria-label="Case study">
       <a href="/#work">← All work</a>
-      <a href="/contact">Get in touch ↗</a>
     </nav>
   </article>
   <Footer />
@@ -63,7 +62,7 @@ const d = item.data;
      properties for its subtree, but `color`/`background` inherited from <body> already
      resolved against the untouched :root values — only elements that reference the vars
      directly inside the scope pick up the new theme. */
-  .cs { background: var(--color-core-background-default); color: var(--color-core-foreground-default); font-family: var(--font-family-body); }
+  .cs { background: var(--color-core-background-default); color: var(--color-core-foreground-default); font-family: var(--font-family-body); padding-bottom: 64px; }
   .cs-head { padding-top: 64px; }
   .cs-head .eyebrow { color: var(--color-accent-strong); }
   .cs-head h1 { font-family: var(--font-family-display); font-weight: 800; font-size: clamp(48px, 10vw, 104px); line-height: 0.94; letter-spacing: -0.02em; margin: 18px 0; }
