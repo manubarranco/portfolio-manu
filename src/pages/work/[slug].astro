@@ -105,7 +105,9 @@ const d = item.data;
 
     const items = shots.map((img) => {
       const fig = img.closest('figure');
-      const caption = fig?.querySelector('figcaption')?.textContent?.trim() || '';
+      /* alt is the fallback for figures that carry no caption of their own, like the
+         individual illustrations inside the archetype strip (captioned once, as a group) */
+      const caption = fig?.querySelector('figcaption')?.textContent?.trim() || img.alt || '';
       return { src: img.currentSrc || img.src, alt: img.alt || '', caption };
     });
 
@@ -571,6 +573,24 @@ const d = item.data;
   .prose :global(figure.shot figcaption) { font-family: var(--font-family-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-core-foreground-subtle); margin-top: 10px; }
   .prose :global(.shot-row) { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 2.2em 0; }
   .prose :global(.shot-row figure.shot) { margin: 0; }
+
+  /* strip of generated archetype illustrations: five in a row is the point, since the
+     evidence is that they all share a style while no two subjects repeat */
+  .prose :global(figure.art-row) { margin: 2.4em 0; }
+  .prose :global(.art-row-grid) { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+  .prose :global(.art-row-grid figure.shot) { margin: 0; }
+  /* the illustrations carry their own transparent fade to the edges, so a frame around
+     them would cut exactly the effect the style lock is going for */
+  .prose :global(.art-row-grid figure.shot img) { border: 0; background: none; }
+  .prose :global(.art-row-grid .shot-zoom)::after { width: 20px; height: 20px; font-size: 10px; right: 5px; bottom: 5px; }
+  .prose :global(figure.art-row > figcaption) { font-family: var(--font-family-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-core-foreground-subtle); margin-top: 10px; }
+
+  @media (max-width: 860px) {
+    .prose :global(.art-row-grid) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 560px) {
+    .prose :global(.art-row-grid) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
 
   @media (max-width: 860px) {
     /* minmax(0, ...) not a bare 1fr: without the 0 floor, the diagrams' 640px mobile
