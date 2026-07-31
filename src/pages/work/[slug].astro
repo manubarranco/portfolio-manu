@@ -38,6 +38,30 @@ const d = item.data;
     <nav class="cs-foot wrap" aria-label="Case study">
       <a href="/#work">← All work</a>
     </nav>
+
+    <!-- Lightbox. Lives inside <article> so it inherits the case's data-theme tokens;
+         showModal() lifts it to the top layer regardless of where it sits in the DOM.
+         Native <dialog> buys us Esc-to-close, the backdrop, the focus trap and focus
+         restore to the thumbnail that opened it. -->
+    <dialog class="lb" aria-label="Image viewer">
+      <div class="lb-stage">
+        <img class="lb-img" src="" alt="" draggable="false" />
+      </div>
+
+      <button type="button" class="lb-nav lb-prev" aria-label="Previous image">←</button>
+      <button type="button" class="lb-nav lb-next" aria-label="Next image">→</button>
+
+      <div class="lb-bar">
+        <p class="lb-cap"></p>
+        <div class="lb-tools">
+          <span class="lb-count mono" aria-hidden="true"></span>
+          <button type="button" class="lb-btn lb-out" aria-label="Zoom out">−</button>
+          <span class="lb-zoom mono" role="status" aria-live="polite"></span>
+          <button type="button" class="lb-btn lb-in" aria-label="Zoom in">+</button>
+          <button type="button" class="lb-btn lb-close" aria-label="Close viewer">✕</button>
+        </div>
+      </div>
+    </dialog>
   </article>
   <Footer />
 </Base>
@@ -55,6 +79,204 @@ const d = item.data;
   }
   checkDiagramOverflow();
   window.addEventListener('resize', checkDiagramOverflow, { passive: true });
+
+  /* ── lightbox: click any case-study shot to open it full screen, then zoom and pan.
+     Zoom is applied as an explicit pixel width on the image inside a scrolling stage
+     (not a CSS transform): panning then rides on native scrolling, which is what makes
+     a trackpad, a scrollbar and a dragging finger all behave the way people expect. */
+  const dlg = document.querySelector('.lb') as HTMLDialogElement | null;
+  const shots = Array.from(
+    document.querySelectorAll<HTMLImageElement>('.prose figure.shot img'),
+  );
+
+  if (dlg && shots.length && typeof dlg.showModal === 'function') {
+    const stage = dlg.querySelector('.lb-stage') as HTMLElement;
+    const lbImg = dlg.querySelector('.lb-img') as HTMLImageElement;
+    const capEl = dlg.querySelector('.lb-cap') as HTMLElement;
+    const countEl = dlg.querySelector('.lb-count') as HTMLElement;
+    const zoomEl = dlg.querySelector('.lb-zoom') as HTMLElement;
+    const prevBtn = dlg.querySelector('.lb-prev') as HTMLButtonElement;
+    const nextBtn = dlg.querySelector('.lb-next') as HTMLButtonElement;
+
+    /* Astro's scoped styles only match elements carrying its data-astro-cid-* attribute,
+       which nodes built with createElement never get — copy it off an element the
+       compiler did stamp so the generated buttons pick up the .shot-zoom rules. */
+    const cid = stage.getAttributeNames().find((n) => n.startsWith('data-astro-cid'));
+
+    const items = shots.map((img) => {
+      const fig = img.closest('figure');
+      const caption = fig?.querySelector('figcaption')?.textContent?.trim() || '';
+      return { src: img.currentSrc || img.src, alt: img.alt || '', caption };
+    });
+
+    let index = 0;
+    let scale = 1;      /* multiplier over the image's natural width */
+    let fitScale = 1;   /* the scale at which it fits the stage; also the lower bound */
+
+    function applyScale(next: number, focusX?: number, focusY?: number) {
+      const nw = lbImg.naturalWidth || 1;
+      const clamped = Math.min(Math.max(next, fitScale), Math.max(fitScale * 6, 4));
+      const prevW = lbImg.clientWidth || nw * scale;
+      /* keep whatever sits under the pointer (or under the pinch center) pinned in place:
+         convert it to a fraction of the content, then put that fraction back under it */
+      const fx = focusX ?? stage.clientWidth / 2;
+      const fy = focusY ?? stage.clientHeight / 2;
+      const ratioX = (stage.scrollLeft + fx) / Math.max(prevW, 1);
+      const ratioY = (stage.scrollTop + fy) / Math.max(lbImg.clientHeight || 1, 1);
+
+      scale = clamped;
+      lbImg.style.width = `${nw * scale}px`;
+
+      stage.scrollLeft = ratioX * lbImg.clientWidth - fx;
+      stage.scrollTop = ratioY * lbImg.clientHeight - fy;
+
+      zoomEl.textContent = `${Math.round(scale * 100)}%`;
+      stage.classList.toggle('is-zoomed', scale > fitScale + 0.001);
+    }
+
+    function fitToStage() {
+      const nw = lbImg.naturalWidth;
+      const nh = lbImg.naturalHeight;
+      if (!nw || !nh) return;
+      /* never upscale on open: a small screenshot blown up to fill the stage just looks broken */
+      fitScale = Math.min(stage.clientWidth / nw, stage.clientHeight / nh, 1);
+      scale = fitScale;
+      lbImg.style.width = `${nw * fitScale}px`;
+      zoomEl.textContent = `${Math.round(scale * 100)}%`;
+      stage.classList.remove('is-zoomed');
+    }
+
+    function show(i: number) {
+      index = (i + items.length) % items.length;
+      const it = items[index];
+      lbImg.style.width = '';
+      lbImg.src = it.src;
+      lbImg.alt = it.alt;
+      capEl.textContent = it.caption;
+      countEl.textContent = items.length > 1 ? `${index + 1} / ${items.length}` : '';
+      prevBtn.hidden = nextBtn.hidden = items.length < 2;
+      if (lbImg.complete && lbImg.naturalWidth) fitToStage();
+    }
+
+    lbImg.addEventListener('load', fitToStage);
+
+    shots.forEach((img, i) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'shot-zoom';
+      btn.setAttribute(
+        'aria-label',
+        items[i].caption ? `Enlarge: ${items[i].caption}` : 'Enlarge image',
+      );
+      if (cid) btn.setAttribute(cid, '');
+      img.parentNode?.insertBefore(btn, img);
+      btn.appendChild(img);
+      btn.addEventListener('click', () => {
+        show(i);
+        dlg.showModal();
+        fitToStage();
+      });
+    });
+
+    dlg.querySelector('.lb-close')?.addEventListener('click', () => dlg.close());
+    dlg.querySelector('.lb-in')?.addEventListener('click', () => applyScale(scale * 1.4));
+    dlg.querySelector('.lb-out')?.addEventListener('click', () => applyScale(scale / 1.4));
+    prevBtn.addEventListener('click', () => show(index - 1));
+    nextBtn.addEventListener('click', () => show(index + 1));
+
+    /* click the backdrop (i.e. the dialog itself, outside the stage) to dismiss */
+    dlg.addEventListener('click', (e) => {
+      if (e.target === dlg) dlg.close();
+    });
+
+    /* double-click / double-tap toggles between fit and 100% (or back to fit if already there) */
+    stage.addEventListener('dblclick', (e) => {
+      const r = stage.getBoundingClientRect();
+      applyScale(scale > fitScale + 0.001 ? fitScale : Math.max(1, fitScale * 2), e.clientX - r.left, e.clientY - r.top);
+    });
+
+    stage.addEventListener(
+      'wheel',
+      (e) => {
+        /* trackpad pinch and ctrl+wheel arrive as wheel events with ctrlKey set; plain
+           wheel is left alone so a two-finger scroll still pans the zoomed image */
+        if (!e.ctrlKey) return;
+        e.preventDefault();
+        const r = stage.getBoundingClientRect();
+        applyScale(scale * (e.deltaY < 0 ? 1.12 : 1 / 1.12), e.clientX - r.left, e.clientY - r.top);
+      },
+      { passive: false },
+    );
+
+    /* drag to pan, and two-finger pinch to zoom */
+    const pointers = new Map<number, { x: number; y: number }>();
+    let pinchStart = 0;
+    let pinchScale = 1;
+    let panFrom: { x: number; y: number; left: number; top: number } | null = null;
+
+    function pinchDistance() {
+      const [a, b] = Array.from(pointers.values());
+      return Math.hypot(a.x - b.x, a.y - b.y);
+    }
+
+    stage.addEventListener('pointerdown', (e) => {
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pointers.size === 2) {
+        pinchStart = pinchDistance();
+        pinchScale = scale;
+        panFrom = null;
+      } else if (pointers.size === 1) {
+        panFrom = { x: e.clientX, y: e.clientY, left: stage.scrollLeft, top: stage.scrollTop };
+      }
+    });
+
+    stage.addEventListener('pointermove', (e) => {
+      if (!pointers.has(e.pointerId)) return;
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+      if (pointers.size === 2 && pinchStart > 0) {
+        e.preventDefault();
+        const [a, b] = Array.from(pointers.values());
+        const r = stage.getBoundingClientRect();
+        applyScale(
+          (pinchScale * pinchDistance()) / pinchStart,
+          (a.x + b.x) / 2 - r.left,
+          (a.y + b.y) / 2 - r.top,
+        );
+        return;
+      }
+
+      if (panFrom && pointers.size === 1) {
+        const dx = e.clientX - panFrom.x;
+        const dy = e.clientY - panFrom.y;
+        if (stage.scrollWidth > stage.clientWidth || stage.scrollHeight > stage.clientHeight) {
+          e.preventDefault();
+          stage.scrollLeft = panFrom.left - dx;
+          stage.scrollTop = panFrom.top - dy;
+          stage.classList.add('is-panning');
+        }
+      }
+    });
+
+    function endPointer(e: PointerEvent) {
+      pointers.delete(e.pointerId);
+      if (pointers.size < 2) pinchStart = 0;
+      if (pointers.size === 0) {
+        panFrom = null;
+        stage.classList.remove('is-panning');
+      }
+    }
+    stage.addEventListener('pointerup', endPointer);
+    stage.addEventListener('pointercancel', endPointer);
+
+    dlg.addEventListener('keydown', (e) => {
+      if (items.length < 2) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(index + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(index - 1); }
+    });
+
+    window.addEventListener('resize', () => { if (dlg.open) fitToStage(); }, { passive: true });
+  }
 </script>
 
 <style>
@@ -189,6 +411,163 @@ const d = item.data;
 
   .prose :global(figure.shot) { margin: 2.2em 0; }
   .prose :global(figure.shot img) { display: block; width: 100%; height: auto; border: 1.5px solid var(--color-core-border-default); background: var(--color-core-background-subtle); }
+
+  /* ── zoom trigger: the script wraps every shot in this button (no-JS keeps a plain image) */
+  .prose :global(.shot-zoom) {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+    font: inherit;
+    color: inherit;
+  }
+  /* affordance badge, mirroring the diagram scroll hint so the two read as the same family */
+  .prose :global(.shot-zoom)::after {
+    content: '⤢';
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    line-height: 1;
+    color: var(--color-on-accent);
+    background: var(--color-accent-strong);
+    border-radius: var(--radius-surface);
+    box-shadow: var(--shadow-card);
+    opacity: 0;
+    transition: opacity 0.14s ease;
+  }
+  .prose :global(.shot-zoom:hover)::after,
+  .prose :global(.shot-zoom:focus-visible)::after { opacity: 1; }
+  .prose :global(.shot-zoom:focus-visible) { outline: var(--border-width-strong) solid var(--color-accent-strong); outline-offset: 3px; }
+  /* touch devices get no hover, so the badge has to be there from the start */
+  @media (hover: none) {
+    .prose :global(.shot-zoom)::after { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prose :global(.shot-zoom)::after { transition: none; }
+  }
+
+  /* ── lightbox */
+  .lb {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    padding: 0;
+    border: 0;
+    background: var(--color-core-background-default);
+    color: var(--color-core-foreground-default);
+    overflow: hidden;
+  }
+  .lb::backdrop { background: rgba(0, 0, 0, 0.82); }
+  .lb:not([open]) { display: none; }
+
+  .lb-stage {
+    position: absolute;
+    inset: 0 0 var(--lb-bar-h, 68px);
+    display: flex;
+    overflow: auto;
+    overscroll-behavior: contain;
+    /* the pointer handlers own horizontal drag and pinch; leaving the browser its own
+       gesture would fight them mid-drag */
+    touch-action: none;
+    background: var(--color-core-background-subtle);
+  }
+  .lb-img {
+    margin: auto; /* centers while small, and unlike justify/align-center it does not clip
+                     the top-left once the image outgrows the stage and starts scrolling */
+    display: block;
+    max-width: none;
+    height: auto;
+    /* flex-shrink is 1 by default and a replaced element's automatic minimum size is its
+       intrinsic width: without this the stage silently clamps every zoom level above 100%
+       back down to the file's natural width, and zooming in past 100% does nothing */
+    flex: none;
+  }
+  .lb-stage.is-zoomed { cursor: grab; }
+  .lb-stage.is-panning { cursor: grabbing; }
+
+  .lb-bar {
+    position: absolute;
+    inset: auto 0 0 0;
+    min-height: var(--lb-bar-h, 68px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 20px;
+    border-top: 1.5px solid var(--color-core-border-strong);
+    background: var(--color-core-background-default);
+  }
+  .lb-cap {
+    font-family: var(--font-family-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--color-core-foreground-subtle);
+    margin: 0;
+  }
+  .lb-tools { display: flex; align-items: center; gap: 8px; flex: none; }
+  .lb-count, .lb-zoom {
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    color: var(--color-core-foreground-subtle);
+    min-width: 44px;
+    text-align: center;
+  }
+  .lb-btn {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-family-body);
+    font-size: 16px;
+    line-height: 1;
+    color: var(--color-core-foreground-default);
+    background: none;
+    border: var(--border-width-strong) solid var(--color-core-border-default);
+    border-radius: var(--radius-surface);
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+  }
+  .lb-btn:hover { background: var(--color-accent-strong); color: var(--color-on-accent); border-color: var(--color-accent-strong); }
+  .lb-btn:focus-visible { outline: var(--border-width-strong) solid var(--color-accent-strong); outline-offset: 2px; }
+
+  .lb-nav {
+    position: absolute;
+    top: calc(50% - var(--lb-bar-h, 68px) / 2);
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--color-core-foreground-default);
+    background: var(--color-core-background-default);
+    border: var(--border-width-strong) solid var(--color-core-border-default);
+    border-radius: var(--radius-surface);
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
+  }
+  .lb-prev { left: 16px; }
+  .lb-next { right: 16px; }
+  .lb-nav:hover { background: var(--color-accent-strong); color: var(--color-on-accent); border-color: var(--color-accent-strong); }
+  .lb-nav:focus-visible { outline: var(--border-width-strong) solid var(--color-accent-strong); outline-offset: 2px; }
+  .lb-nav[hidden] { display: none; }
+
+  @media (max-width: 560px) {
+    .lb-cap { display: none; } /* the tools need the whole bar on a phone */
+    .lb-bar { justify-content: flex-end; }
+    .lb-nav { width: 40px; height: 40px; }
+  }
   .prose :global(figure.shot figcaption) { font-family: var(--font-family-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-core-foreground-subtle); margin-top: 10px; }
   .prose :global(.shot-row) { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 2.2em 0; }
   .prose :global(.shot-row figure.shot) { margin: 0; }
