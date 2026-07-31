@@ -589,13 +589,36 @@ import Footer from '../components/Footer.astro';
     z-index: 1; /* the chip field is position:absolute, which paints above static-flow
                    content by default — lift the title/eyebrow above it so traveling
                    chips read as passing behind, not obscuring it */
-    font-family: var(--font-family-mono);
-    font-size: 13px;
+    /* Each universe's own headline face, so the credit belongs to its cartela instead of
+       reading as system chrome: Fraunces on Ruralvía, Big Shoulders on Flame, Playfair on
+       Erneszt, each paired against its own display face in the title below. */
+    font-family: var(--font-family-headline);
+    font-weight: var(--font-weight-headline);
+    /* Sized as the client credit on a title card, not as a UI label. At 13px against a
+       photographic backdrop it read as a caption someone forgot to remove. */
+    font-size: clamp(15px, 2.1vw, 28px);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: rgba(255, 255, 255, 0.85);
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.9), 0 0 6px rgba(0, 0, 0, 0.75), 0 1px 2px rgba(0, 0, 0, 0.9);
+    letter-spacing: 0.16em;
+    /* letter-spacing also lands after the final letter, so a centred line sits half a
+       letter-space left of true centre. Pull that trailing space back out. */
+    margin-right: -0.16em;
+    /* White measured 15.4:1 over Flame's fire and 14.1:1 over Erneszt's gears. Ruralvía's
+       wheat is the hard one (3.7:1, with pixels from near-black to blown-out in the same
+       band), which is what --cartela-halo below is for. */
+    color: #FFFFFF;
+    text-shadow:
+      0 0 4px var(--cartela-halo, rgba(0, 0, 0, 0.95)),
+      0 0 12px var(--cartela-halo, rgba(0, 0, 0, 0.8)),
+      0 2px 3px var(--cartela-halo, rgba(0, 0, 0, 0.95));
   }
+  /* Ruralvía's title is drawn as a fill plus a dark green outline; the credit takes the same
+     green instead of a generic black halo, so both lines read as one piece of lettering. */
+  .cartela[data-theme="ruralvia"] .cartela-eyebrow { --cartela-halo: #0E5400; }
+  /* Optical size correction. What the eye compares across the three cartelas is cap height,
+     not font-size, and Big Shoulders runs tall: measured at a shared 26.88px it caps at
+     21.5px against Fraunces' 18.8px and Playfair's 19.0px. Scaling it by 18.9/21.5 puts all
+     three credits on the same cap height. */
+  .cartela[data-theme="flame"] .cartela-eyebrow { font-size: clamp(13px, 1.85vw, 24.5px); }
   .cartela-title {
     position: relative;
     z-index: 1;
