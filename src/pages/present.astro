@@ -1,0 +1,501 @@
+---
+import Base from '../layouts/Base.astro';
+
+// The interview deck. Same content spine as the site (Ruralvía → Flame → Erneszt),
+// distilled to one beat per slide. Each slide carries the data-theme of its universe,
+// so the deck inherits the whole token system for free.
+type Slide = {
+  variant: 'title' | 'arc' | 'split' | 'gallery' | 'statement' | 'metrics' | 'close';
+  theme?: string;
+  kicker: string;
+  headline: string;
+  body?: string;
+  quote?: string;
+  meta?: string;
+  image?: { src: string; alt: string };
+  images?: { src: string; alt: string }[];
+  items?: { index: string; title: string; label: string }[];
+  metrics?: { num: string; lbl: string }[];
+};
+
+const slides: Slide[] = [
+  {
+    variant: 'title',
+    kicker: 'Portfolio · 2026',
+    headline: 'I define the system and make the decisions that set the direction.',
+    body: 'Then I lead the execution and adoption to make it real.',
+    meta: 'Manu Barranco · Product design leader · 15+ years in digital product, the last eight in banking',
+  },
+  {
+    variant: 'arc',
+    kicker: 'The arc',
+    headline: 'Three projects. One story.',
+    body: 'Each one raises the altitude: design the product, design the system that scales the people who design products, design with AI as the material.',
+    items: [
+      { index: '01', title: 'Ruralvía', label: 'Product design, end to end' },
+      { index: '02', title: 'Flame', label: 'Systems at scale' },
+      { index: '03', title: 'Erneszt', label: 'AI from scratch' },
+    ],
+  },
+  {
+    variant: 'split',
+    theme: 'ruralvia',
+    kicker: 'Ruralvía · Caja Rural · 2018–2019',
+    headline: 'The research led.',
+    body: '201 survey responses, desk research and five in-depth interviews across Spain. People used the app to check their balance and move money. What they asked for was someone in their corner.',
+    quote: 'The Caja Rural app talks Greek to me.',
+    image: { src: '/work/ruralvia/persona-board.webp', alt: 'User research synthesis board' },
+  },
+  {
+    variant: 'split',
+    theme: 'ruralvia',
+    kicker: 'Ruralvía · The vision',
+    headline: 'El Experto: an expert in your corner.',
+    body: 'Not a chatbot. A contextual advisor built on Caja Rural’s real asset: closeness. And underneath, the floor the research demanded: the complete transfer flow, every screen and every state.',
+    image: { src: '/work/ruralvia/expert-chat.webp', alt: 'El Experto, a contextual advisor inside the app' },
+  },
+  {
+    variant: 'split',
+    theme: 'ruralvia',
+    kicker: 'Ruralvía · The outcome',
+    headline: 'The industry caught up.',
+    body: 'What we designed in 2018 is what Cleo, Revolut and N26 are building today: proactive advice, contextual alerts, a product that works for you.',
+    image: { src: '/work/ruralvia/ruralvia.webp', alt: 'Ruralvía’s redesigned home screen, in production' },
+  },
+  {
+    variant: 'split',
+    theme: 'flame',
+    kicker: 'Flame · Santander · 2020–2024',
+    headline: 'The problem wasn’t consistency. It was adoption.',
+    body: 'A global system imposed top-down dies ignored. Flame chose adoption over control: a global foundation, local layers, and teams that could move fast without fragmenting the platform.',
+    image: { src: '/work/flame/sticker-sheet.webp', alt: 'Flame component sticker sheet' },
+  },
+  {
+    variant: 'gallery',
+    theme: 'flame',
+    kicker: 'Flame · Governance',
+    headline: 'An agreement, not a rulebook.',
+    body: '350+ designers across 11 markets. None of them reported to me. Guidance over enforcement, support over control.',
+    images: [
+      { src: '/work/flame/contribution-model.webp', alt: 'Flame contribution model' },
+      { src: '/work/flame/distribution-model.webp', alt: 'Flame distribution model' },
+    ],
+  },
+  {
+    variant: 'statement',
+    theme: 'flame',
+    kicker: 'Flame · The European tier',
+    headline: 'The European tier outgrew the global reference.',
+    body: 'Co-designed by several countries through facilitation and explicit trade-offs. Consensus outran hierarchy.',
+  },
+  {
+    variant: 'metrics',
+    theme: 'flame',
+    kicker: 'Flame 4.0 · The proof',
+    headline: 'Breaking the system to keep it alive.',
+    body: 'A deliberate breaking change instead of inherited debt: new governance, new architecture, a protected core.',
+    metrics: [
+      { num: '1,780+', lbl: 'components governed' },
+      { num: '350+', lbl: 'designers' },
+      { num: '10', lbl: 'countries' },
+      { num: '35%', lbl: 'faster feature development' },
+    ],
+  },
+  {
+    variant: 'split',
+    theme: 'erneszt',
+    kicker: 'Erneszt · Self-initiated · 2026',
+    headline: 'AI-native products deliver a feeling, not features.',
+    body: 'Three emotional moments designed before any interface: recognition, belonging, sharing. That sequence governed every decision that followed.',
+    image: { src: '/work/erneszt/automaton.webp', alt: 'The Erneszt automaton' },
+  },
+  {
+    variant: 'statement',
+    theme: 'erneszt',
+    kicker: 'Erneszt · Conversation architecture',
+    headline: 'A prompt is a design artifact.',
+    body: 'Five phases, each fully specified, like a user flow or a component library. Two of them the user never sees: they are what makes the rest feel prescient.',
+  },
+  {
+    variant: 'split',
+    theme: 'erneszt',
+    kicker: 'Erneszt · The illustration engine',
+    headline: 'The system owns the style. The model owns the subject.',
+    body: 'Every card is generated for one person, out of what they actually said. The same contract a design system makes with its teams: freedom inside the constraint, no vote on the constraint.',
+    image: { src: '/work/erneszt/trading-cards.webp', alt: 'Archetype cards in the automaton’s Art Nouveau visual language' },
+  },
+  {
+    variant: 'close',
+    kicker: 'Why BBVA',
+    headline: 'Design at the table where decisions are made.',
+    body: 'Two of BBVA’s strategic priorities are this exact thesis: making the most of AI, and a radical customer perspective. That is the work I want to do next.',
+    meta: 'Erneszt is live · erneszt.com',
+  },
+];
+---
+
+<Base title="Present · Manu Barranco" description="Portfolio, presented.">
+  <main class="deck" aria-label="Portfolio presentation">
+    {slides.map((s, i) => (
+      <section
+        class={`slide v-${s.variant}`}
+        data-theme={s.theme}
+        data-slide={i}
+        aria-hidden={i === 0 ? 'false' : 'true'}
+      >
+        <div class="slide-inner">
+          <p class="kicker">{s.kicker}</p>
+
+          {s.variant === 'gallery' || s.variant === 'split' ? (
+            <div class="cols">
+              <div class="text">
+                <h2 class="headline">{s.headline}</h2>
+                {s.quote && <p class="quote">&ldquo;{s.quote}&rdquo;</p>}
+                {s.body && <p class="body">{s.body}</p>}
+              </div>
+              <div class="media">
+                {s.image && <img src={s.image.src} alt={s.image.alt} loading="eager" />}
+                {s.images && s.images.map((img) => <img src={img.src} alt={img.alt} loading="eager" />)}
+              </div>
+            </div>
+          ) : (
+            <div class="text">
+              <h2 class="headline">{s.headline}</h2>
+              {s.body && <p class="body">{s.body}</p>}
+              {s.items && (
+                <ol class="arc-list">
+                  {s.items.map((it) => (
+                    <li>
+                      <span class="mono arc-index">{it.index}</span>
+                      <span class="arc-title">{it.title}</span>
+                      <span class="arc-label">{it.label}</span>
+                    </li>
+                  ))}
+                </ol>
+              )}
+              {s.metrics && (
+                <div class="metrics">
+                  {s.metrics.map((m) => (
+                    <div class="metric">
+                      <span class="num">{m.num}</span>
+                      <span class="lbl">{m.lbl}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {s.meta && <p class="meta mono">{s.meta}</p>}
+            </div>
+          )}
+        </div>
+      </section>
+    ))}
+
+    <div class="hud" data-theme="">
+      <div class="progress" aria-hidden="true"><span class="bar"></span></div>
+      <p class="hint mono" aria-hidden="true">&larr; &rarr; navigate &middot; esc exits</p>
+      <div class="controls">
+        <button class="ctrl prev mono" aria-label="Previous slide">&larr;</button>
+        <span class="counter mono" aria-live="polite">01 / {String(slides.length).padStart(2, '0')}</span>
+        <button class="ctrl next mono" aria-label="Next slide">&rarr;</button>
+      </div>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .deck {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--color-core-background-default);
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    background: var(--color-core-background-default);
+    color: var(--color-core-foreground-default);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.5s;
+    display: flex;
+    align-items: stretch;
+  }
+  .slide.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 1;
+  }
+
+  .slide-inner {
+    width: 100%;
+    max-width: var(--layout-max-width);
+    margin: 0 auto;
+    padding: clamp(40px, 7vh, 84px) var(--space-gutter) clamp(96px, 14vh, 140px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 4vh, 40px);
+    min-height: 0;
+  }
+
+  .kicker {
+    font-family: var(--font-family-mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent-default);
+    border-bottom: 1.5px solid var(--color-core-border-strong);
+    padding-bottom: 14px;
+  }
+
+  .headline {
+    font-family: var(--font-family-display);
+    font-weight: var(--font-weight-headline);
+    font-size: clamp(34px, 5.4vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    max-width: 18ch;
+    text-wrap: balance;
+  }
+  .v-title .headline,
+  .v-close .headline {
+    font-size: clamp(40px, 6.4vw, 88px);
+    max-width: 16ch;
+  }
+
+  .body {
+    font-size: clamp(16px, 1.7vw, 21px);
+    line-height: 1.5;
+    color: var(--color-core-foreground-muted);
+    max-width: 56ch;
+  }
+
+  .quote {
+    font-family: var(--font-family-headline);
+    font-weight: var(--font-weight-headline);
+    font-size: clamp(20px, 2.4vw, 30px);
+    line-height: 1.25;
+    color: var(--color-accent-default);
+    max-width: 26ch;
+  }
+
+  .meta {
+    color: var(--color-core-foreground-subtle);
+    letter-spacing: 0.03em;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 3vh, 28px);
+    justify-content: center;
+    min-height: 0;
+  }
+  .v-title .text,
+  .v-close .text,
+  .v-statement .text,
+  .v-arc .text,
+  .v-metrics .text {
+    flex: 1;
+  }
+
+  .cols {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(28px, 4vw, 64px);
+    align-items: center;
+  }
+
+  .media {
+    align-self: center;
+    justify-self: center;
+    min-height: 0;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  .media img {
+    max-width: 100%;
+    min-height: 0;
+    object-fit: contain;
+    border: 1.5px solid var(--color-core-border-default);
+    border-radius: var(--radius-surface);
+    box-shadow: var(--shadow-card);
+    background: var(--color-core-background-subtle);
+  }
+  .v-split .media img { max-height: 58vh; }
+  .v-gallery .media { flex-direction: row; }
+  .v-gallery .media img { max-height: 46vh; width: calc(50% - 10px); }
+
+  .arc-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 3vw, 40px);
+    margin-top: clamp(8px, 2vh, 24px);
+  }
+  .arc-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: var(--border-width-strong) solid var(--color-core-border-strong);
+    padding-top: 18px;
+  }
+  .arc-index { color: var(--color-accent-default); }
+  .arc-title {
+    font-family: var(--font-family-display);
+    font-weight: var(--font-weight-headline);
+    font-size: clamp(24px, 2.8vw, 40px);
+    line-height: 1;
+  }
+  .arc-label {
+    font-size: clamp(14px, 1.4vw, 17px);
+    color: var(--color-core-foreground-muted);
+  }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(16px, 2.5vw, 32px);
+    margin-top: clamp(8px, 2vh, 24px);
+  }
+  .metric {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: var(--border-width-strong) solid var(--color-core-border-strong);
+    padding-top: 16px;
+  }
+  .metric .num {
+    font-family: var(--font-family-headline);
+    font-weight: var(--font-weight-headline);
+    font-size: clamp(40px, 5vw, 68px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--color-accent-default);
+  }
+  .metric .lbl {
+    font-family: var(--font-family-mono);
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--color-core-foreground-muted);
+  }
+
+  /* HUD sits above every slide; its colors follow the active slide's theme,
+     which the script copies onto it so counter and bar never lose contrast. */
+  .hud {
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 var(--space-gutter) 26px;
+    pointer-events: none;
+    color: var(--color-core-foreground-default);
+  }
+  .progress {
+    position: absolute;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: var(--color-core-border-default);
+  }
+  .progress .bar {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--color-accent-default);
+    transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .hint {
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-core-foreground-subtle);
+  }
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    pointer-events: auto;
+  }
+  .counter {
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    color: var(--color-core-foreground-muted);
+  }
+  .ctrl {
+    font-size: 15px;
+    line-height: 1;
+    padding: 9px 13px;
+    background: transparent;
+    color: var(--color-core-foreground-default);
+    border: 1.5px solid var(--color-core-border-strong);
+    border-radius: var(--radius-surface);
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+  }
+  .ctrl:hover {
+    background: var(--color-accent-strong);
+    color: var(--color-on-accent);
+    border-color: var(--color-accent-strong);
+  }
+
+  @media (max-width: 860px) {
+    .cols { grid-template-columns: 1fr; align-items: start; }
+    .v-split .media img { max-height: 34vh; }
+    .v-gallery .media img { max-height: 26vh; }
+    .arc-list, .metrics { grid-template-columns: repeat(2, 1fr); }
+    .hint { display: none; }
+  }
+</style>
+
+<script>
+  const slides = Array.from(document.querySelectorAll<HTMLElement>('.slide'));
+  const hud = document.querySelector<HTMLElement>('.hud')!;
+  const counter = document.querySelector<HTMLElement>('.counter')!;
+  const bar = document.querySelector<HTMLElement>('.progress .bar')!;
+  const pad = (n: number) => String(n).padStart(2, '0');
+
+  let current = Math.min(Math.max(parseInt(location.hash.slice(1), 10) || 0, 0), slides.length - 1);
+
+  function go(n: number) {
+    current = Math.min(Math.max(n, 0), slides.length - 1);
+    slides.forEach((s, i) => {
+      s.classList.toggle('active', i === current);
+      s.setAttribute('aria-hidden', i === current ? 'false' : 'true');
+    });
+    // hand the active slide's universe to the HUD so its tokens re-resolve
+    hud.setAttribute('data-theme', slides[current].getAttribute('data-theme') || '');
+    counter.textContent = `${pad(current + 1)} / ${pad(slides.length)}`;
+    bar.style.width = `${((current + 1) / slides.length) * 100}%`;
+    history.replaceState(null, '', `#${current}`);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(current + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(current - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); go(0); }
+    else if (e.key === 'End') { e.preventDefault(); go(slides.length - 1); }
+    else if (e.key === 'Escape') { window.location.href = '/'; }
+  });
+
+  // click anywhere advances; the explicit controls go both ways
+  document.querySelector('.deck')!.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('.ctrl, a')) return;
+    go(current + 1);
+  });
+  document.querySelector('.ctrl.prev')!.addEventListener('click', () => go(current - 1));
+  document.querySelector('.ctrl.next')!.addEventListener('click', () => go(current + 1));
+
+  go(current);
+</script>
