@@ -154,8 +154,17 @@ const slides: Slide[] = [
                 {s.body && <p class="body">{s.body}</p>}
               </div>
               <div class="media">
-                {s.image && <img src={s.image.src} alt={s.image.alt} loading="eager" />}
-                {s.images && s.images.map((img) => <img src={img.src} alt={img.alt} loading="eager" />)}
+                {s.image && (
+                  <button type="button" class="shot-zoom" aria-label={`Enlarge: ${s.image.alt}`}>
+                    <img src={s.image.src} alt={s.image.alt} loading="eager" />
+                  </button>
+                )}
+                {s.images &&
+                  s.images.map((img) => (
+                    <button type="button" class="shot-zoom" aria-label={`Enlarge: ${img.alt}`}>
+                      <img src={img.src} alt={img.alt} loading="eager" />
+                    </button>
+                  ))}
               </div>
             </div>
           ) : (
@@ -189,6 +198,24 @@ const slides: Slide[] = [
         </div>
       </section>
     ))}
+
+    <!-- Lightbox: one image at a time, no carousel — the deck itself is the sequence.
+         Native <dialog> buys Esc-to-close, focus trap and focus restore; the script
+         copies the active slide's data-theme onto it so it stays in-universe. -->
+    <dialog class="lb" aria-label="Image viewer">
+      <div class="lb-stage">
+        <img class="lb-img" src="" alt="" draggable="false" />
+      </div>
+      <div class="lb-bar">
+        <p class="lb-cap"></p>
+        <div class="lb-tools">
+          <button type="button" class="lb-btn lb-out" aria-label="Zoom out">&minus;</button>
+          <span class="lb-zoom mono" role="status" aria-live="polite"></span>
+          <button type="button" class="lb-btn lb-in" aria-label="Zoom in">+</button>
+          <button type="button" class="lb-btn lb-close" aria-label="Close viewer">&#10005;</button>
+        </div>
+      </div>
+    </dialog>
 
     <div class="hud" data-theme="">
       <div class="progress" aria-hidden="true"><span class="bar"></span></div>
@@ -319,6 +346,16 @@ const slides: Slide[] = [
     gap: 20px;
     align-items: center;
   }
+  .shot-zoom {
+    display: flex;
+    padding: 0;
+    border: 0;
+    background: none;
+    max-width: 100%;
+    min-height: 0;
+    cursor: zoom-in;
+  }
+  .shot-zoom:focus-visible { outline: var(--border-width-strong) solid var(--color-accent-strong); outline-offset: 4px; }
   .media img {
     max-width: 100%;
     min-height: 0;
@@ -330,7 +367,8 @@ const slides: Slide[] = [
   }
   .v-split .media img { max-height: 58vh; }
   .v-gallery .media { flex-direction: row; }
-  .v-gallery .media img { max-height: 46vh; width: calc(50% - 10px); }
+  .v-gallery .media .shot-zoom { width: calc(50% - 10px); }
+  .v-gallery .media img { max-height: 46vh; width: 100%; }
 
   .arc-list {
     list-style: none;
@@ -450,6 +488,88 @@ const slides: Slide[] = [
     border-color: var(--color-accent-strong);
   }
 
+  /* ── lightbox — same mechanics as the case-study viewer, minus the carousel.
+     Zoom is an explicit pixel width inside a scrolling stage (not a transform):
+     panning rides on native scrolling, so trackpad, scrollbar and drag all behave. */
+  .lb {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    padding: 0;
+    border: 0;
+    background: var(--color-core-background-default);
+    color: var(--color-core-foreground-default);
+    overflow: hidden;
+  }
+  .lb::backdrop { background: rgba(0, 0, 0, 0.82); }
+  .lb:not([open]) { display: none; }
+
+  .lb-stage {
+    position: absolute;
+    inset: 0 0 var(--lb-bar-h, 68px);
+    display: flex;
+    overflow: auto;
+    overscroll-behavior: contain;
+    touch-action: none;
+    background: var(--color-core-background-subtle);
+  }
+  .lb-img {
+    margin: auto;
+    display: block;
+    max-width: none;
+    height: auto;
+    flex: none;
+  }
+  .lb-stage.is-zoomed { cursor: grab; }
+  .lb-stage.is-panning { cursor: grabbing; }
+
+  .lb-bar {
+    position: absolute;
+    inset: auto 0 0 0;
+    min-height: var(--lb-bar-h, 68px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 20px;
+    border-top: 1.5px solid var(--color-core-border-strong);
+    background: var(--color-core-background-default);
+  }
+  .lb-cap {
+    font-family: var(--font-family-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--color-core-foreground-subtle);
+    margin: 0;
+  }
+  .lb-tools { display: flex; align-items: center; gap: 8px; flex: none; }
+  .lb-zoom {
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    color: var(--color-core-foreground-subtle);
+    min-width: 44px;
+    text-align: center;
+  }
+  .lb-btn {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-family-body);
+    font-size: 16px;
+    line-height: 1;
+    color: var(--color-core-foreground-default);
+    background: none;
+    border: var(--border-width-strong) solid var(--color-core-border-default);
+    border-radius: var(--radius-surface);
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+  }
+  .lb-btn:hover { background: var(--color-accent-strong); color: var(--color-on-accent); border-color: var(--color-accent-strong); }
+  .lb-btn:focus-visible { outline: var(--border-width-strong) solid var(--color-accent-strong); outline-offset: 2px; }
+
   @media (max-width: 860px) {
     .cols { grid-template-columns: 1fr; align-items: start; }
     .v-split .media img { max-height: 34vh; }
@@ -481,7 +601,16 @@ const slides: Slide[] = [
     history.replaceState(null, '', `#${current}`);
   }
 
+  const dlg = document.querySelector<HTMLDialogElement>('.lb')!;
+
   document.addEventListener('keydown', (e) => {
+    // while the lightbox is open the deck goes quiet: the first Esc closes the viewer,
+    // and only the next one, with the deck back in charge, exits to the site
+    if (dlg.open) {
+      if (e.key === 'Escape') { e.preventDefault(); dlg.close(); }
+      return;
+    }
+    if (e.key === ' ' && (e.target as HTMLElement).closest?.('button')) return;
     if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(current + 1); }
     else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(current - 1); }
     else if (e.key === 'Home') { e.preventDefault(); go(0); }
@@ -489,13 +618,156 @@ const slides: Slide[] = [
     else if (e.key === 'Escape') { window.location.href = '/'; }
   });
 
-  // click anywhere advances; the explicit controls go both ways
+  // click anywhere advances; the explicit controls go both ways, images open the viewer
   document.querySelector('.deck')!.addEventListener('click', (e) => {
-    if ((e.target as HTMLElement).closest('.ctrl, a')) return;
+    if ((e.target as HTMLElement).closest('.ctrl, a, .shot-zoom, .lb')) return;
     go(current + 1);
   });
   document.querySelector('.ctrl.prev')!.addEventListener('click', () => go(current - 1));
   document.querySelector('.ctrl.next')!.addEventListener('click', () => go(current + 1));
 
   go(current);
+
+  /* ── lightbox: zoom as pixel width inside a scrolling stage, same approach as the
+     case-study viewer. Pinch (ctrl+wheel) zooms around the pointer, plain two-finger
+     scroll pans natively, drag pans, double-click toggles fit ↔ 100%. */
+  const stage = dlg.querySelector<HTMLElement>('.lb-stage')!;
+  const lbImg = dlg.querySelector<HTMLImageElement>('.lb-img')!;
+  const capEl = dlg.querySelector<HTMLElement>('.lb-cap')!;
+  const zoomEl = dlg.querySelector<HTMLElement>('.lb-zoom')!;
+
+  let scale = 1;
+  let fitScale = 1;
+
+  function applyScale(next: number, focusX?: number, focusY?: number) {
+    const nw = lbImg.naturalWidth || 1;
+    const clamped = Math.min(Math.max(next, fitScale), Math.max(fitScale * 6, 4));
+    const prevW = lbImg.clientWidth || nw * scale;
+    const fx = focusX ?? stage.clientWidth / 2;
+    const fy = focusY ?? stage.clientHeight / 2;
+    const ratioX = (stage.scrollLeft + fx) / Math.max(prevW, 1);
+    const ratioY = (stage.scrollTop + fy) / Math.max(lbImg.clientHeight || 1, 1);
+
+    scale = clamped;
+    lbImg.style.width = `${nw * scale}px`;
+    stage.scrollLeft = ratioX * lbImg.clientWidth - fx;
+    stage.scrollTop = ratioY * lbImg.clientHeight - fy;
+
+    zoomEl.textContent = `${Math.round(scale * 100)}%`;
+    stage.classList.toggle('is-zoomed', scale > fitScale + 0.001);
+  }
+
+  function fitToStage() {
+    const nw = lbImg.naturalWidth;
+    const nh = lbImg.naturalHeight;
+    if (!nw || !nh) return;
+    /* never upscale on open: a small screenshot blown up to fill the stage looks broken */
+    fitScale = Math.min(stage.clientWidth / nw, stage.clientHeight / nh, 1);
+    scale = fitScale;
+    lbImg.style.width = `${nw * fitScale}px`;
+    zoomEl.textContent = `${Math.round(scale * 100)}%`;
+    stage.classList.remove('is-zoomed');
+  }
+
+  lbImg.addEventListener('load', fitToStage);
+
+  document.querySelectorAll<HTMLButtonElement>('.shot-zoom').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const img = btn.querySelector('img')!;
+      // stay in the slide's universe: the dialog carries the same theme tokens
+      dlg.setAttribute('data-theme', btn.closest('.slide')?.getAttribute('data-theme') || '');
+      lbImg.style.width = '';
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt;
+      capEl.textContent = img.alt;
+      dlg.showModal();
+      if (lbImg.complete && lbImg.naturalWidth) fitToStage();
+    });
+  });
+
+  dlg.querySelector('.lb-close')!.addEventListener('click', () => dlg.close());
+  dlg.querySelector('.lb-in')!.addEventListener('click', () => applyScale(scale * 1.4));
+  dlg.querySelector('.lb-out')!.addEventListener('click', () => applyScale(scale / 1.4));
+
+  // click the backdrop (the dialog itself, outside the stage) to dismiss
+  dlg.addEventListener('click', (e) => {
+    if (e.target === dlg) dlg.close();
+  });
+
+  stage.addEventListener('dblclick', (e) => {
+    const r = stage.getBoundingClientRect();
+    applyScale(scale > fitScale + 0.001 ? fitScale : Math.max(1, fitScale * 2), e.clientX - r.left, e.clientY - r.top);
+  });
+
+  stage.addEventListener(
+    'wheel',
+    (e) => {
+      /* trackpad pinch and ctrl+wheel arrive as wheel events with ctrlKey set; plain
+         wheel is left alone so a two-finger scroll still pans the zoomed image */
+      if (!e.ctrlKey) return;
+      e.preventDefault();
+      const r = stage.getBoundingClientRect();
+      applyScale(scale * (e.deltaY < 0 ? 1.12 : 1 / 1.12), e.clientX - r.left, e.clientY - r.top);
+    },
+    { passive: false },
+  );
+
+  // drag to pan, and two-finger pinch to zoom (touch)
+  const pointers = new Map<number, { x: number; y: number }>();
+  let pinchStart = 0;
+  let pinchScale = 1;
+  let panFrom: { x: number; y: number; left: number; top: number } | null = null;
+
+  function pinchDistance() {
+    const [a, b] = Array.from(pointers.values());
+    return Math.hypot(a.x - b.x, a.y - b.y);
+  }
+
+  stage.addEventListener('pointerdown', (e) => {
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.size === 2) {
+      pinchStart = pinchDistance();
+      pinchScale = scale;
+      panFrom = null;
+    } else if (pointers.size === 1) {
+      panFrom = { x: e.clientX, y: e.clientY, left: stage.scrollLeft, top: stage.scrollTop };
+    }
+  });
+
+  stage.addEventListener('pointermove', (e) => {
+    if (!pointers.has(e.pointerId)) return;
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (pointers.size === 2 && pinchStart > 0) {
+      e.preventDefault();
+      const [a, b] = Array.from(pointers.values());
+      const r = stage.getBoundingClientRect();
+      applyScale((pinchScale * pinchDistance()) / pinchStart, (a.x + b.x) / 2 - r.left, (a.y + b.y) / 2 - r.top);
+      return;
+    }
+
+    if (panFrom && pointers.size === 1) {
+      const dx = e.clientX - panFrom.x;
+      const dy = e.clientY - panFrom.y;
+      if (stage.scrollWidth > stage.clientWidth || stage.scrollHeight > stage.clientHeight) {
+        e.preventDefault();
+        stage.scrollLeft = panFrom.left - dx;
+        stage.scrollTop = panFrom.top - dy;
+        stage.classList.add('is-panning');
+      }
+    }
+  });
+
+  function endPointer(e: PointerEvent) {
+    pointers.delete(e.pointerId);
+    if (pointers.size < 2) pinchStart = 0;
+    if (pointers.size === 0) {
+      panFrom = null;
+      stage.classList.remove('is-panning');
+    }
+  }
+  stage.addEventListener('pointerup', endPointer);
+  stage.addEventListener('pointercancel', endPointer);
+
+  window.addEventListener('resize', () => { if (dlg.open) fitToStage(); }, { passive: true });
 </script>
