@@ -5,7 +5,7 @@ import Base from '../layouts/Base.astro';
 // distilled to one beat per slide. Each slide carries the data-theme of its universe,
 // so the deck inherits the whole token system for free.
 type Slide = {
-  variant: 'title' | 'arc' | 'split' | 'gallery' | 'statement' | 'metrics' | 'close';
+  variant: 'title' | 'arc' | 'cartela' | 'split' | 'gallery' | 'statement' | 'metrics' | 'close';
   theme?: string;
   kicker: string;
   headline: string;
@@ -38,6 +38,12 @@ const slides: Slide[] = [
     ],
   },
   {
+    variant: 'cartela',
+    theme: 'ruralvia',
+    kicker: 'Caja Rural',
+    headline: 'RURALVÍA',
+  },
+  {
     variant: 'split',
     theme: 'ruralvia',
     kicker: 'Ruralvía · Caja Rural · 2018–2019',
@@ -61,6 +67,12 @@ const slides: Slide[] = [
     headline: 'The industry caught up.',
     body: 'What we designed in 2018 is what Cleo, Revolut and N26 are building today: proactive advice, contextual alerts, a product that works for you.',
     image: { src: '/work/ruralvia/ruralvia.webp', alt: 'Ruralvía’s redesigned home screen, in production' },
+  },
+  {
+    variant: 'cartela',
+    theme: 'flame',
+    kicker: 'Santander',
+    headline: 'FLAME',
   },
   {
     variant: 'split',
@@ -109,6 +121,12 @@ const slides: Slide[] = [
     ],
   },
   {
+    variant: 'cartela',
+    theme: 'erneszt',
+    kicker: 'Self-initiated',
+    headline: 'ERNESZT',
+  },
+  {
     variant: 'split',
     theme: 'erneszt',
     kicker: 'Erneszt · Self-initiated · 2026',
@@ -150,6 +168,12 @@ const slides: Slide[] = [
         data-slide={i}
         aria-hidden={i === 0 ? 'false' : 'true'}
       >
+        {s.variant === 'cartela' ? (
+          <div class="cartela-face" aria-hidden="false">
+            <p class="cartela-eyebrow">{s.kicker}</p>
+            <h2 class="cartela-word">{s.headline}</h2>
+          </div>
+        ) : (
         <div class="slide-inner">
           <p class="kicker">{s.kicker}</p>
 
@@ -203,6 +227,7 @@ const slides: Slide[] = [
             </div>
           )}
         </div>
+        )}
       </section>
     ))}
 
@@ -493,6 +518,88 @@ const slides: Slide[] = [
     background: var(--color-accent-strong);
     color: var(--color-on-accent);
     border-color: var(--color-accent-strong);
+  }
+
+  /* ── cartelas — the site's universe title cards as section dividers. Inverted palette
+     (saturated backdrop + photo in hard-light), each title in its universe's display face
+     with the same outline/shadow treatments as the home's fixed cartelas. */
+  .v-cartela { background: var(--cartela-bg); }
+  .v-cartela::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: hard-light;
+  }
+  .v-cartela[data-theme='ruralvia'] { --cartela-bg: #00804E; --cartela-title: #ECD643; }
+  .v-cartela[data-theme='ruralvia']::before { background-image: url('/cartelas/ruralvia-wheat.jpg'); opacity: 0.75; }
+  .v-cartela[data-theme='flame'] { --cartela-bg: #F61000; --cartela-title: #FFFFFF; }
+  .v-cartela[data-theme='flame']::before { background-image: url('/cartelas/flame-fire.jpg'); }
+  .v-cartela[data-theme='erneszt'] { --cartela-bg: #E95900; --cartela-title: #D0A136; }
+  .v-cartela[data-theme='erneszt']::before { background-image: url('/cartelas/erneszt-gears.jpg'); }
+
+  .cartela-face {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+  }
+  .cartela-eyebrow {
+    font-family: var(--font-family-headline);
+    font-weight: var(--font-weight-headline);
+    font-size: clamp(15px, 2.1vw, 28px);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin-right: -0.16em;
+    color: #ffffff;
+    text-shadow:
+      0 0 4px var(--cartela-halo, rgba(0, 0, 0, 0.95)),
+      0 0 12px var(--cartela-halo, rgba(0, 0, 0, 0.8)),
+      0 2px 3px var(--cartela-halo, rgba(0, 0, 0, 0.95));
+  }
+  .v-cartela[data-theme='ruralvia'] .cartela-eyebrow { --cartela-halo: #0e5400; }
+  /* optical cap-height match: Big Shoulders runs tall vs Fraunces/Playfair (see index.astro) */
+  .v-cartela[data-theme='flame'] .cartela-eyebrow { font-size: clamp(13px, 1.85vw, 24.5px); }
+  .cartela-word {
+    font-family: var(--font-family-display);
+    font-weight: 700;
+    font-size: clamp(80px, 14vw, 180px);
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    text-align: center;
+    color: var(--cartela-title);
+  }
+  .v-cartela[data-theme='ruralvia'] .cartela-word {
+    text-shadow:
+       0.017em     0px    0 #0E5400,
+      -0.017em     0px    0 #0E5400,
+       0px     0.017em    0 #0E5400,
+       0px    -0.017em    0 #0E5400,
+       0.017em  0.017em   0 #0E5400,
+      -0.017em  0.017em   0 #0E5400,
+       0.017em -0.017em   0 #0E5400,
+      -0.017em -0.017em   0 #0E5400,
+      -0.1em    0.1em     0 #0E5400;
+  }
+  .v-cartela[data-theme='flame'] .cartela-word {
+    text-shadow: 0 -0.121em 0 rgba(0, 0, 0, 0.25);
+  }
+  .v-cartela[data-theme='erneszt'] .cartela-word {
+    text-shadow:
+       0.029em     0px    0 #000000,
+      -0.029em     0px    0 #000000,
+       0px     0.029em    0 #000000,
+       0px    -0.029em    0 #000000,
+       0.029em  0.029em   0 #000000,
+      -0.029em  0.029em   0 #000000,
+       0.029em -0.029em   0 #000000,
+      -0.029em -0.029em   0 #000000,
+       0px      0.102em   0 #000000;
   }
 
   /* ── lightbox — same mechanics as the case-study viewer, minus the carousel.
